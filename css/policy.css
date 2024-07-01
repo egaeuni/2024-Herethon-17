@@ -1,0 +1,173 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 2vw 5vw 1vw 5vw;
+}
+
+#logo {
+  width: 7vw;
+}
+nav {
+  flex: 1;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  flex: 1;
+}
+
+.menu ul,
+.account ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu ul li,
+.account ul li {
+  list-style: none;
+  margin-right: 2vw;
+  font-weight: bold;
+}
+
+.menu ul li:first-child {
+  color: #fb8129;
+}
+
+hr {
+  background: #d0d3d9;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sec_header {
+  margin-top: 2vw;
+  font-weight: bold;
+  font-size: 28px;
+  color: #fb8129;
+}
+
+.form_div {
+  border: 3px solid #eff0f1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.2vw 0.3vw;
+  width: 32vw;
+  margin-top: 2vw;
+}
+
+#search {
+  border: none;
+  padding: 0.5vw 0.7vw;
+  font-size: 12px;
+  outline: none;
+  flex: 1;
+}
+
+#submit {
+  border: none;
+  background: none;
+}
+
+.sec_section {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.sec_btn {
+  margin-top: 2vw;
+}
+
+.sec_btn button {
+  border: 1px solid #eff0f1;
+  background: none;
+  border-radius: 20px;
+  padding: 0.6vw 1vw;
+}
+
+.sec_btn button:nth-child(2) {
+  border: 1px solid #fb8129;
+  color: #fb8129;
+}
+
+.sec_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.policy_detail {
+  display: flex;
+  flex-direction: row;
+  margin-right: 2vw;
+  margin-top: 2vw;
+}
+
+.policy_detail_img {
+  width: 8vw;
+  overflow: hidden;
+  margin-right: 1vw;
+  border-radius: 10px 10px 0px 10px;
+}
+
+.policy_detail_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.policy_detail_main {
+  background-color: rgb(252, 221, 205, 0.5);
+  box-shadow: 5px 5px 15px #d9d9d9;
+  width: 15vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5vw 0;
+}
+
+.policy_detail_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.policy_detail_text p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.policy_detail_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+#detailBtn {
+  border: none;
+  background: none;
+  margin-right: 0.5vw;
+  margin-top: 0.5vw;
+  font-size: 10px;
+  color: #747474;
+}
+
+#detailBtn:active {
+  color: #292929;
+}
