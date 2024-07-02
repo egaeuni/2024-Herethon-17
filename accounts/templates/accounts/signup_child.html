@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup - Step 2</title>
+    <style>
+        .gender-option {
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>우리 아이에 대해서 알려주세요!</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="gender">성별:</label><br>
+        <label class="gender-option">
+            <input type="radio" id="female" name="gender" value="female" required> 여자
+        </label>
+        <label class="gender-option">
+            <input type="radio" id="male" name="gender" value="male" required> 남자
+        </label>
+        <label class="gender-option">
+            <input type="radio" id="unknown" name="gender" value="unknown" required> 미정
+        </label><br>
+        <br>
+        <br>
+        <label for="birth_date">출생일 (출산예정일):</label><br>
+        <input type="date" id="birth_date" name="birth_date" required><br>
+        <br>
+        <button type="submit">완료! POM시작하기</button>
+    </form>
+</body>
+</html>
