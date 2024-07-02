@@ -52,7 +52,7 @@ hr {
 
 body {
   font-family: Arial, sans-serif;
-  background-image: url("mypage_background2.png");
+  background-image: url("/img/mypage_background2.png");
 
   margin: 0;
   padding: 0;
@@ -133,7 +133,18 @@ body {
 
 .stat-item {
   flex: 1;
-  padding: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 30px;
+  border: 0;
+}
+
+.stat-item:hover {
+  flex: 1;
+  padding: 20px;
+  background-color: #fcddcd;
+  border-radius: 100px;
+  border: 0;
 }
 
 .stat-item h3 {
@@ -145,4 +156,15 @@ body {
   font-size: 20px;
   margin: 10px 0 0 0;
   color: #333;
+}
+
+.hidden {
+  display: none;
+}
+
+#show_selection {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
 }
