@@ -1,35 +1,83 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup - Step 2</title>
-    <style>
-        .gender-option {
-            display: inline-block;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <h2>우리 아이에 대해서 알려주세요!</h2>
-    <form method="post">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/sign_styles.css' %}" />
+  </head>
+
+  <body>
+    <div class="logo-container">
+      <img src="{% static 'img/logo1.png' %}" alt="로고" class="logo" />
+    </div>
+    <div class="container1">
+      <h2 class="input_1">우리 아이에 대해서 알려주세요!</h2>
+
+      <form method="post">
         {% csrf_token %}
-        <label for="gender">성별:</label><br>
-        <label class="gender-option">
-            <input type="radio" id="female" name="gender" value="female" required> 여자
-        </label>
-        <label class="gender-option">
-            <input type="radio" id="male" name="gender" value="male" required> 남자
-        </label>
-        <label class="gender-option">
-            <input type="radio" id="unknown" name="gender" value="unknown" required> 미정
-        </label><br>
-        <br>
-        <br>
-        <label for="birth_date">출생일 (출산예정일):</label><br>
-        <input type="date" id="birth_date" name="birth_date" required><br>
-        <br>
-        <button type="submit">완료! POM시작하기</button>
-    </form>
-</body>
+        <label class="input_show" for="gender">성별:</label>
+        <div class="radio-container">
+          <label class="radio-label">
+            <img
+              class="gender_select"
+              style="margin-bottom: 15px"
+              src="{% static 'img/girl.png' %}"
+              alt="girl"
+            /><br />
+            <input
+              type="radio"
+              name="gender"
+              id="female"
+              value="female"
+              class="radio-input"
+            />
+            <span class="radio-custom"></span> &nbsp;여&emsp;자
+          </label>
+          <label class="radio-label2">
+            <img
+              class="gender_select2"
+              style="margin-bottom: 15px"
+              src="{% static 'img/boy.png' %}"
+              alt="boy"
+            /><br />
+            <input
+              type="radio"
+              name="gender"
+              id="male"
+              value="male"
+              class="radio-input"
+            />
+            <span class="radio-custom"></span> &nbsp;남&emsp;자
+          </label>
+          <label class="radio-label2">
+            <img
+              class="gender_select3"
+              style="margin-bottom: 15px"
+              src="{% static 'img/other.png' %}"
+              alt="girl"
+            /><br />
+            <input
+              type="radio"
+              name="gender"
+              id="unknown"
+              value="unknown"
+              class="radio-input"
+            />
+            <span class="radio-custom"></span> &nbsp;미&emsp;정
+          </label>
+        </div>
+
+        <div style="margin-bottom: 40px">
+          <label class="input_show" for="birth_date"
+            >출생일(출산예정일) :</label
+          >
+          <input type="date" id="birthdate" name="birthdate" required /><br />
+        </div>
+
+        <button class="basic_button" type="submit">완료! POM시작하기</button>
+      </form>
+    </div>
+  </body>
 </html>
