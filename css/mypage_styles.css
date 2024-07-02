@@ -70,7 +70,8 @@ body {
 
 .profile-section,
 .stats-section {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 25px;
 }
 
 .profile-picture {
@@ -98,17 +99,18 @@ body {
   bottom: 8px;
   left: 85%;
   transform: translateX(-50%);
-  background-color: #007bff;
+  background-color: #ffffff;
   color: #fff;
   border: none;
   padding: 8px 10px;
   cursor: pointer;
   border-radius: 100%;
   font-size: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 #change-picture-btn:hover {
-  background-color: #0056b3;
+  background-color: #ff6600;
 }
 
 .profile-info {
@@ -117,6 +119,10 @@ body {
 
 .profile-info h2 {
   margin: 0;
+}
+
+.profile-info p {
+  margin-top: 14px;
 }
 
 .stats-section {
