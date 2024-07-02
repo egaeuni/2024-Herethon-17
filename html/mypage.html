@@ -4,26 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>마이페이지</title>
-    <link rel="stylesheet" href="mypage_styles.css" />
+    <link rel="stylesheet" href="/css/mypage_styles.css" />
   </head>
   <body>
     <!-- 상단 메뉴 -->
     <section class="nav_main">
-      <a href="mainpage.html"
-        ><img class="logo" src="logo2.png" alt="로고"
+      <a href="/html/mainpage.html"
+        ><img class="logo" src="/img/logo2.png" alt="로고"
       /></a>
       <nav>
         <ul class="menu">
-          <li><a href="introduction.html">육아휴직소개서</a></li>
-          <li><a href="mentoring.html">전문가멘토링</a></li>
-          <li><a href="community.html">커뮤니티</a></li>
-          <li><a href="mypage.html">마이페이지</a></li>
+          <li><a href="/html/introduction.html">육아휴직소개서</a></li>
+          <li><a href="/html/mentoring.html">전문가멘토링</a></li>
+          <li><a href="/html/community.html">커뮤니티</a></li>
+          <li><a href="/html/mypage.html">마이페이지</a></li>
         </ul>
       </nav>
       <nav class="right_nav">
         <ul class="user-options">
-          <li><a href="login.html">로그인</a></li>
-          <li><a href="signup.html">회원가입</a></li>
+          <li><a href="/html/login.html">로그인</a></li>
+          <li><a href="/html/signup.html">회원가입</a></li>
         </ul>
       </nav>
     </section>
@@ -33,7 +33,7 @@
       <div class="profile-section">
         <div class="profile-section">
           <div class="profile-picture">
-            <img id="profile-img" src="girl.png" alt="프로필 사진" />
+            <img id="profile-img" src="/img/girl.png" alt="프로필 사진" />
             <input type="file" id="upload-img" accept="image/*" />
             <button id="change-picture-btn">📸</button>
           </div>
@@ -62,25 +62,6 @@
         </div>
       </div>
     </div>
-    <script>
-      document
-        .getElementById("change-picture-btn")
-        .addEventListener("click", function () {
-          document.getElementById("upload-img").click();
-        });
-
-      document
-        .getElementById("upload-img")
-        .addEventListener("change", function (event) {
-          const file = event.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              document.getElementById("profile-img").src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-          }
-        });
-    </script>
+    <script src="/scripts/changeIMG.js"></script>
   </body>
 </html>
