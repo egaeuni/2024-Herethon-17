@@ -4,7 +4,7 @@
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>로그인</h1>
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
@@ -14,7 +14,13 @@
         <input type="text" id="username" name="username" required><br>
         <label for="password">비밀번호:</label>
         <input type="password" id="password" name="password" required><br>
+        <label>
+            <input type="checkbox" name="remember_me" id="remember_me"> 로그인 상태 유지
+        </label><br>
         <button type="submit">로그인</button>
     </form>
+    <p>
+        <a href="{% url 'signup' %}">회원가입</a>
+    </p>
 </body>
 </html>

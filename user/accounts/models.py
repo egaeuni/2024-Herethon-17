@@ -10,6 +10,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=10)
     birth_date = models.DateField()
     profile_pic = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
+    nickname = models.CharField(max_length=100, default='User')  # 닉네임 필드 추가
 
     def __str__(self):
         return self.user.username

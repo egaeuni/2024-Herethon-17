@@ -1,20 +1,41 @@
-<!-- mypage.html -->
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>마이페이지</title>
     <style>
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
         .profile-pic {
-            width: 150px; /* 원하는 크기로 조정 */
-            height: 150px; /* 원하는 크기로 조정 */
-            border-radius: 50%; /* 원형으로 만들기 */
-            object-fit: cover; /* 이미지를 잘라서 맞춤 */
+            width: 150px; 
+            height: 150px; 
+            border-radius: 50%;
+            object-fit: cover; 
+        }
+        .no-underline {
+            text-decoration: none;
+            color: inherit;
+        }
+        .no-underline:hover {
+            text-decoration: underline; 
         }
     </style>
 </head>
 <body>
-    <h2>{{ username }}</h2>
+    <div class="profile-container">
+        <!-- 프로필 사진을 원형으로 표시 -->
+        {% if profile_pic_url %}
+            <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic">
+        {% else %}
+            <p>프로필 사진이 없습니다.</p>
+        {% endif %}
+    </div>
+    <h2>{{ nickname }}</h2>
     <p>{% if gender == 'female' %}여자아이{% elif gender == 'male' %}남자아이{% else %}미정{% endif %} {{ current_age_months }}</p>
+    <br>
+    <p>
+        <a href="{% url 'edit_profile' %}" class="no-underline">정보 수정하기 &gt;</a>
+    </p>
 </body>
 </html>
