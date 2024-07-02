@@ -15,5 +15,3 @@ function validatePasswords() {
 
 password.addEventListener("input", validatePasswords);
 confirmPassword.addEventListener("input", validatePasswords);
-
-window.location.href = `childinfo.html?username=${username}&password=${password}`;
