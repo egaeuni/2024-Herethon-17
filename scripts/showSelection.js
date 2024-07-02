@@ -1,19 +1,19 @@
 document
   .getElementById("showQuestionBtn")
   .addEventListener("click", function () {
-    loadContent("test1.html");
+    loadContent("/html/showQuestion.html");
   });
 
 document.getElementById("showPostBtn").addEventListener("click", function () {
-  loadContent("test2.html");
+  loadContent("/html/showPost.html");
 });
 
 document.getElementById("showAnswerBtn").addEventListener("click", function () {
-  loadContent("test1.html");
+  loadContent("/html/showAnswer.html");
 });
 
 document.getElementById("showScrapBtn").addEventListener("click", function () {
-  loadContent("test2.html");
+  loadContent("/html/showScrap.html");
 });
 
 function loadContent(url) {
