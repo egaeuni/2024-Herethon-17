@@ -1,0 +1,142 @@
+.nav_main {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: 150px;
+  margin-right: 80px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.menu li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+
+.right_nav {
+  position: fixed;
+  right: 250px; /* 원하는 위치로 조정 */
+}
+
+.user-options {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.user-options li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+
+hr {
+  color: #646464;
+  margin-top: 5px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("mypage_background2.png");
+
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.profile-section,
+.stats-section {
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 30px;
+  border: 3px solid #ff6600;
+  border-radius: 100%;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-picture input {
+  display: none;
+}
+
+#change-picture-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 85%;
+  transform: translateX(-50%);
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 100%;
+  font-size: 15px;
+}
+
+#change-picture-btn:hover {
+  background-color: #0056b3;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-info h2 {
+  margin: 0;
+}
+
+.stats-section {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.stat-item {
+  flex: 1;
+  padding: 30px;
+}
+
+.stat-item h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.stat-item p {
+  font-size: 20px;
+  margin: 10px 0 0 0;
+  color: #333;
+}
