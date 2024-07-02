@@ -1,0 +1,48 @@
+
+<body>
+    <a href="{%url 'community:list'%}">뒤로가기</a><br><br>
+
+    {{post.author.nickname}} | {{ current_age_months }}
+    <h2>{{post.title}}</h2>
+    {{post.content}}<br><br>
+
+    <!--댓글-->
+    댓글 수: {{post.answers.count}}<br><br>
+    {% for answer in post.answers.all %}
+        <b>{{answer.author.nickname}}</b><br>
+        {{answer.content}}<br><br>
+    {%empty%}
+        댓글이 없습니다.
+    {%endfor%}
+
+    <!--댓글 작성 폼-->
+    <form method="POST" action="{%url 'community:create-answer' post.id%}">
+        {%csrf_token%}
+        <input type="text" name="content" placeholder="댓글을 입력해주세요.">
+        <input type="submit" value="등록">
+    </form>
+
+    <!--공감-->
+    {%if request.user in post.like.all%}
+    <form method="POST" action="{%url 'community:remove-like' post.id%}">
+    {%csrf_token%}
+    <button type="submit" name="like">공감 취소 </button> {{post.like.count}}</form>
+    {%else%}
+    <form method="POST" action="{%url 'community:add-like' post.id%}">
+    {%csrf_token%}
+    <button type="submit" name="like">공감 </button></form>
+    {%endif%}
+    </button>
+
+    <!--스크랩-->
+    {%if request.user in post.scrap.all%}
+    <form method="POST" action="{%url 'community:remove-scrap' post.id%}">
+    {%csrf_token%}
+    <button type="submit" name="scrap">스크랩 취소</button> {{post.scrap.count}}</form>
+    {%else%}
+    <form method="POST" action="{%url 'community:add-scrap' post.id%}">
+    {%csrf_token%}
+    <button type="submit" name="like">스크랩</button></form>
+    {%endif%}
+    </button>
+</body>
