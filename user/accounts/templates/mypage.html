@@ -1,0 +1,20 @@
+<!-- mypage.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>마이페이지</title>
+    <style>
+        .profile-pic {
+            width: 150px; /* 원하는 크기로 조정 */
+            height: 150px; /* 원하는 크기로 조정 */
+            border-radius: 50%; /* 원형으로 만들기 */
+            object-fit: cover; /* 이미지를 잘라서 맞춤 */
+        }
+    </style>
+</head>
+<body>
+    <h2>{{ username }}</h2>
+    <p>{% if gender == 'female' %}여자아이{% elif gender == 'male' %}남자아이{% else %}미정{% endif %} {{ current_age_months }}</p>
+</body>
+</html>

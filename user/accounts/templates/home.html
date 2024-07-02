@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .container h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container p {
+            margin: 10px 0;
+        }
+        .container a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Home Page</h1>
+        <p>You are now logged in!</p>
+        <p>
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+        <p>
+            <a href="{% url 'mypage' %}">마이페이지 보기</a> <!-- 마이페이지로 연결하는 링크 -->
+        </p>
+    </div>
+</body>
+</html>
