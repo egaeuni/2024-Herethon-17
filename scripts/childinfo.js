@@ -1,3 +1,9 @@
+const gender = document.getElementById("gender");
+const birthdate = document.getElementById("birthdate");
+
+localStorage.setItem("gender", document.getElementById("gender").value);
+localStorage.setItem("birthdate", document.getElementById("birthdate").value);
+
 document.addEventListener("DOMContentLoaded", function () {
   const radioInputs = document.querySelectorAll(".radio-input");
 
