@@ -1,52 +1,80 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        .container {
-            text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .container h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        .container p {
-            margin: 10px 0;
-        }
-        .container a {
-            text-decoration: none;
-            color: #007BFF;
-            font-weight: bold;
-        }
-        .container a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to the Home Page</h1>
-        <p>You are now logged in!</p>
-        <p>
-            <a href="{% url 'accounts:logout' %}">Logout</a>
-        </p>
-        <p>
-            <a href="{% url 'accounts:mypage' %}">마이페이지 보기</a> <!-- 마이페이지로 연결하는 링크 -->
-        </p>
-    </div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메인페이지</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/mainpage_styles.css' %}" />
+  </head>
+
+  <body>
+    <section class="nav_main">
+      {% load static %}
+
+      <a href="{% url 'accounts:home' %}">
+        <img class="logo" src="{% static 'img/logo2.png' %}" alt="로고" />
+      </a>
+      <nav>
+        <ul class="menu">
+          <li><a href="/html/introduction.html">육아휴직소개서</a></li>
+          <li><a href="/html/mentoring.html">전문가멘토링</a></li>
+          <li><a href="/html/community.html">커뮤니티</a></li>
+          <li><a href="{% url 'accounts:mypage' %}">마이페이지</a></li>
+        </ul>
+      </nav>
+      <nav style="padding-left: 400px">
+        <ul class="menu">
+          {% if user.is_authenticated %}
+          <li>
+            <a>{{ user.username }}님, 환영합니다!</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              onclick="document.getElementById('logout-form').submit();"
+              >로그아웃</a
+            >
+            <form
+              id="logout-form"
+              action="{% url 'accounts:logout' %}"
+              method="post"
+              style="display: none"
+            >
+              {% csrf_token %}
+            </form>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'accounts:login' %}" class="nav-link">로그인</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:signup' %}" class="nav-link">회원가입</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </section>
+    <hr />
+    <img class="guide" src="{% static 'img/guide.png' %}" alt="로고" />
+    <img class="title" src="{% static 'img/title2.png' %}" alt="로고" />
+    <a href="/html/introduction.html">
+      <img
+        class="menu_1"
+        src="{% static 'img/menu1.png' %}"
+        alt="육아휴직소개서"
+      />
+    </a>
+    <a href="/html/mentoring.html">
+      <img
+        class="menu_2"
+        src="{% static 'img/menu2.png' %}"
+        alt="전문가멘토링"
+      />
+    </a>
+    <a href="/html/community.html">
+      <img class="menu_3" src="{% static 'img/menu3.png' %}" alt="커뮤니티" />
+    </a>
+    <script src="{% static '/scripts/loginCheck.js' %}"></script>
+  </body>
 </html>
