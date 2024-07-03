@@ -1,0 +1,20 @@
+<body>
+    <a href="{%url 'mentoring:home'%}">뒤로가기</a>
+    <h2>멘토링 기록하기</h2>
+
+    <style>textarea {
+    width: 50%;
+    height: 3.5em;
+    resize: none;
+    }</style>
+    <form method="POST" action="{%url 'mentoring:record-sheet'%}">
+    {%csrf_token%}
+    <h3>멘토님과 함께 정한 사항</h3>
+    <textarea name="plan" placeholder="ex. 육아책 하루에 한권씩 읽기"></textarea>
+    <h3>멘토님이 전해준 말씀 정리</h3>
+    <textarea name="advice" placeholder="ex. 아이들이 자신의 감정을 컨트롤할 수 있도록 기다려 주기"></textarea>
+    <h3>앞으로의 다짐</h3>
+    <textarea name="pledge" placeholder="ex. 앞으로 육아 열심히 해야지"></textarea><br><br>
+    <button type="submit">등록</button>
+    </form>
+</body>

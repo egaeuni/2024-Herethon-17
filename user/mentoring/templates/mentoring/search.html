@@ -1,0 +1,16 @@
+<body>
+    <h2>멘토 찾기</h2>
+    <form method="GET" action="{% url 'mentoring:search' %}">
+    <!--검색-->
+    <input name="search" type="text">
+    <button type="submit">검색</button>
+    </form>
+
+    {% for mento in search_list %}
+        {{ mento.nickname }}
+        <b><a href="{% url 'mentoring:detail' mento.id %}">{{ mento.name }}</a></b>
+        {{ mento.tag }}<br><br>
+    {% empty %}
+        멘토가 없습니다.
+    {% endfor %}
+</body>

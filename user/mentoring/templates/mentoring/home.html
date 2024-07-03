@@ -1,0 +1,17 @@
+<body>
+    <h2>멘토 찾기</h2>
+    <a href="{%url 'mentoring:record-sheet'%}">멘토링 기록지</a><br><br>
+
+    <form method="GET" action="{% url 'mentoring:search' %}">
+        <input name="search" type="text" placeholder="닉네임, 키워드 검색어를 입력하세요.">
+        <button type="submit">검색</button>
+    </form>
+    
+    {%for mento in mentos%}
+    {{mento.nickname}}
+    <b><a href="{%url 'mentoring:detail' mento.id%}">{{mento.name}}</a></b>
+    {{mento.tag}}<br><br>
+    {%empty%}
+    멘토가 없습니다.
+    {%endfor%}
+</body>

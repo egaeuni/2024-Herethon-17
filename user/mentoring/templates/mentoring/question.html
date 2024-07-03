@@ -1,0 +1,14 @@
+<body>
+    <h2>질문사항</h2>
+    <form action = "{%url 'mentoring:question' mento.id%}" method="POST">
+        {%csrf_token%}
+        {{mento.nickname}} <b> {{mento.name}}멘토 </b><br>
+        {{mento.tag}}<br><br>
+        <textarea name = "content" placeholder="내용을 입력해주세요."></textarea><br>
+        <button type="submit">등록</button>
+    </form>
+    <hr>
+    {%for question in questions %}
+    {{question.content}}<br><hr>
+    {%endfor%}
+
