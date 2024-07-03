@@ -1,28 +1,120 @@
 <!-- mypage.html -->
 
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/mypage_styles.css' %}" />
+  </head>
+  <head>
     <title>마이페이지</title>
     <style>
-        .profile-pic {
-            width: 150px; /* 원하는 크기로 조정 */
-            height: 150px; /* 원하는 크기로 조정 */
-            border-radius: 50%; /* 원형으로 만들기 */
-            object-fit: cover; /* 이미지를 잘라서 맞춤 */
-        }
+      .profile-pic {
+        width: 150px; /* 원하는 크기로 조정 */
+        height: 150px; /* 원하는 크기로 조정 */
+        border-radius: 50%; /* 원형으로 만들기 */
+        object-fit: cover; /* 이미지를 잘라서 맞춤 */
+      }
     </style>
-</head>
-<body>
-    <h2>{{ username }}</h2>
-    <p>{% if gender == 'female' %}
-        여자아이
-        {% elif gender == 'male' %}
-        남자아이
-        {% else %}
-        미정
-        {% endif %}
-        <br>
-        {{ current_age_months }}</p>
-</body>
+  </head>
+  <body>
+    <section class="nav_main">
+      {% load static %}
+
+      <a href="{% url 'accounts:home' %}">
+        <img class="logo" src="{% static 'img/logo2.png' %}" alt="로고" />
+      </a>
+      <nav>
+        <ul class="menu">
+          <li><a href="/html/introduction.html">육아휴직소개서</a></li>
+          <li><a href="/html/mentoring.html">전문가멘토링</a></li>
+          <li><a href="/html/community.html">커뮤니티</a></li>
+          <li><a href="{% url 'accounts:mypage' %}">마이페이지</a></li>
+        </ul>
+      </nav>
+      <nav class="right_nav">
+        <ul class="user-options">
+          {% if user.is_authenticated %}
+          <li>
+            <a>{{ user.username }}님, 환영합니다!</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              onclick="document.getElementById('logout-form').submit();"
+              >로그아웃</a
+            >
+            <form
+              id="logout-form"
+              action="{% url 'accounts:logout' %}"
+              method="post"
+              style="display: none"
+            >
+              {% csrf_token %}
+            </form>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'accounts:login' %}" class="nav-link">로그인</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:signup' %}" class="nav-link">회원가입</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </section>
+
+    <div class="container">
+      <div class="profile-section">
+        <div class="profile-section">
+          <div class="profile-picture">
+            <img
+              id="profile-img"
+              src="{% static 'img/girl.png' %}"
+              alt="프로필 사진"
+            />
+            <input type="file" id="upload-img" accept="image/*" />
+            <button id="change-picture-btn">📸</button>
+          </div>
+          <div class="profile-info">
+            <h2 id="username">{{ username }}</h2>
+            <p id="birthdate">출생: {{ current_age_months }}</p>
+            <p id="gender">
+              성별: {% if gender == 'female' %} 여자아이 {% elif gender ==
+              'male' %} 남자아이 {% else %} 미정 {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="stats-section">
+        <a
+          href="/html/showQuestion.html"
+          class="stat-item"
+          id="showQuestionBtn"
+        >
+          <h3>질문</h3>
+          <p id="question-count">10</p>
+        </a>
+        <a href="/html/showPost.html" class="stat-item" id="showPostBtn">
+          <h3>게시글</h3>
+          <p id="post-count">5</p>
+        </a>
+        <a href="/html/showAnswer.html" class="stat-item" id="showAnswerBtn">
+          <h3>답변</h3>
+          <p id="answer-count">15</p>
+        </a>
+        <a href="/html/showScrap.html" class="stat-item" id="showScrapBtn">
+          <h3>프로그램</h3>
+          <p id="scrap-count">8</p>
+        </a>
+      </div>
+    </div>
+    <div id="show_selection" class="hidden"></div>
+    <script src="/scripts/changeIMG.js"></script>
+    <script src="/scripts/showProfile.js"></script>
+    <script src="/scripts/showActivity.js"></script>
+  </body>
 </html>
