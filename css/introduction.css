@@ -37,8 +37,11 @@ nav {
   font-weight: bold;
 }
 
-.menu ul li:first-child {
-  color: #fb8129;
+.menu ul li a,
+.account ul li a,
+.policy_header_more p {
+  text-decoration: none;
+  color: #333;
 }
 
 hr {
