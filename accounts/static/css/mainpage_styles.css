@@ -41,7 +41,6 @@ body {
 }
 
 .right_nav {
-  position: fixed;
   right: 250px; /* 원하는 위치로 조정 */
 }
 
@@ -53,6 +52,12 @@ body {
 }
 
 .user-options li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+.user-options li span {
   font-size: 20px;
   margin-right: 50px;
   text-decoration: none;
