@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>모든 프로그램</title>
+    <style>
+        .program-content {
+            display: none; 
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .program-title {
+            cursor: pointer;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .program-item {
+            display: none;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .program-image {
+            width: 300px; 
+            height: auto;
+            margin-right: 20px;
+        }
+        .program-details {
+            display: flex;
+            align-items: flex-start;
+        }
+        .apply-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .apply-button button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .apply-button button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>육아 프로그램</h1>
+    <a href="{% url 'program:program_home' %}"><button>뒤로가기</button></a>
+    <br>
+    <form method="GET" action="{% url 'program:program_list' %}">
+        <select name="region">
+            <option value="">전체 지역</option>
+            <option value="서울" {% if region == '서울' %}selected{% endif %}>서울</option>
+            <option value="인천" {% if region == '인천' %}selected{% endif %}>인천</option>
+            <option value="강원" {% if region == '강원' %}selected{% endif %}>강원</option>
+            <option value="경남" {% if region == '경남' %}selected{% endif %}>경남</option>
+            <option value="전남" {% if region == '전남' %}selected{% endif %}>전남</option>
+            <option value="경기" {% if region == '경기' %}selected{% endif %}>경기</option>
+        </select>
+        <input type="text" name="q" placeholder="프로그램 이름 검색" value="{{ query }}">
+        <button type="submit">검색</button>
+    </form>
+
+    <ul>
+        {% for program in programs %}
+            <li>
+                <h2 class="program-title" onclick="toggleContent('content-{{ forloop.counter }}')">{{ program.region }} | {{ program.title }}</h2>
+                <div id="content-{{ forloop.counter }}" class="program-content">
+                    <div class="program-details">
+                        {% if program.image %}
+                            <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
+                        {% endif %}
+                        <div>
+                            <p><strong>센터정보:</strong> {{ program.center_info }}</p>
+                            <p><strong>행사기간:</strong> {{ program.event_period }}</p>
+                            <p><strong>접수기간:</strong> {{ program.registration_period }}</p>
+                            <p><strong>참여대상:</strong> {{ program.participants }}</p>
+                            <p><strong>행사내용:</strong> {{ program.event_content }}</p>
+                            <p><strong>회기정보:</strong> {{ program.session_info }}</p>
+                            <p><strong>진행장소:</strong> {{ program.location }}</p>
+                        </div>
+                    </div>
+                    <div class="apply-button">
+                        {% if program.application_url %}
+                            <a href="{{ program.application_url }}" target="_blank"><button>신청하기</button></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

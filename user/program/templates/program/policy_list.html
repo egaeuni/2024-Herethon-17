@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>육아휴직 제도</title>
+    <style>
+        .content {
+            display: none;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .title {
+            cursor: pointer;
+            color: #007BFF;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>육아휴직 제도</h1>
+    <a href="{% url 'program:program_home' %}"><button>뒤로가기</button></a>
+    <ul>
+        {% for policy in policies %}
+            <li>
+                <h2 class="title" onclick="toggleContent('policy-content-{{ forloop.counter }}')">{{ policy.title }}</h2>
+                <div id="policy-content-{{ forloop.counter }}" class="content">
+                    {% for benefit in policy.benefits.all %}
+                        <h3>혜택 {{ forloop.counter }}: {{ benefit.title }}</h3>
+                        <p><strong>내용:</strong> {{ benefit.content }}</p>
+                        <p><strong>신청방법:</strong> {{ benefit.application_method }}</p>
+                        {% if benefit.planned_changes %}
+                            <p><strong>2024년 개편 예정:</strong> {{ benefit.planned_changes }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
