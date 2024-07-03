@@ -37,8 +37,11 @@ nav {
   font-weight: bold;
 }
 
-.menu ul li:first-child {
-  color: #fb8129;
+.menu ul li a,
+.account ul li a,
+.policy_header_more {
+  text-decoration: none;
+  color: #333;
 }
 
 hr {
@@ -104,4 +107,21 @@ hr {
 
 .contents {
   margin-left: 1.2vw;
+}
+
+.close {
+  margin-top: 2vw;
+}
+
+#closeBtn {
+  width: 10.5vw;
+  border-radius: 8px;
+  background: #fb8129;
+  border: none;
+  padding: 10px;
+}
+
+#closeBtn a {
+  text-decoration: none;
+  color: white;
 }
