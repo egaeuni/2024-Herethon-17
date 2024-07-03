@@ -7,6 +7,8 @@ from .models import Profile
 from .forms import ProfileForm  # 프로필 폼 추가
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
+from community.models import Post, Scrap  # 추가: Post 모델 가져오기
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method == "POST":
@@ -48,15 +50,6 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)  # Django의 로그인 함수를 사용
-
-            # "로그인 상태 유지" 체크박스를 확인
-            if 'remember_me' in request.POST:
-                # 로그인 상태를 30일간 유지
-                request.session.set_expiry(2592000)  # 30 days, in seconds
-            else:
-                # 브라우저를 닫을 때 세션 만료
-                request.session.set_expiry(0)
-
             return redirect('home')  # 로그인 후 리다이렉트할 페이지
         else:
             # 로그인 실패 시 에러 메시지와 함께 로그인 페이지를 다시 렌더링
@@ -65,15 +58,17 @@ def login(request):
         # GET 요청 처리, 로그인 폼을 보여줌
         return render(request, 'login.html')
 
+
 def logout(request):
     # 로그아웃 처리
     from django.contrib.auth import logout as auth_logout
     auth_logout(request)
-    return redirect('home')
+    return redirect('login')
 
 def home(request):  
     return render(request, 'home.html')
 
+@login_required
 def mypage(request):
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -88,17 +83,24 @@ def mypage(request):
             profile = Profile.objects.get(user=request.user)
             birth_date = profile.birth_date
             gender = profile.gender
-            nickname = profile.nickname  # 닉네임 추가
+            nickname = profile.nickname
+
+            # 작성한 게시글과 스크랩한 게시글 가져오기
+            user_posts = Post.objects.filter(author=request.user)
+            user_scraps = Scrap.objects.filter(user=request.user).values_list('post', flat=True)
+            scraped_posts = Post.objects.filter(id__in=user_scraps)
 
             # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
 
             return render(request, 'mypage.html', {
-                'nickname': nickname,  # 닉네임을 템플릿으로 전달
+                'nickname': nickname,
                 'gender': gender,
                 'current_age_months': current_age_months,
                 'profile_pic_url': profile.profile_pic.url if profile.profile_pic else None,
-                'form': form  # 프로필 폼 추가
+                'form': form,
+                'user_posts': user_posts,
+                'scraped_posts': scraped_posts,
             })
         except Profile.DoesNotExist:
             return render(request, 'mypage.html', {
@@ -106,7 +108,9 @@ def mypage(request):
                 'gender': '미정',
                 'current_age_months': '알 수 없음',
                 'profile_pic_url': None,
-                'form': form  # 프로필 폼 추가
+                'form': form,
+                'user_posts': [],
+                'scraped_posts': [],
             })
     else:
         return redirect('login')
@@ -119,9 +123,7 @@ def calculate_age_in_months(birth_date):
     months = delta.months
     
     if years == 0:
-        if months == 0:
-            return '방금 태어남'
-        elif months == 1:
+        if months == 1:
             return '1개월'
         else:
             return f'{months}개월'
@@ -140,6 +142,7 @@ def calculate_age_in_months(birth_date):
         else:
             return f'{years}년 {months}개월'
 
+@login_required
 def edit_profile(request):
     if request.user.is_authenticated:
         if request.method == "POST":

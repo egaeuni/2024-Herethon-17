@@ -35,9 +35,9 @@
         <div class="profile-container">
             {% if profile_pic_url %}
                 <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic">
-            {% else %}
-                <p>프로필 사진이 없습니다.</p>
-            {% endif %}
+                {% else %}
+                <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic">
+                {% endif %}
             <input type="file" name="profile_pic" id="profile_pic" class="file-upload">
             <label for="profile_pic" class="upload-label"></label>
         </div>

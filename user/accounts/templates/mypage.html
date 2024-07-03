@@ -16,26 +16,73 @@
         .no-underline {
             text-decoration: none;
             color: inherit;
+            font-size: 12px; 
         }
         .no-underline:hover {
             text-decoration: underline; 
         }
+        .post-list {
+            display: none;
+            margin-top: 10px;
+        }
+        .toggle-button {
+            cursor: pointer;
+            color: #007BFF;
+            font-weight: bold;
+        }
     </style>
+    <script>
+        function togglePostList(type) {
+            var list = document.getElementById(type + "-post-list");
+            if (list.style.display === "none") {
+                list.style.display = "block";
+            } else {
+                list.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
+    <h1>마이페이지</h1>
+    <a href="{% url 'community:list' %}">뒤로가기</a><br><br>
     <div class="profile-container">
         <!-- 프로필 사진을 원형으로 표시 -->
         {% if profile_pic_url %}
             <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic">
         {% else %}
-            <p>프로필 사진이 없습니다.</p>
+            <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic">
         {% endif %}
     </div>
     <h2>{{ nickname }}</h2>
     <p>{% if gender == 'female' %}여자아이{% elif gender == 'male' %}남자아이{% else %}미정{% endif %} {{ current_age_months }}</p>
-    <br>
     <p>
         <a href="{% url 'edit_profile' %}" class="no-underline">정보 수정하기 &gt;</a>
     </p>
+    <br>
+    <h3>
+        작성한 게시글: <span class="toggle-button" onclick="togglePostList('user')">{{ user_posts|length }}</span>
+    </h3>
+    <ul id="user-post-list" class="post-list">
+        {% for post in user_posts %}
+            <li>
+                <a href="{% url 'community:detail' post.id %}">{{ post.title }}</a>
+            </li>
+        {% empty %}
+            <li>작성한 게시글이 없습니다.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>
+        스크랩한 게시글: <span class="toggle-button" onclick="togglePostList('scrap')">{{ scraped_posts|length }}</span>
+    </h3>
+    <ul id="scrap-post-list" class="post-list">
+        {% for post in scraped_posts %}
+            <li>
+                <a href="{% url 'community:detail' post.id %}">{{ post.title }}</a>
+            </li>
+        {% empty %}
+            <li>스크랩한 게시글이 없습니다.</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
