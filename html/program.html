@@ -72,7 +72,7 @@
                 <input type="text" id="program" placeholder="프로그램을 입력하세요">
               </div><!-- ~<div class="inputDiv"> -->
               <div class="submitBtn">
-                <button type="submit" id="submit">조회</button>
+                <button type="button" id="submit">조회</button>
               </div><!-- ~<div class="submitBtn"> -->
             </div>
             
@@ -80,7 +80,7 @@
           
         </div><!-- ~<div class="search"> -->
 
-        <div class="program">
+        <div id="programs">
 
           <div class="program_list">
 
@@ -166,7 +166,23 @@
             
           </div><!-- ~<div class="program_list"> -->
           
+        </div><!-- ~<div class="programs"> -->
+        
+        <div id="find">
+          <div class="program_detail_find">
+            <div class="program_detail_location">
+              <div class="program_detail_circle"><div class="program_detail_text">강원</div></div><!-- ~<div class="program_detail_circle"> -->
+            </div><!-- ~<div class="program_detail_location"> -->
+            <div class="program_detail_content">
+              <p>강릉시가족센터</p>
+              <p>우리 아빠는 슈퍼 대디</p>
+            </div>
+            <div class="program_detail_look">
+              <p><a href="/html/program_detail.html">상세보기</a></p>
+            </div>
+          </div><!-- ~<div id="find"> -->
         </div><!-- ~<div class="program"> -->
+
 
         <div class="page">
           <div><button>1</button></div>
@@ -174,8 +190,9 @@
           <button>3</button>
           <button>></button>
         </div><!-- ~<div class="page"> -->
-          
+
       </div><!-- ~<div class="section"> -->
     </section>
+    <script src="/scripts/program.js"></script>
   </body>
 </html>
