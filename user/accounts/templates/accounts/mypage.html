@@ -56,7 +56,7 @@
     <h2>{{ nickname }}</h2>
     <p>{% if gender == 'female' %}여자아이{% elif gender == 'male' %}남자아이{% else %}미정{% endif %} {{ current_age_months }}</p>
     <p>
-        <a href="{% url 'edit_profile' %}" class="no-underline">정보 수정하기 &gt;</a>
+        <a href="{% url 'accounts:edit_profile' %}" class="no-underline">정보 수정하기 &gt;</a>
     </p>
     <br>
     <h3>

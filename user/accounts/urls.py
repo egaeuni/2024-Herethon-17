@@ -1,13 +1,14 @@
-from django.contrib import admin
 from django.urls import path
-from . import views
+from .views import *
+
+app_name = 'accounts'
 
 urlpatterns = [
-    path('login/', views.login, name="login"),
-    path('logout/', views.logout, name="logout"),
-    path('signup/', views.signup, name="signup"),
-    path('signup_child/', views.signup_child, name="signup_child"),
-    path('mypage/', views.mypage, name='mypage'),
-    path('edit_profile/', views.edit_profile, name="edit_profile"),
-    path('home/', views.home, name="home"),
+    path('login/', login, name="login"),
+    path('logout/', logout, name="logout"),
+    path('signup/', signup, name="signup"),
+    path('signup_child/', signup_child, name="signup_child"),
+    path('mypage/', mypage, name='mypage'),
+    path('edit_profile/', edit_profile, name="edit_profile"),
+    path('home/', home, name="home"),
 ]

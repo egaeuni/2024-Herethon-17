@@ -4,11 +4,11 @@
     <title>커뮤니티 게시글 목록</title>
 </head>
 <body>
-    <b><a href="{% url 'home' %}">POM</a></b>
+    <b><a href="{% url 'accounts:home' %}">POM</a></b>
     <a href="#">육아휴직 소개서</a>
     <a href="#">전문가 멘토링</a>
     <a href="{% url 'community:list' %}">커뮤니티</a>
-    <a href="{% url 'mypage' %}">마이페이지</a><br><br>
+    <a href="{% url 'accounts:mypage' %}">마이페이지</a><br><br>
 
     <!-- 글 작성 버튼 -->
     <a href="{% url 'community:create' %}">글 작성하기</a>
