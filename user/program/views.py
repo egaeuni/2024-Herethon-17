@@ -34,7 +34,7 @@ def policy_list(request):
     policies = Policy.objects.annotate(scrap_count=Count('scraps'))
 
     if query:
-        policies = policies.filter(title__icontains(query))
+        policies = policies.filter(title__icontains=query)
 
     if sort_by == 'scrap_count':
         policies = policies.order_by('-scrap_count', '-created_at')
