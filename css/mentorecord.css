@@ -1,0 +1,137 @@
+/* 기본 스타일링 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* header {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+.nav_main {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: 150px;
+  margin-right: 80px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.menu li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+
+.right_nav {
+  position: fixed;
+  right: 250px; /* 원하는 위치로 조정 */
+}
+
+.user-options {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.user-options li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+
+hr {
+  color: #646464;
+  margin-top: 5px;
+}
+
+.main-content {
+  padding: 20px;
+  display: flex;
+}
+
+.container {
+  width: 35%;
+  margin: 30px auto;
+  /* text-align: center; */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+}
+
+h1 {
+  display: block;
+  text-align: center;
+  background-color: #f3f3f3;
+  color: #333;
+  padding: 20px;
+  margin-bottom: 60px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  font-size: 18px;
+  color: black;
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 0px solid #efefef;
+  border-radius: 8px;
+  resize: vertical;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  background-color: #fb8129;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #c65300;
+}
+
+.BtnStyle {
+  display: flex;
+  justify-content: space-between;
+}
