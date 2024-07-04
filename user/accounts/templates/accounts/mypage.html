@@ -84,17 +84,5 @@
             <li>스크랩한 게시글이 없습니다.</li>
         {% endfor %}
     </ul>
-    <h3>
-        멘토링 기록지: <span class="toggle-button" onclick="togglePostList('record')">{{ records|length }}</span>
-    </h3>
-    <ul id="record-sheet-list" class="post-list">
-        {% for record in records %}
-            <li>
-                <a href="{% url 'mentoring:record-sheet' %}">{{ record.advice }}</a>
-            </li>
-        {% empty %}
-            <li>작성한 기록지가 없습니다.</li>
-        {% endfor %}
-    </ul>
 </body>
 </html>

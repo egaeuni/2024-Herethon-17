@@ -2,12 +2,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Post, Answer
 from accounts.views import calculate_age_in_months  # 함수 가져오기
+from django.db.models import Count
 
 @login_required
 def list(request):
-    posts = Post.objects.all().order_by('-id')
+    sort = request.GET.get('sort', 'latest')
+    
+    if sort == 'popular':
+        posts = Post.objects.all().annotate(popularity= Count('like')).order_by('-popularity', '-id')
+    else:
+        posts = Post.objects.all().order_by('-id')
+    
     for post in posts:
         post.author.profile.current_age_months = calculate_age_in_months(post.author.profile.birth_date)
+    
     return render(request, 'community/list.html', {'posts': posts})
 
 @login_required

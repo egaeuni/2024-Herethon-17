@@ -6,11 +6,16 @@
     <button type="submit">검색</button>
     </form>
 
-    {% for mento in search_list %}
-        {{ mento.nickname }}
-        <b><a href="{% url 'mentoring:detail' mento.id %}">{{ mento.name }}</a></b>
-        {{ mento.tag }}<br><br>
-    {% empty %}
-        멘토가 없습니다.
-    {% endfor %}
+    <a href="{% url 'mentoring:search' %}?sort=latest">최신 등록순</a>
+    <a href="{% url 'mentoring:search' %}?sort=popular">인기순</a><br><br>
+
+    {% if search_list %}
+        {% for mento in search_list %}
+            {{ mento.nickname }}
+            <b><a href="{% url 'mentoring:detail' mento.id %}">{{ mento.name }}</a></b>
+            {{ mento.tag }}<br><br>
+        {% endfor %}
+    {% else %}
+        <p>검색 결과가 없습니다.</p>
+    {% endif %}
 </body>

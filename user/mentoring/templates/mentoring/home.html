@@ -6,6 +6,8 @@
         <input name="search" type="text" placeholder="닉네임, 키워드 검색어를 입력하세요.">
         <button type="submit">검색</button>
     </form>
+        <a href="{% url 'mentoring:home' %}?sort=latest">최신 등록순</a>
+        <a href="{% url 'mentoring:home' %}?sort=popular">인기순</a><br><br>
     
     {%for mento in mentos%}
     {{mento.nickname}}

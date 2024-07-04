@@ -9,7 +9,6 @@ from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 from community.models import Post, Scrap  # 추가: Post 모델 가져오기
 from django.contrib.auth.decorators import login_required
-from mentoring.models import *
 
 def signup(request):
     if request.method == "POST":
@@ -89,7 +88,6 @@ def mypage(request):
             user_posts = Post.objects.filter(author=request.user)
             user_scraps = Scrap.objects.filter(user=request.user).values_list('post', flat=True)
             scraped_posts = Post.objects.filter(id__in=user_scraps)
-            records = Record.objects.all()
 
             # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
@@ -102,7 +100,6 @@ def mypage(request):
                 'form': form,
                 'user_posts': user_posts,
                 'scraped_posts': scraped_posts,
-                'records':records
             })
         except Profile.DoesNotExist:
             return render(request, 'accounts/mypage.html', {
@@ -113,7 +110,6 @@ def mypage(request):
                 'form': form,
                 'user_posts': [],
                 'scraped_posts': [],
-                'records':[]
             })
     else:
         return redirect('accounts:login')

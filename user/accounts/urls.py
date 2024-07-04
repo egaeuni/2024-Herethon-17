@@ -10,5 +10,5 @@ urlpatterns = [
     path('signup_child/', signup_child, name="signup_child"),
     path('mypage/', mypage, name='mypage'),
     path('edit_profile/', edit_profile, name="edit_profile"),
-    path('home/', home, name="home"),
+    path('', home, name="home"),
 ]
