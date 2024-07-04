@@ -20,7 +20,7 @@
       {% load static %}
 
       <a href="{% url 'accounts:home' %}">
-        <img class="logo" src="{% static 'img/logo2.png' %}" alt="로고" />
+        <img class="logo" src="{% static 'images/logo2.png' %}" alt="로고" />
       </a>
       <nav>
         <ul class="menu">
@@ -62,30 +62,42 @@
         </ul>
       </nav>
     </section>
-    <a href="{% url 'community:list' %}">뒤로가기</a><br /><br />
+
     <div class="container">
+      <button class="back_button">
+        <a href="{% url 'community:list' %}" class="back_button">뒤로가기</a>
+      </button>
       <div class="profile-section">
         <div class="profile-section">
           <div class="profile-picture">
+            {% if profile_pic_url %}
             <img
-              id="profile-img"
-              src="{% static 'img/girl.png' %}"
+              src="{{ profile_pic_url }}"
               alt="프로필 사진"
+              class="profile-pic"
             />
-            <input type="file" id="upload-img" accept="image/*" />
-            <button id="change-picture-btn">📸</button>
+            {% else %}
+            <img
+              src="{% static 'images/basic_image.png' %}"
+              alt="기본 프로필 사진"
+              class="profile-pic"
+            />
+            {% endif %}
           </div>
-          <h2>{{ nickname }}</h2>
-          <p>
-            {% if gender == 'female' %}여자아이{% elif gender == 'male'
-            %}남자아이{% else %}미정{% endif %} {{ current_age_months }}
-          </p>
-          <p>
-            <a href="{% url 'accounts:edit_profile' %}" class="no-underline"
+          <div class="profile-info">
+            <h1>{{ nickname }}</h1>
+            <p id="gender">
+              {% if gender == 'female' %}여자아이 👧🏻 {% elif gender == 'male' %}
+              남자아이 👦🏻 {% else %} 미정 {% endif %}
+            </p>
+            <p id="birthdate" style="margin-bottom: 20px">
+              {{ current_age_months }}
+            </p>
+            <a href="{% url 'accounts:edit_profile' %}" class="edit_button"
               >정보 수정하기 &gt;</a
             >
-          </p>
-          <br />
+          </div>
+          <br /><br />
           <h3>
             작성한 게시글:
             <span class="toggle-button" onclick="togglePostList('user')"
@@ -125,7 +137,6 @@
       </div>
     </div>
     <script src="{% static 'scripts/togglePostList.js' %}"></script>
-    <script src="{% static 'scripts/changeIMG.js' %}"></script>
     <script src="{% static 'scripts/showProfile.js' %}"></script>
   </body>
 </html>
