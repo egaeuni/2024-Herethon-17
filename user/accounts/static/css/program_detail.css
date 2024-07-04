@@ -61,10 +61,6 @@ hr {
 }
 
 .sec_content {
-  width: 50%;
-  padding: 2vw;
-  margin-top: 2vw;
-  box-shadow: 5px 5px 15px #d9d9d9;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -112,7 +108,8 @@ hr {
   margin-left: 1.2vw;
 }
 
-.close {
+.close,
+.register {
   margin-top: 2vw;
 }
 
@@ -124,7 +121,42 @@ hr {
   padding: 10px;
 }
 
-#closeBtn a {
+#registerBtn {
+  width: 10.5vw;
+  border-radius: 8px;
+  background-color: rgb(251, 129, 41, 0.5);
+  border: none;
+  padding: 10px;
+}
+
+#closeBtn a,
+#registerBtn a {
   text-decoration: none;
   color: white;
+}
+
+.sec_section {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 50%;
+  padding: 2vw;
+  margin-top: 2vw;
+  box-shadow: 5px 5px 15px #d9d9d9;
+}
+
+#scrap {
+  border: none;
+  background: none;
+  margin-bottom: 0.3vw;
+}
+
+#scrap img {
+  width: 0.8vw;
+}
+
+.register {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
