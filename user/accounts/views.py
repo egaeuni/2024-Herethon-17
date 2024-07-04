@@ -16,7 +16,7 @@ def signup(request):
             request.session['username'] = request.POST['username']
             request.session['password1'] = request.POST['password1']
             request.session['nickname'] = request.POST['nickname']  # 닉네임 추가
-            return redirect('signup_child')
+            return redirect('accounts:signup_child')
         else:
             return render(request, 'accounts/signup.html', {'error': '비밀번호가 일치하지 않습니다.'})
     return render(request, 'accounts/signup.html')
