@@ -104,10 +104,10 @@ hr {
   padding: 0.6vw 1vw;
 }
 
-.sec_btn button:nth-child(2) {
+/* .sec_btn button:nth-child(2) {
   border: 1px solid #fb8129;
   color: #fb8129;
-}
+} */
 
 .sec_grid {
   display: grid;
