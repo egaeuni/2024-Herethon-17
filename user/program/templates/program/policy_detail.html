@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ policy.title }}</title>
+    <style>
+        .content {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .title {
+            font-weight: bold;
+            color: #007BFF;
+        }
+    </style>
+    <script>
+        function goBack() {
+            const referrer = document.referrer;
+            if (referrer.includes('/program/policies/')) {
+                location.href = "{% url 'program:policy_list' %}";
+            } else {
+                location.href = "{% url 'program:program_home' %}";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>{{ policy.title }}</h1>
+    <div class="content">
+        {% for benefit in policy.benefits.all %}
+            <h3>혜택 {{ forloop.counter }}: {{ benefit.title }}</h3>
+            <p><strong>내용:</strong> {{ benefit.content }}</p>
+            {% if benefit.eligibility %}
+                <p><strong>지원 조건:</strong> {{ benefit.eligibility }}</p>
+            {% endif %}
+            {% if benefit.application_period %}
+                <p><strong>신청 시기:</strong> {{ benefit.application_period }}</p>
+            {% endif %}
+            <p><strong>신청 방법:</strong> {{ benefit.application_method }}</p>
+            {% if benefit.planned_changes %}
+                <p><strong>2024년 개편 예정:</strong> {{ benefit.planned_changes }}</p>
+            {% endif %}
+            {% if benefit.additional_info %}
+                <p><strong>기타:</strong> {{ benefit.additional_info }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <button onclick="goBack()">뒤로가기</button>
+
+    <!-- 스크랩 -->
+    {% if is_scrapped %}
+    <form method="POST" action="{% url 'program:remove_scrap' policy.id %}">
+        {% csrf_token %}
+        <button type="submit" name="scrap">스크랩 취소</button> {{ policy.scrap_set.count }}</form>
+    {% else %}
+    <form method="POST" action="{% url 'program:add_scrap' policy.id %}">
+        {% csrf_token %}
+        <button type="submit" name="scrap">스크랩</button> {{ policy.scrap_set.count }}</form>
+    {% endif %}
+</body>
+</html>

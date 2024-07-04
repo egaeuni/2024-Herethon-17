@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ program.title }}</title>
+    <style>
+        .content {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .title {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .program-image {
+            width: 300px; 
+            height: auto;
+            margin-right: 20px;
+        }
+    </style>
+    <script>
+        function goBack() {
+            const referrer = document.referrer;
+            if (referrer.includes('/program/list/')) {
+                location.href = "{% url 'program:program_list' %}";
+            } else {
+                location.href = "{% url 'program:program_home' %}";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>{{ program.region }} | {{ program.title }}</h1>
+    <div class="content">
+        {% if program.center_info %}
+            <p><strong>센터정보:</strong> {{ program.center_info }}</p>
+        {% endif %}
+        {% if program.event_period %}
+            <p><strong>행사기간:</strong> {{ program.event_period }}</p>
+        {% endif %}
+        {% if program.registration_period %}
+            <p><strong>접수기간:</strong> {{ program.registration_period }}</p>
+        {% endif %}
+        {% if program.participants %}
+            <p><strong>참여대상:</strong> {{ program.participants }}</p>
+        {% endif %}
+        {% if program.event_content %}
+            <p><strong>행사내용:</strong> {{ program.event_content }}</p>
+        {% endif %}
+        {% if program.session_info %}
+            <p><strong>회기정보:</strong> {{ program.session_info }}</p>
+        {% endif %}
+        {% if program.location %}
+            <p><strong>진행장소:</strong> {{ program.location }}</p>
+        {% endif %}
+        {% if program.image %}
+            <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
+        {% endif %}
+    </div>
+    <div class="apply-button">
+        {% if program.application_url %}
+            <a href="{{ program.application_url }}" target="_blank"><button>신청하기</button></a>
+        {% endif %}
+    </div>
+    <button onclick="goBack()">뒤로가기</button>
+</body>
+</html>

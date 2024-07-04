@@ -38,17 +38,7 @@
     <ul>
         {% for policy in policies|slice:":3" %}
             <li>
-                <h2 class="title" onclick="toggleContent('policy-content-{{ forloop.counter }}')">{{ policy.title }}</h2>
-                <div id="policy-content-{{ forloop.counter }}" class="content">
-                    {% for benefit in policy.benefits.all %}
-                        <h3>혜택 {{ forloop.counter }}: {{ benefit.title }}</h3>
-                        <p><strong>내용:</strong> {{ benefit.content }}</p>
-                        <p><strong>신청방법:</strong> {{ benefit.application_method }}</p>
-                        {% if benefit.planned_changes %}
-                            <p><strong>2024년 개편 예정:</strong> {{ benefit.planned_changes }}</p>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                <h2 class="title"><a href="{% url 'program:policy_detail' policy.id %}">{{ policy.title }}</a></h2>
             </li>
         {% endfor %}
     </ul>
@@ -58,19 +48,7 @@
     <ul>
         {% for program in programs %}
             <li>
-                <h2 class="title" onclick="toggleContent('content-{{ forloop.counter }}')">{{ program.region }} | {{ program.title }}</h2>
-                <div id="content-{{ forloop.counter }}" class="content">
-                    <p><strong>센터정보:</strong> {{ program.center_info }}</p>
-                    <p><strong>행사기간:</strong> {{ program.event_period }}</p>
-                    <p><strong>접수기간:</strong> {{ program.registration_period }}</p>
-                    <p><strong>참여대상:</strong> {{ program.participants }}</p>
-                    <p><strong>행사내용:</strong> {{ program.event_content }}</p>
-                    <p><strong>회기정보:</strong> {{ program.session_info }}</p>
-                    <p><strong>진행장소:</strong> {{ program.location }}</p>
-                    {% if program.image %}
-                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
-                    {% endif %}
-                </div>
+                <h2 class="title"><a href="{% url 'program:program_detail' program.id %}">{{ program.region }} | {{ program.title }}</a></h2>
             </li>
         {% endfor %}
     </ul>

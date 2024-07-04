@@ -11,39 +11,55 @@
             border-radius: 5px;
         }
         .title {
+            font-weight: bold;
+        }
+        .details-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
+        }
+        .details-button:hover {
+            background-color: #0056b3;
+        }
+        .sort-buttons {
+            margin-bottom: 20px;
+        }
+        .sort-buttons a {
+            text-decoration: none;
             color: #007BFF;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+        .sort-buttons a.active {
+            border-bottom: 2px solid #007BFF;
             font-weight: bold;
         }
     </style>
-    <script>
-        function toggleContent(id) {
-            var content = document.getElementById(id);
-            if (content.style.display === "none") {
-                content.style.display = "block";
-            } else {
-                content.style.display = "none";
-            }
-        }
-    </script>
 </head>
 <body>
     <h1>육아휴직 제도</h1>
     <a href="{% url 'program:program_home' %}"><button>뒤로가기</button></a>
+    <br>
+    <form method="GET" action="{% url 'program:policy_list' %}">
+        <input type="text" name="q" placeholder="제도 검색" value="{{ query }}">
+        <input type="hidden" name="sort_by" value="{{ sort_by }}">
+        <button type="submit">검색</button>
+    </form>
+    <div class="sort-buttons">
+        <a href="{% url 'program:policy_list' %}?sort_by=created_at" class="{% if sort_by == 'created_at' %}active{% endif %}">최신 등록순</a>
+        <a href="{% url 'program:policy_list' %}?sort_by=scrap_count" class="{% if sort_by == 'scrap_count' %}active{% endif %}">인기순</a>
+    </div>
     <ul>
         {% for policy in policies %}
             <li>
-                <h2 class="title" onclick="toggleContent('policy-content-{{ forloop.counter }}')">{{ policy.title }}</h2>
-                <div id="policy-content-{{ forloop.counter }}" class="content">
-                    {% for benefit in policy.benefits.all %}
-                        <h3>혜택 {{ forloop.counter }}: {{ benefit.title }}</h3>
-                        <p><strong>내용:</strong> {{ benefit.content }}</p>
-                        <p><strong>신청방법:</strong> {{ benefit.application_method }}</p>
-                        {% if benefit.planned_changes %}
-                            <p><strong>2024년 개편 예정:</strong> {{ benefit.planned_changes }}</p>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                <h2 class="title">{{ policy.title }}</h2>
+                <p>스크랩 수: {{ policy.scrap_count }}</p>
+                <a href="{% url 'program:policy_detail' policy.id %}"><button class="details-button">상세보기</button></a>
             </li>
         {% endfor %}
     </ul>

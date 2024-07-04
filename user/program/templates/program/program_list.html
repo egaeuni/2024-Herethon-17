@@ -4,7 +4,6 @@
     <title>모든 프로그램</title>
     <style>
         .program-content {
-            display: none; 
             margin-top: 10px;
             border: 1px solid #ccc;
             padding: 20px;
@@ -16,19 +15,14 @@
             color: #007BFF;
             font-weight: bold;
         }
-        .program-item {
-            display: none;
-            align-items: center;
-            margin-top: 10px;
+        .program-details {
+            display: flex;
+            align-items: flex-start;
         }
         .program-image {
             width: 300px; 
             height: auto;
             margin-right: 20px;
-        }
-        .program-details {
-            display: flex;
-            align-items: flex-start;
         }
         .apply-button {
             text-align: center;
@@ -46,16 +40,6 @@
             background-color: #0056b3;
         }
     </style>
-    <script>
-        function toggleContent(id) {
-            var content = document.getElementById(id);
-            if (content.style.display === "none") {
-                content.style.display = "block";
-            } else {
-                content.style.display = "none";
-            }
-        }
-    </script>
 </head>
 <body>
     <h1>육아 프로그램</h1>
@@ -78,28 +62,7 @@
     <ul>
         {% for program in programs %}
             <li>
-                <h2 class="program-title" onclick="toggleContent('content-{{ forloop.counter }}')">{{ program.region }} | {{ program.title }}</h2>
-                <div id="content-{{ forloop.counter }}" class="program-content">
-                    <div class="program-details">
-                        {% if program.image %}
-                            <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
-                        {% endif %}
-                        <div>
-                            <p><strong>센터정보:</strong> {{ program.center_info }}</p>
-                            <p><strong>행사기간:</strong> {{ program.event_period }}</p>
-                            <p><strong>접수기간:</strong> {{ program.registration_period }}</p>
-                            <p><strong>참여대상:</strong> {{ program.participants }}</p>
-                            <p><strong>행사내용:</strong> {{ program.event_content }}</p>
-                            <p><strong>회기정보:</strong> {{ program.session_info }}</p>
-                            <p><strong>진행장소:</strong> {{ program.location }}</p>
-                        </div>
-                    </div>
-                    <div class="apply-button">
-                        {% if program.application_url %}
-                            <a href="{{ program.application_url }}" target="_blank"><button>신청하기</button></a>
-                        {% endif %}
-                    </div>
-                </div>
+                <h2 class="program-title"><a href="{% url 'program:program_detail' program.id %}">{{ program.region }} | {{ program.title }}</a></h2>
             </li>
         {% endfor %}
     </ul>
