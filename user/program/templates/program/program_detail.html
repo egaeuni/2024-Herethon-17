@@ -64,5 +64,16 @@
         {% endif %}
     </div>
     <button onclick="goBack()">뒤로가기</button>
+    
+    <!-- 스크랩 -->
+    {% if is_scrapped %}
+    <form method="POST" action="{% url 'program:remove_scrap_program' program.id %}">
+        {% csrf_token %}
+        <button type="submit" name="scrap">스크랩 취소</button> {{ program.scrap_set.count }}</form>
+    {% else %}
+    <form method="POST" action="{% url 'program:add_scrap_program' program.id %}">
+        {% csrf_token %}
+        <button type="submit" name="scrap">스크랩</button> {{ program.scrap_set.count }}</form>
+    {% endif %}
 </body>
 </html>

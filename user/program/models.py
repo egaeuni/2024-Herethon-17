@@ -39,8 +39,13 @@ class Benefit(models.Model):
 
 class Scrap(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    policy = models.ForeignKey(Policy, related_name='scraps', on_delete=models.CASCADE)
+    policy = models.ForeignKey(Policy, related_name='scraps', on_delete=models.CASCADE, null=True, blank=True)
+    program = models.ForeignKey(Program, related_name='scraps', on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.policy.title}"
+        if self.policy:
+            return f"{self.user.username} - {self.policy.title}"
+        elif self.program:
+            return f"{self.user.username} - {self.program.title}"
+        return f"{self.user.username} - Scrap"

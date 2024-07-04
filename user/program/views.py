@@ -24,7 +24,8 @@ def program_list(request):
 
 def program_detail(request, program_id):
     program = get_object_or_404(Program, id=program_id)
-    return render(request, 'program/program_detail.html', {'program': program})
+    is_scrapped = Scrap.objects.filter(user=request.user, program=program).exists() if request.user.is_authenticated else False
+    return render(request, 'program/program_detail.html', {'program': program, 'is_scrapped': is_scrapped})
 
 def policy_list(request):
     sort_by = request.GET.get('sort_by', 'created_at')
@@ -33,7 +34,7 @@ def policy_list(request):
     policies = Policy.objects.annotate(scrap_count=Count('scraps'))
 
     if query:
-        policies = policies.filter(title__icontains=query)
+        policies = policies.filter(title__icontains(query))
 
     if sort_by == 'scrap_count':
         policies = policies.order_by('-scrap_count', '-created_at')
@@ -48,13 +49,25 @@ def policy_detail(request, policy_id):
     return render(request, 'program/policy_detail.html', {'policy': policy, 'is_scrapped': is_scrapped})
 
 @login_required
-def add_scrap(request, policy_id):
+def add_scrap_policy(request, policy_id):
     policy = get_object_or_404(Policy, id=policy_id)
     Scrap.objects.get_or_create(user=request.user, policy=policy)
     return redirect('program:policy_detail', policy_id=policy_id)
 
 @login_required
-def remove_scrap(request, policy_id):
+def remove_scrap_policy(request, policy_id):
     policy = get_object_or_404(Policy, id=policy_id)
     Scrap.objects.filter(user=request.user, policy=policy).delete()
     return redirect('program:policy_detail', policy_id=policy_id)
+
+@login_required
+def add_scrap_program(request, program_id):
+    program = get_object_or_404(Program, id=program_id)
+    Scrap.objects.get_or_create(user=request.user, program=program)
+    return redirect('program:program_detail', program_id=program_id)
+
+@login_required
+def remove_scrap_program(request, program_id):
+    program = get_object_or_404(Program, id=program_id)
+    Scrap.objects.filter(user=request.user, program=program).delete()
+    return redirect('program:program_detail', program_id=program_id)
