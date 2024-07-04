@@ -19,6 +19,8 @@
             const referrer = document.referrer;
             if (referrer.includes('/program/policies/')) {
                 location.href = "{% url 'program:policy_list' %}";
+            } else if (referrer.includes('/accounts/mypage/scrap/policy/')) {
+                location.href = "{% url 'accounts:scrap_policy' %}";
             } else {
                 location.href = "{% url 'program:program_home' %}";
             }
@@ -50,11 +52,11 @@
 
     <!-- 스크랩 -->
     {% if is_scrapped %}
-    <form method="POST" action="{% url 'program:remove_scrap' policy.id %}">
+    <form method="POST" action="{% url 'program:remove_scrap_policy' policy.id %}">
         {% csrf_token %}
         <button type="submit" name="scrap">스크랩 취소</button> {{ policy.scrap_set.count }}</form>
     {% else %}
-    <form method="POST" action="{% url 'program:add_scrap' policy.id %}">
+    <form method="POST" action="{% url 'program:add_scrap_policy' policy.id %}">
         {% csrf_token %}
         <button type="submit" name="scrap">스크랩</button> {{ policy.scrap_set.count }}</form>
     {% endif %}

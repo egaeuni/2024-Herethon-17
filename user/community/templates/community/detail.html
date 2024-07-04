@@ -2,16 +2,28 @@
 <html>
 <head>
     <title>게시글 상세보기</title>
+    <script>
+        function goBack() {
+            const referrer = document.referrer;
+            if (referrer.includes('/accounts/mypage/posts/')) {
+                location.href = "{% url 'accounts:post_number' %}";
+            } else if (referrer.includes('/accounts/mypage/scrap/post/')) {
+                location.href = "{% url 'accounts:scrap_post' %}";
+            } else if (referrer.includes('/community/list/')) {
+                location.href = "{% url 'community:list' %}";
+            } else {
+                location.href = "{% url 'community:list' %}";  // 기본적으로 리스트 페이지로 이동
+            }
+        }
+    </script>
 </head>
 <body>
-    <a href="{% url 'community:list' %}">뒤로가기</a><br><br>
+    <button onclick="goBack()">뒤로가기</button><br><br>
 
-    <!-- 게시글 작성자의 닉네임과 개월 수 표시 -->
     {{ author_nickname }} | {{ author_current_age_months }}
     <h2>{{ post.title }}</h2>
     {{ post.content }}<br><br>
 
-    <!-- 댓글 -->
     댓글 수: {{ post.answers.count }}<br><br>
     {% for answer in post.answers.all %}
         <b>{{ answer.author.profile.nickname }}</b><br>
@@ -20,14 +32,12 @@
         댓글이 없습니다.
     {% endfor %}
 
-    <!-- 댓글 작성 폼 -->
     <form method="POST" action="{% url 'community:create-answer' post.id %}">
         {% csrf_token %}
         <input type="text" name="content" placeholder="댓글을 입력해주세요.">
         <input type="submit" value="등록">
     </form>
 
-    <!-- 공감 -->
     {% if request.user in post.like.all %}
     <form method="POST" action="{% url 'community:remove-like' post.id %}">
         {% csrf_token %}
@@ -38,7 +48,6 @@
         <button type="submit" name="like">공감</button></form>
     {% endif %}
 
-    <!-- 스크랩 -->
     {% if request.user in post.scrap.all %}
     <form method="POST" action="{% url 'community:remove-scrap' post.id %}">
         {% csrf_token %}

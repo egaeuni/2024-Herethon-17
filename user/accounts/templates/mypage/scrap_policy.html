@@ -2,18 +2,45 @@
 <html>
 <head>
     <title>스크랩한 육아휴직 제도</title>
+    <style>
+        .policy-container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .policy-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>스크랩한 육아휴직 제도</h1>
-    <ul>
+    {% if scrapped_policies %}
         {% for scrap in scrapped_policies %}
-        <li>
-            <a href="{% url 'program:policy_detail' scrap.policy.id %}">{{ scrap.policy.title }}</a>
-        </li>
-        {% empty %}
-        <li>스크랩한 육아휴직 제도가 없습니다.</li>
+            <div class="policy-container">
+                <div class="policy-title">
+                    <a href="{% url 'program:policy_detail' scrap.policy.id %}">{{ scrap.policy.title }}</a>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-    <a href="{% url 'accounts:mypage' %}"><button>뒤로가기</button></a>
+    {% else %}
+        <p>스크랩한 육아휴직 제도가 없습니다.</p>
+    {% endif %}
+    <a href="{% url 'accounts:mypage' %}" class="back-button">뒤로가기</a>
 </body>
 </html>

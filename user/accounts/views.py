@@ -7,8 +7,8 @@ from .models import Profile
 from .forms import ProfileForm
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
-from community.models import Post, Scrap
-from program.models import Policy, Program  # 추가: Policy와 Program 모델 가져오기
+from community.models import Post, ScrapCommunity  
+from program.models import Scrap, Policy, Program
 from django.contrib.auth.decorators import login_required
 
 def signup(request):
@@ -76,10 +76,16 @@ def mypage(request):
             gender = profile.gender
             nickname = profile.nickname
 
+            # 작성한 게시글과 스크랩한 게시글 가져오기
             user_posts = Post.objects.filter(author=request.user)
-            user_scraps = Scrap.objects.filter(user=request.user).values_list('post', flat=True)
-            scraped_posts = Post.objects.filter(id__in=user_scraps)
+            scrapped_posts = ScrapCommunity.objects.filter(user=request.user, post__isnull=False).select_related('post')
+            scrapped_policies = Scrap.objects.filter(user=request.user, policy__isnull=False).select_related('policy')
+            scrapped_programs = Scrap.objects.filter(user=request.user, program__isnull=False).select_related('program')
 
+            # 스크랩 수의 합 계산
+            total_scraps = scrapped_posts.count() + scrapped_policies.count() + scrapped_programs.count()
+
+            # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
 
             return render(request, 'accounts/mypage.html', {
@@ -89,7 +95,10 @@ def mypage(request):
                 'profile_pic_url': profile.profile_pic.url if profile.profile_pic else None,
                 'form': form,
                 'user_posts': user_posts,
-                'scraped_posts': scraped_posts,
+                'scraped_posts': scrapped_posts,
+                'scraped_policies': scrapped_policies,
+                'scraped_programs': scrapped_programs,
+                'total_scraps': total_scraps,  # 총 스크랩 수를 템플릿에 전달
             })
         except Profile.DoesNotExist:
             return render(request, 'accounts/mypage.html', {
@@ -100,6 +109,9 @@ def mypage(request):
                 'form': form,
                 'user_posts': [],
                 'scraped_posts': [],
+                'scraped_policies': [],
+                'scraped_programs': [],
+                'total_scraps': 0,  # 스크랩 수의 기본값을 0으로 설정
             })
     else:
         return redirect('accounts:login')
@@ -149,7 +161,6 @@ def edit_profile(request):
     else:
         return redirect('accounts:login')
 
-#마이페이지 관련 뷰함수
 @login_required
 def post_number(request):
     user_posts = Post.objects.filter(author=request.user)
@@ -157,14 +168,12 @@ def post_number(request):
 
 @login_required
 def scrap_post(request):
-    user = request.user
-    scrapped_posts = Scrap.objects.filter(user=user, post__isnull=False).select_related('post')
+    scrapped_posts = ScrapCommunity.objects.filter(user=request.user, post__isnull=False).select_related('post')
     return render(request, 'mypage/scrap_post.html', {'scrapped_posts': scrapped_posts})
 
 @login_required
 def scrap_policy(request):
-    user = request.user
-    scrapped_policies = Scrap.objects.filter(user=user, policy__isnull=False).select_related('policy')
+    scrapped_policies = Scrap.objects.filter(user=request.user, policy__isnull=False).select_related('policy')
     return render(request, 'mypage/scrap_policy.html', {'scrapped_policies': scrapped_policies})
 
 @login_required

@@ -8,18 +8,18 @@
             display: inline-block;
         }
         .profile-pic {
-            width: 150px; 
-            height: 150px; 
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            object-fit: cover; 
+            object-fit: cover;
         }
         .no-underline {
             text-decoration: none;
             color: inherit;
-            font-size: 12px; 
+            font-size: 12px;
         }
         .no-underline:hover {
-            text-decoration: underline; 
+            text-decoration: underline;
         }
         .post-list {
             display: none;
@@ -29,6 +29,10 @@
             cursor: pointer;
             color: #007BFF;
             font-weight: bold;
+            text-decoration: none;
+        }
+        .toggle-button:hover {
+            text-decoration: underline;
         }
         .toggle-section {
             display: none;
@@ -64,11 +68,11 @@
     </p>
     <br>
     <h3>
-        <a href="{% url 'accounts:post_number' %}">게시글 수: {{ user_posts|length }}</a>
+        <a href="{% url 'accounts:post_number' %}" class="toggle-button">게시글 수: {{ user_posts|length }}</a>
     </h3>
 
     <h3>
-        <span class="toggle-button" onclick="toggleSection('scrap-section')">스크랩 수: {{ scraped_posts|length }}</span>
+        <span class="toggle-button" onclick="toggleSection('scrap-section')">스크랩 수: {{ total_scraps }}</span>
     </h3>
     <div id="scrap-section" class="toggle-section">
         <ul>

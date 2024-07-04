@@ -24,6 +24,8 @@
             const referrer = document.referrer;
             if (referrer.includes('/program/list/')) {
                 location.href = "{% url 'program:program_list' %}";
+            } else if (referrer.includes('/accounts/mypage/scrap/program/')) {
+                location.href = "{% url 'accounts:scrap_program' %}";
             } else {
                 location.href = "{% url 'program:program_home' %}";
             }

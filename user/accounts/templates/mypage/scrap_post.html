@@ -19,10 +19,6 @@
         .post-content {
             margin-bottom: 10px;
         }
-        .post-date {
-            font-size: 0.9em;
-            color: #555;
-        }
         .post-metadata {
             font-size: 0.9em;
             color: #555;
@@ -46,16 +42,17 @@
 </head>
 <body>
     <h1>스크랩한 커뮤니티 게시글</h1>
-    {% if scraped_posts %}
-        {% for post in scraped_posts %}
+    {% if scrapped_posts %}
+        {% for scrap in scrapped_posts %}
             <div class="post-container">
-                <div class="post-title"><a href="{% url 'community:detail' post.id %}">{{ post.title }}</a></div>
-                <div class="post-content">{{ post.content }}</div>
+                <div class="post-title">
+                    <a href="{% url 'community:detail' scrap.post.id %}">{{ scrap.post.title }}</a>
+                </div>
+                <div class="post-content">{{ scrap.post.content|truncatewords:30 }}</div>
                 <div class="post-metadata">
-                    <span>작성일: {{ post.created_at|date:"Y-m-d" }}</span>
-                    <span>좋아요: {{ post.post_likes.count }}</span>
-                    <span>댓글: {{ post.answers.count }}</span>
-                    <span>스크랩: {{ post.post_scraps.count }}</span>
+                    <span>좋아요: {{ scrap.post.post_likes.count }}</span>
+                    <span>댓글: {{ scrap.post.answers.count }}</span>
+                    <span>스크랩: {{ scrap.post.post_scraps.count }}</span>
                 </div>
             </div>
         {% endfor %}

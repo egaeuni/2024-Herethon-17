@@ -2,18 +2,61 @@
 <html>
 <head>
     <title>스크랩한 육아휴직 프로그램</title>
+    <style>
+        .program-container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .program-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .program-content {
+            margin-bottom: 10px;
+        }
+        .program-metadata {
+            font-size: 0.9em;
+            color: #555;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .back-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>스크랩한 육아휴직 프로그램</h1>
-    <ul>
+    {% if scrapped_programs %}
         {% for scrap in scrapped_programs %}
-        <li>
-            <a href="{% url 'program:program_detail' scrap.program.id %}">{{ scrap.program.title }}</a>
-        </li>
-        {% empty %}
-        <li>스크랩한 육아휴직 프로그램이 없습니다.</li>
+            <div class="program-container">
+                <div class="program-title">
+                    <a href="{% url 'program:program_detail' scrap.program.id %}">{{ scrap.program.title }}</a>
+                </div>
+                <div class="program-content">{{ scrap.program.event_content }}</div>
+                <div class="program-metadata">
+                    <span>센터정보: {{ scrap.program.center_info }}</span>
+                    <span>행사기간: {{ scrap.program.event_period }}</span>
+                    <span>접수기간: {{ scrap.program.registration_period }}</span>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-    <a href="{% url 'accounts:mypage' %}"><button>뒤로가기</button></a>
+    {% else %}
+        <p>스크랩한 육아휴직 프로그램이 없습니다.</p>
+    {% endif %}
+    <a href="{% url 'accounts:mypage' %}" class="back-button">뒤로가기</a>
 </body>
 </html>
