@@ -210,3 +210,30 @@ hr {
   font-size: 16px;
   margin-right: 0.5vw;
 }
+
+.page {
+  margin-top: 2vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.page div {
+  background-color: rgb(252, 221, 205, 0.5);
+  border-radius: 10px;
+  width: 25px;
+  margin-right: 0.5vw;
+}
+
+.page button {
+  border: none;
+  padding: none;
+  background: none;
+  font-size: 16px;
+  margin-right: 0.5vw;
+  background-color: none;
+  border-radius: 25px;
+}
+
+#one {
+  background-color: rgb(252, 221, 205, 0.5);
+}

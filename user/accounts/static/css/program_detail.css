@@ -148,7 +148,7 @@ hr {
 #scrap {
   border: none;
   background: none;
-  margin-bottom: 0.3vw;
+  padding: 0;
 }
 
 #scrap img {
@@ -159,4 +159,18 @@ hr {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.sec_scrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.3vw;
+}
+
+.sec_scrap p {
+  margin: 0;
+  margin-left: 0.2vw;
+  color: #747474;
+  font-size: 11px;
 }
