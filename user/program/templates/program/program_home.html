@@ -34,7 +34,7 @@
 </head>
 <body>
     <h1>오늘의 POM 육아휴직 제도</h1>
-    <a href="{% url 'community:list' %}"><button>뒤로가기</button></a><br><br>
+    <a href="{% url 'accounts:home' %}"><button>뒤로가기</button></a><br><br>
     <a href="{% url 'program:policy_list' %}">더보기</a>
     <ul>
         {% for policy in policies|slice:":3" %}

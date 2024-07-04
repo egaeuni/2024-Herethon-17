@@ -41,21 +41,21 @@
     {% if request.user in post.like.all %}
     <form method="POST" action="{% url 'community:remove-like' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="like">공감 취소</button> {{ post.like.count }}</form>
+        <button type="submit" name="like">공감 취소</button>   {{ post.like.count }}</form>
     {% else %}
     <form method="POST" action="{% url 'community:add-like' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="like">공감</button></form>
+        <button type="submit" name="like">공감</button>   {{ post.like.count }}</form>
     {% endif %}
 
     {% if request.user in post.scrap.all %}
     <form method="POST" action="{% url 'community:remove-scrap' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="scrap">스크랩 취소</button> {{ post.scrap.count }}</form>
+        <button type="submit" name="scrap">스크랩 취소</button>   {{ post.scrap.count }}</form>
     {% else %}
     <form method="POST" action="{% url 'community:add-scrap' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="scrap">스크랩</button></form>
+        <button type="submit" name="scrap">스크랩</button>   {{ post.scrap.count }}</form>
     {% endif %}
 </body>
 </html>

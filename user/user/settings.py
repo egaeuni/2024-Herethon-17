@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'community',
     'program',
+    'mentoring',
 ]
 
 MIDDLEWARE = [

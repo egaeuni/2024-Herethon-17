@@ -6,10 +6,14 @@
 <body>
     <b><a href="{% url 'accounts:home' %}">POM</a></b>
     <a href="{% url 'program:program_home' %}">육아휴직 소개서</a>
-    <a href="#">전문가 멘토링</a>
+    <a href="{%url 'mentoring:home'%}">전문가 멘토링</a>
     <a href="{% url 'community:list' %}">커뮤니티</a>
     <a href="{% url 'accounts:mypage' %}">마이페이지</a><br><br>
 
+    <!--최신 등록순 % 인기순-->
+    <a href="{% url 'community:list' %}?sort=latest">최신 등록순</a>
+    <a href="{% url 'community:list' %}?sort=popular">인기순</a>
+    <!-- 글 작성 버튼 -->
     <a href="{% url 'community:create' %}">글 작성하기</a>
     <br><hr>
 
