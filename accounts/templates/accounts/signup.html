@@ -16,7 +16,7 @@
       {% if error %}
       <p style="color: red">{{ error }}</p>
       {% endif %}
-      <form method="post">
+      <form id="signupForm" method="post">
         {% csrf_token %}
         <div style="margin-bottom: 20px">
           <label class="input_show" for="username">아이디:</label>
@@ -61,8 +61,27 @@
             required
           />
         </div>
-        <button class="basic_button" type="submit">다음 단계로 넘어가기</button>
+        <button id="submitButton" class="basic_button" type="submit">
+          다음 단계로 넘어가기
+        </button>
       </form>
     </div>
+    <!-- <script src="{% static '/scripts/signup.js' %}"></script> -->
+    <script>
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (event) {
+          var password1 = document.getElementById("password1").value;
+          var password2 = document.getElementById("password2").value;
+          var message = document.getElementById("message");
+
+          if (password1 !== password2) {
+            event.preventDefault(); // 폼 제출을 막음
+            message.style.display = "block"; // 에러 메시지 표시
+          } else {
+            message.style.display = "none"; // 에러 메시지 숨김
+          }
+        });
+    </script>
   </body>
 </html>

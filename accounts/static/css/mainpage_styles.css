@@ -76,17 +76,17 @@ hr {
 
 .guide {
   width: 450px;
-  margin-top: 50px;
-  margin-bottom: 30px;
-  margin-left: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
   height: 28px;
-  margin-top: 110px;
-  margin-bottom: 20px;
-  margin-left: 90px;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menu_1 {
