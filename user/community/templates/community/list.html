@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>커뮤니티 게시글 목록</title>
+</head>
+<body>
+    <b><a href="{% url 'accounts:home' %}">POM</a></b>
+    <a href="#">육아휴직 소개서</a>
+    <a href="#">전문가 멘토링</a>
+    <a href="{% url 'community:list' %}">커뮤니티</a>
+    <a href="{% url 'accounts:mypage' %}">마이페이지</a><br><br>
+
+    <!-- 글 작성 버튼 -->
+    <a href="{% url 'community:create' %}">글 작성하기</a>
+    <br><hr>
+
+    {% for post in posts %}
+    {{ post.author.profile.nickname }} | {{ post.author.profile.current_age_months }}
+    <h2><a href="{% url 'community:detail' post.id %}">{{ post.title }}</a></h2>
+    {{ post.content }}<br><br>
+    댓글 수: {{ post.answers.count }}
+    공감 수: {{ post.like.count }}
+    스크랩 수: {{ post.scrap.count }} <br><hr>
+    {% empty %}
+    게시글이 없습니다.
+    {% endfor %}
+</body>
+</html>
