@@ -1,0 +1,17 @@
+<body>
+    {{mento.nickname}} <b> {{mento.name}}멘토 </b><br>
+    {{mento.tag}}     
+    <a href="{%url 'mentoring:question' mento.id%}">질문하기</a><br><br>
+
+    <h3>멘토 소개</h3>
+    {{mento.intro}}<br><br>
+    <h3>이런 내용을 멘토링 합니다!</h3>
+    {{mento.content_1}}<br>
+    {{mento.content_2}}<br>
+    {{mento.content_3}}<br>
+    {{mento.content_4}}<br><br>
+    <h3>질문 답변 시간</h3>
+    {{mento.time}}<br><br><br>
+
+    <a href="{%url 'mentoring:home'%}">뒤로가기</a>
+</body>
