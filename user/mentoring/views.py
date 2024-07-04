@@ -4,14 +4,29 @@ from django.db.models import Q, Count
 from .models import Mento
 # Create your views here.
 def home(request):
-    mentos = Mento.objects.all()
+    search_query = request.GET.get('search', '')
     sort = request.GET.get('sort', 'latest')
     
+    mentos = Mento.objects.all()
+    
+    if search_query:
+        mentos = mentos.filter(
+            Q(name__icontains=search_query) | 
+            Q(nickname__icontains=search_query) | 
+            Q(tag__icontains=search_query) |
+            Q(intro__icontains=search_query) |
+            Q(content_1__icontains=search_query) |
+            Q(content_2__icontains=search_query) |
+            Q(content_3__icontains=search_query) |
+            Q(content_4__icontains=search_query)
+        )
+    
     if sort == 'popular':
-        mentos = Mento.objects.all().annotate(popularity= Count('questions')).order_by('-popularity', '-id')
+        mentos = mentos.annotate(popularity=Count('questions')).order_by('-popularity', '-id')
     else:
-        mentos = Mento.objects.all().order_by('-id')
-    return render(request, 'mentoring/home.html', {'mentos':mentos})
+        mentos = mentos.order_by('-id')
+    
+    return render(request, 'mentoring/home.html', {'mentos': mentos, 'search_query': search_query, 'sort': sort})
 
 def detail(request, id):
     mento = get_object_or_404(Mento, id=id)

@@ -1,0 +1,106 @@
+/* 기본 스타일링 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* header {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+.nav_main {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: 150px;
+  margin-right: 80px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.menu li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+
+.right_nav {
+  position: fixed;
+  right: 250px; /* 원하는 위치로 조정 */
+}
+
+.user-options {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.user-options li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+
+hr {
+  color: #646464;
+  margin-top: 5px;
+}
+
+.main-content {
+  padding: 20px;
+  display: flex;
+}
+
+.guide {
+  width: 450px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: 280px;
+}
+
+.title {
+  height: 28px;
+  margin-top: 110px;
+  margin-bottom: 20px;
+  margin-left: 90px;
+  position: absolute;
+}
+
+.menu_1 {
+  width: 350px;
+  margin-top: 40px;
+  margin-bottom: 55px;
+  margin-left: 40px;
+}
+
+.menu_2 {
+  position: absolute;
+  width: 380px;
+  margin-top: 170px;
+  margin-left: 10px;
+}
+
+.menu_3 {
+  position: absolute;
+  width: 380px;
+  margin-top: 410px;
+  margin-left: 10px;
+}

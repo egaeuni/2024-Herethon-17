@@ -1,14 +1,61 @@
-<body>
-    <h2>질문사항</h2>
-    <form action = "{%url 'mentoring:question' mento.id%}" method="POST">
-        {%csrf_token%}
-        {{mento.nickname}} <b> {{mento.name}}멘토 </b><br>
-        {{mento.tag}}<br><br>
-        <textarea name = "content" placeholder="내용을 입력해주세요."></textarea><br>
-        <button type="submit">등록</button>
-    </form>
-    <hr>
-    {%for question in questions %}
-    {{question.content}}<br><hr>
-    {%endfor%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/question.css' %}" />
+    <title>question</title>
+  </head>
+  <body>
+    {%include 'mentoring/header.html' %}
 
+    <section>
+      <form action="{%url 'mentoring:question' mento.id%}" method="POST">
+        {%csrf_token%}
+        <div class="section">
+          <div class="sec_header">질문사항</div>
+          <!-- ~<div class="sec_header"> -->
+
+          <div class="mentor">
+            <div class="mentor_detail">
+              <div class="mentor_nickname">
+                <div class="mentor_circle"><div class="mentor_text">{{mento.nickname}}</div></div>
+                <!-- ~<div class="mentor_circle"> -->
+              </div>
+              <!-- ~<div class="mentor_nickname"> -->
+
+              <div class="mentor_name">
+                <p>{{mento.name}}멘토</p>
+              </div>
+              <!-- ~<div class="mentor_name"> -->
+
+              <div class="mentor_content">
+                <p>{{mento.tag}}</p>
+              </div>
+              <!-- ~<div class="mentor_content"> -->
+            </div>
+            <!-- ~<div class="mentor_detail"> -->
+            {%for question in questions %}
+            <div class="question">
+              <div><p>{{question.content}}</p></div>
+            </div>
+            <!-- ~<div class="question"> -->
+            {%endfor%}
+            <div class="text">
+              <textarea class="textarea" placeholder="내용을 입력해주세요." name="content"></textarea>
+            </div>
+            <!-- ~<div class="text"> -->
+          </div>
+          <!-- ~<div class="mentor"> -->
+
+          <div class="close">
+            <button type="submit" id="closeBtn">등록</button>
+          </div>
+          <!-- ~<div class="closeBtn"> -->
+        </div>
+        <!-- ~<div class="section"> -->
+      </form>
+    </section>
+  </body>
+</html>
