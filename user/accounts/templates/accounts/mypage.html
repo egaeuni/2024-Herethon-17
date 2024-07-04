@@ -1,95 +1,131 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/mypage_styles.css' %}" />
     <title>마이페이지</title>
     <style>
-      .profile-container {
-        position: relative;
-        display: inline-block;
-      }
       .profile-pic {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-      .no-underline {
-        text-decoration: none;
-        color: inherit;
-        font-size: 12px;
-      }
-      .no-underline:hover {
-        text-decoration: underline;
-      }
-      .post-list {
-        display: none;
-        margin-top: 10px;
-      }
-      .toggle-button {
-        cursor: pointer;
-        color: #007bff;
-        font-weight: bold;
+        width: 150px; /* 원하는 크기로 조정 */
+        height: 150px; /* 원하는 크기로 조정 */
+        border-radius: 50%; /* 원형으로 만들기 */
+        object-fit: cover; /* 이미지를 잘라서 맞춤 */
       }
     </style>
-    <script></script>
   </head>
   <body>
-    <h1>마이페이지</h1>
-    <a href="{% url 'community:list' %}">뒤로가기</a><br /><br />
-    <div class="profile-container">
-      <!-- 프로필 사진을 원형으로 표시 -->
-      {% if profile_pic_url %}
-      <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic" />
-      {% else %}
-      <img
-        src="{% static 'images/basic_image.png' %}"
-        alt="기본 프로필 사진"
-        class="profile-pic"
-      />
-      {% endif %}
-    </div>
-    <h2>{{ nickname }}</h2>
-    <p>
-      {% if gender == 'female' %}여자아이{% elif gender == 'male' %}남자아이{%
-      else %}미정{% endif %} {{ current_age_months }}
-    </p>
-    <p>
-      <a href="{% url 'accounts:edit_profile' %}" class="no-underline"
-        >정보 수정하기 &gt;</a
-      >
-    </p>
-    <br />
-    <h3>
-      작성한 게시글:
-      <span class="toggle-button" onclick="togglePostList('user')"
-        >{{ user_posts|length }}</span
-      >
-    </h3>
-    <ul id="user-post-list" class="post-list">
-      {% for post in user_posts %}
-      <li>
-        <a href="{% url 'community:detail' post.id %}">{{ post.title }}</a>
-      </li>
-      {% empty %}
-      <li>작성한 게시글이 없습니다.</li>
-      {% endfor %}
-    </ul>
+    <!-- 상단 nav -->
+    <section class="nav_main">
+      {% load static %}
 
-    <h3>
-      스크랩한 게시글:
-      <span class="toggle-button" onclick="togglePostList('scrap')"
-        >{{ scraped_posts|length }}</span
-      >
-    </h3>
-    <ul id="scrap-post-list" class="post-list">
-      {% for post in scraped_posts %}
-      <li>
-        <a href="{% url 'community:detail' post.id %}">{{ post.title }}</a>
-      </li>
-      {% empty %}
-      <li>스크랩한 게시글이 없습니다.</li>
-      {% endfor %}
-    </ul>
+      <a href="{% url 'accounts:home' %}">
+        <img class="logo" src="{% static 'img/logo2.png' %}" alt="로고" />
+      </a>
+      <nav>
+        <ul class="menu">
+          <li><a href="/html/introduction.html">육아휴직소개서</a></li>
+          <li><a href="/html/mentoring.html">전문가멘토링</a></li>
+          <li><a href="/html/community.html">커뮤니티</a></li>
+          <li><a href="{% url 'accounts:mypage' %}">마이페이지</a></li>
+        </ul>
+      </nav>
+      <nav class="right_nav">
+        <ul class="user-options">
+          {% if user.is_authenticated %}
+          <li>
+            <a>{{ user.username }}님, 환영합니다!</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              onclick="document.getElementById('logout-form').submit();"
+              >로그아웃</a
+            >
+            <form
+              id="logout-form"
+              action="{% url 'accounts:logout' %}"
+              method="post"
+              style="display: none"
+            >
+              {% csrf_token %}
+            </form>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'accounts:login' %}" class="nav-link">로그인</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:signup' %}" class="nav-link">회원가입</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </section>
+    <a href="{% url 'community:list' %}">뒤로가기</a><br /><br />
+    <div class="container">
+      <div class="profile-section">
+        <div class="profile-section">
+          <div class="profile-picture">
+            <img
+              id="profile-img"
+              src="{% static 'img/girl.png' %}"
+              alt="프로필 사진"
+            />
+            <input type="file" id="upload-img" accept="image/*" />
+            <button id="change-picture-btn">📸</button>
+          </div>
+          <h2>{{ nickname }}</h2>
+          <p>
+            {% if gender == 'female' %}여자아이{% elif gender == 'male'
+            %}남자아이{% else %}미정{% endif %} {{ current_age_months }}
+          </p>
+          <p>
+            <a href="{% url 'accounts:edit_profile' %}" class="no-underline"
+              >정보 수정하기 &gt;</a
+            >
+          </p>
+          <br />
+          <h3>
+            작성한 게시글:
+            <span class="toggle-button" onclick="togglePostList('user')"
+              >{{ user_posts|length }}</span
+            >
+          </h3>
+          <ul id="user-post-list" class="post-list">
+            {% for post in user_posts %}
+            <li>
+              <a href="{% url 'community:detail' post.id %}"
+                >{{ post.title }}</a
+              >
+            </li>
+            {% empty %}
+            <li>작성한 게시글이 없습니다.</li>
+            {% endfor %}
+          </ul>
+
+          <h3>
+            스크랩한 게시글:
+            <span class="toggle-button" onclick="togglePostList('scrap')"
+              >{{ scraped_posts|length }}</span
+            >
+          </h3>
+          <ul id="scrap-post-list" class="post-list">
+            {% for post in scraped_posts %}
+            <li>
+              <a href="{% url 'community:detail' post.id %}"
+                >{{ post.title }}</a
+              >
+            </li>
+            {% empty %}
+            <li>스크랩한 게시글이 없습니다.</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
     <script src="{% static 'scripts/togglePostList.js' %}"></script>
+    <script src="{% static 'scripts/changeIMG.js' %}"></script>
+    <script src="{% static 'scripts/showProfile.js' %}"></script>
   </body>
 </html>
