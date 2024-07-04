@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Program(models.Model):
     title = models.CharField(max_length=200)
@@ -18,6 +19,7 @@ class Program(models.Model):
 
 class Policy(models.Model):
     title = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)  #최신 등록순
 
     def __str__(self):
         return self.title
@@ -26,8 +28,24 @@ class Benefit(models.Model):
     policy = models.ForeignKey(Policy, related_name='benefits', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
-    application_method = models.TextField()
-    planned_changes = models.TextField()
+    eligibility = models.TextField(blank=True, null=True)  # 지원 조건
+    application_period = models.TextField(blank=True, null=True)  # 신청 시기
+    application_method = models.TextField(blank=True, null=True) #신청 방법
+    additional_info = models.TextField(blank=True, null=True)  # 기타
+    planned_changes = models.TextField(blank=True, null=True) #개편 예정
 
     def __str__(self):
         return self.title
+
+class Scrap(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    policy = models.ForeignKey(Policy, related_name='scraps', on_delete=models.CASCADE, null=True, blank=True)
+    program = models.ForeignKey(Program, related_name='scraps', on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        if self.policy:
+            return f"{self.user.username} - {self.policy.title}"
+        elif self.program:
+            return f"{self.user.username} - {self.program.title}"
+        return f"{self.user.username} - Scrap"

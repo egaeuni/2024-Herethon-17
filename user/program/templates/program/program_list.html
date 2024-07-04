@@ -8,37 +8,7 @@
     <title>program</title>
 </head>
 <body>
-    <div class="header">
-    <header>
-        <div>
-        <a href="staic '/html/mainpage.html"><img src="{% static 'images/POM.png'%} " id="logo"></a></img>
-        </div>
-    </header>
-    <nav>
-        <div class="nav">
-        <div class="menu">
-            <ul>
-            <li><a href="{% url 'program:program_home' %}">육아휴직 소개서</a></li>
-            <li><a href="/html/mentoring.html">전문가 멘토링</a></li>
-            <li><a href="/html/community.html">커뮤니티</a></li>
-            <li><a href="/html/mypage.html">마이 페이지</a></li>
-            </ul>
-        </div>
-        <!-- ~<div class="menu"> -->
-        <div class="account">
-            <ul>
-            <li><a href="/html/login.html">로그인</a></li>
-            <li><a href="/html/signup.html" id="signup">회원가입</a></li>
-            </ul>
-        </div>
-        <!-- ~<div class="account"> -->
-        </div>
-        <!-- ~<div class="menu"> -->
-    </nav>
-    </div>
-    <!-- ~<div class="header"> -->
-    
-    <hr>
+    {% include 'program/header.html' %}
 
     <section>
     <div class="section">
@@ -83,7 +53,7 @@
                 <p>{{ program.title }}</p>
                 </div>
                 <div class="program_detail_look">
-                <p><a href="/html/program_detail.html">상세보기</a></p>
+                <p><a href="{% url 'program:program_detail' program.id %}">상세보기</a></p>
                 </div>
             </div><!-- ~<div class="program_detail"> -->
             {% endfor %}
@@ -93,15 +63,15 @@
         
         </div><!-- ~<div class="programs"> -->
 
-        <!-- <div class="page">
-        <div><button>1</button></div>
-        <button>2</button>
-        <button>3</button>
-        <button>></button>
-        </div>~<div class="page"> -->
+            <div class="page">
+                <button type="button" id="one">1</button>
+                <button type="button" id="two">2</button>
+                <button type="button" id="three">3</button>
+                <button type="button" id="next">></button>
+            </div>
 
     </div><!-- ~<div class="section"> -->
     </section>
-    <!-- <script src="{% static 'scripts/program.js' %}"></script>    -->
+    <script src="{% static 'scripts/program.js' %}"></script>   
 </body>
 </html>

@@ -191,7 +191,7 @@ hr {
   margin-bottom: 0.4vw;
 }
 
-.program_detail_content p:nth-child(2) {
+.program_detail_content a p {
   font-size: 12px;
   font-weight: bold;
 }
@@ -204,4 +204,14 @@ hr {
 .policy,
 .program {
   margin-top: 2vw;
+}
+
+.policy_detail_text a,
+.program_detail_content a {
+  text-decoration: none;
+  color: black;
+}
+
+.policy_detail_text a p {
+  font-size: 12px;
 }

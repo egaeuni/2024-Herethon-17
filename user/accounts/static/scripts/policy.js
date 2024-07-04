@@ -1,57 +1,59 @@
-const recent = document.getElementById("recent");
-const hot = document.getElementById("hot");
-let recent_isClicked = false;
-let hot_isClicked = false;
+document.addEventListener("DOMContentLoaded", function () {
+  const recent = document.getElementById("recent");
+  const hot = document.getElementById("hot");
+  const one = document.getElementById("one");
+  const two = document.getElementById("two");
+  const three = document.getElementById("three");
+  const next = document.getElementById("next");
+  const page = document.getElementsByClassName("page")[0];
 
-const one = document.getElementById("one");
-const two = document.getElementById("two");
-const three = document.getElementById("three");
-const next = document.getElementById("next");
+  // 로컬 스토리지에서 정렬 기준을 읽어서 적용
+  const sortBy = localStorage.getItem("sort_by");
+  if (sortBy === "created_at") {
+    setActiveButton(recent, hot);
+  } else if (sortBy === "scrap_count") {
+    setActiveButton(hot, recent);
+  }
 
-recent.addEventListener("click", function () {
-  recent_isClicked = true;
-  hot_isClicked = false;
+  recent.addEventListener("click", function () {
+    localStorage.setItem("sort_by", "created_at");
+    setActiveButton(recent, hot);
+  });
 
-  recent.style.border = "1px solid #fb8129";
-  recent.style.color = "#fb8129";
-  hot.style.border = "1px solid #eff0f1";
-  hot.style.color = "black";
-});
+  hot.addEventListener("click", function () {
+    localStorage.setItem("sort_by", "scrap_count");
+    setActiveButton(hot, recent);
+  });
 
-hot.addEventListener("click", function () {
-  hot_isClicked = true;
-  recent_isClicked = false;
+  one.addEventListener("click", function () {
+    setPageButton(one, [two, three, next]);
+  });
 
-  hot.style.border = "1px solid #fb8129";
-  hot.style.color = "#fb8129";
-  recent.style.border = "1px solid #eff0f1";
-  recent.style.color = "black";
-});
+  two.addEventListener("click", function () {
+    setPageButton(two, [one, three, next]);
+  });
 
-one.addEventListener("click", function () {
-  one.style.background = "rgb(252, 221, 205, 0.5)";
-  two.style.background = "none";
-  three.style.background = "none";
-  next.style.background = "none";
-});
+  three.addEventListener("click", function () {
+    setPageButton(three, [one, two, next]);
+  });
 
-two.addEventListener("click", function () {
-  one.style.background = "none";
-  two.style.background = "rgb(252, 221, 205, 0.5)";
-  three.style.background = "none";
-  next.style.background = "none";
-});
+  next.addEventListener("click", function () {
+    setPageButton(next, [one, two, three]);
+  });
 
-three.addEventListener("click", function () {
-  one.style.background = "none";
-  two.style.background = "none";
-  three.style.background = "rgb(252, 221, 205, 0.5)";
-  next.style.background = "none";
-});
+  function setActiveButton(activeBtn, inactiveBtn) {
+    const activeLink = activeBtn.querySelector("a");
+    const inactiveLink = inactiveBtn.querySelector("a");
 
-next.addEventListener("click", function () {
-  one.style.background = "none";
-  two.style.background = "none";
-  three.style.background = "none";
-  next.style.background = "rgb(252, 221, 205, 0.5)";
+    activeBtn.style.border = "1px solid #fb8129";
+    activeLink.style.color = "#fb8129";
+    inactiveBtn.style.border = "1px solid #eff0f1";
+    inactiveLink.style.color = "black";
+    // page.style.display = "none";
+  }
+
+  function setPageButton(activeBtn, inactiveBtns) {
+    activeBtn.style.background = "rgb(252, 221, 205, 0.5)";
+    inactiveBtns.forEach((btn) => (btn.style.background = "none"));
+  }
 });

@@ -202,3 +202,22 @@ hr {
 #one {
   background-color: rgb(252, 221, 205, 0.5);
 }
+
+#recent a,
+#hot a {
+  text-decoration: none;
+}
+
+.policy_detail_scrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  margin-right: 0.8vw;
+  margin-bottom: 0.5vw;
+  font-size: 10px;
+}
+
+.policy_detail_scrap img {
+  margin-right: 0.2vw;
+}

@@ -45,8 +45,8 @@
                         <img src="{% static 'images/policy3.png' %}" alt="Policy Image">
                     {% endif %}
                 </div><!-- ~<div class="policy_detail_img"> -->
-                <div class="policy_detail_text">
-                    <p>{{ policy.title }}</p>
+                <div class="policy_detail_text"><a href="{% url 'program:policy_detail' policy.id %}">
+                    <p>{{ policy.title }}</p></a>
                 </div><!-- ~<div class="policy_detail_text"> -->
                 </div><!-- ~<div class="policy_detail"> -->
                 {% endfor %}
@@ -65,11 +65,11 @@
                 {% for program in programs %}
                 <div class="program_detail">
                     <div class="program_detail_location">
-                    <div class="program_detail_circle"><div class="program_detail_text">인천시</div></div><!-- ~<div class="program_detail_circle"> -->
+                    <div class="program_detail_circle"><div class="program_detail_text">{{ program.region }}시</div></div><!-- ~<div class="program_detail_circle"> -->
                     </div><!-- ~<div class="program_detail_location"> -->
                     <div class="program_detail_content">
-                    <p>{{ program.region }}</p>
-                    <p>{{ program.title }}</p>
+                        <p>{{ program.region }}</p>
+                        <a href="{% url 'program:program_detail' program.id %}"><p>{{ program.title }}</p></a>
                     </div>
                 </div><!-- ~<div class="program_detail"> -->
                 {% endfor %}
