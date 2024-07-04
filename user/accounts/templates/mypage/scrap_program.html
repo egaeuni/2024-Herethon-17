@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>스크랩한 육아휴직 프로그램</title>
+</head>
+<body>
+    <h1>스크랩한 육아휴직 프로그램</h1>
+    <ul>
+        {% for scrap in scrapped_programs %}
+        <li>
+            <a href="{% url 'program:program_detail' scrap.program.id %}">{{ scrap.program.title }}</a>
+        </li>
+        {% empty %}
+        <li>스크랩한 육아휴직 프로그램이 없습니다.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'accounts:mypage' %}"><button>뒤로가기</button></a>
+</body>
+</html>

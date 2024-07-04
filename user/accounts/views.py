@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.conf import settings
 from .models import Profile
-from .forms import ProfileForm  # 프로필 폼 추가
+from .forms import ProfileForm
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
-from community.models import Post, Scrap  # 추가: Post 모델 가져오기
+from community.models import Post, Scrap
+from program.models import Policy, Program  # 추가: Policy와 Program 모델 가져오기
 from django.contrib.auth.decorators import login_required
 
 def signup(request):
@@ -29,16 +30,10 @@ def signup_child(request):
         gender = request.POST['gender']
         birth_date_str = request.POST['birth_date']
         
-        # 출생일 문자열을 datetime.date 객체로 변환
         birth_date = datetime.strptime(birth_date_str, '%Y-%m-%d').date()
-
-        # 사용자 생성
         user = User.objects.create_user(username, password=password)
-
-        # 프로필 생성 및 연결
         profile = Profile(user=user, gender=gender, birth_date=birth_date, nickname=nickname)
         profile.save()
-
         auth.login(request, user)
         return redirect('accounts:home')
     return render(request, 'accounts/signup_child.html')
@@ -49,17 +44,14 @@ def login(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            auth_login(request, user)  # Django의 로그인 함수를 사용
-            return redirect('accounts:home')  # 로그인 후 리다이렉트할 페이지
+            auth_login(request, user)
+            return redirect('accounts:home')
         else:
-            # 로그인 실패 시 에러 메시지와 함께 로그인 페이지를 다시 렌더링
             return render(request, 'accounts/login.html', {'error': 'Username or password is incorrect'})
     else:
-        # GET 요청 처리, 로그인 폼을 보여줌
         return render(request, 'accounts/login.html')
 
 def logout(request):
-    # 로그아웃 처리
     from django.contrib.auth import logout as auth_logout
     auth_logout(request)
     return redirect('accounts:login')
@@ -84,12 +76,10 @@ def mypage(request):
             gender = profile.gender
             nickname = profile.nickname
 
-            # 작성한 게시글과 스크랩한 게시글 가져오기
             user_posts = Post.objects.filter(author=request.user)
             user_scraps = Scrap.objects.filter(user=request.user).values_list('post', flat=True)
             scraped_posts = Post.objects.filter(id__in=user_scraps)
 
-            # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
 
             return render(request, 'accounts/mypage.html', {
@@ -158,3 +148,27 @@ def edit_profile(request):
         })
     else:
         return redirect('accounts:login')
+
+#마이페이지 관련 뷰함수
+@login_required
+def post_number(request):
+    user_posts = Post.objects.filter(author=request.user)
+    return render(request, 'mypage/post_number.html', {'user_posts': user_posts})
+
+@login_required
+def scrap_post(request):
+    user = request.user
+    scrapped_posts = Scrap.objects.filter(user=user, post__isnull=False).select_related('post')
+    return render(request, 'mypage/scrap_post.html', {'scrapped_posts': scrapped_posts})
+
+@login_required
+def scrap_policy(request):
+    user = request.user
+    scrapped_policies = Scrap.objects.filter(user=user, policy__isnull=False).select_related('policy')
+    return render(request, 'mypage/scrap_policy.html', {'scrapped_policies': scrapped_policies})
+
+@login_required
+def scrap_program(request):
+    user = request.user
+    scrapped_programs = Scrap.objects.filter(user=user, program__isnull=False).select_related('program')
+    return render(request, 'mypage/scrap_program.html', {'scrapped_programs': scrapped_programs})

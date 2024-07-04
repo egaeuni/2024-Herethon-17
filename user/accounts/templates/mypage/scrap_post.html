@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스크랩한 커뮤니티 게시글</title>
+    <style>
+        .post-container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .post-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .post-content {
+            margin-bottom: 10px;
+        }
+        .post-date {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .post-metadata {
+            font-size: 0.9em;
+            color: #555;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .back-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>스크랩한 커뮤니티 게시글</h1>
+    {% if scraped_posts %}
+        {% for post in scraped_posts %}
+            <div class="post-container">
+                <div class="post-title"><a href="{% url 'community:detail' post.id %}">{{ post.title }}</a></div>
+                <div class="post-content">{{ post.content }}</div>
+                <div class="post-metadata">
+                    <span>작성일: {{ post.created_at|date:"Y-m-d" }}</span>
+                    <span>좋아요: {{ post.post_likes.count }}</span>
+                    <span>댓글: {{ post.answers.count }}</span>
+                    <span>스크랩: {{ post.post_scraps.count }}</span>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>스크랩한 커뮤니티 게시글이 없습니다.</p>
+    {% endif %}
+    <a href="{% url 'accounts:mypage' %}" class="back-button">뒤로가기</a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>스크랩한 육아휴직 제도</title>
+</head>
+<body>
+    <h1>스크랩한 육아휴직 제도</h1>
+    <ul>
+        {% for scrap in scrapped_policies %}
+        <li>
+            <a href="{% url 'program:policy_detail' scrap.policy.id %}">{{ scrap.policy.title }}</a>
+        </li>
+        {% empty %}
+        <li>스크랩한 육아휴직 제도가 없습니다.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'accounts:mypage' %}"><button>뒤로가기</button></a>
+</body>
+</html>
