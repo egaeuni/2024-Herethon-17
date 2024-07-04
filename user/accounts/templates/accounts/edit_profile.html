@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>프로필 수정</title>
+    <style>
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px; 
+        }
+        .profile-pic {
+            width: 150px; 
+            height: 150px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
+        .file-upload {
+            display: none;
+        }
+        .upload-label {
+            cursor: pointer;
+            position: absolute;
+            bottom: 1px; 
+            right: 10px; 
+            width: 32px; 
+            height: 32px; 
+            background: url('{% static "images/pencil.png" %}') no-repeat center center;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="profile-container">
+            {% if profile_pic_url %}
+                <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic">
+                {% else %}
+                <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic">
+                {% endif %}
+            <input type="file" name="profile_pic" id="profile_pic" class="file-upload">
+            <label for="profile_pic" class="upload-label"></label>
+        </div>
+
+        <!-- 닉네임 수정 필드 추가 -->
+        <div style="margin-bottom: 20px;">
+            {{ form.nickname }}
+        </div>
+        <button type="submit">저장</button>
+    </form>
+</body>
+</html>
