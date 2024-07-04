@@ -32,21 +32,21 @@ one.addEventListener("click", function () {
   one.style.background = "rgb(252, 221, 205, 0.5)";
   two.style.background = "none";
   three.style.background = "none";
-  nextstyle.background = "none";
+  next.style.background = "none";
 });
 
 two.addEventListener("click", function () {
   one.style.background = "none";
   two.style.background = "rgb(252, 221, 205, 0.5)";
   three.style.background = "none";
-  nextstyle.background = "none";
+  next.style.background = "none";
 });
 
 three.addEventListener("click", function () {
   one.style.background = "none";
   two.style.background = "none";
   three.style.background = "rgb(252, 221, 205, 0.5)";
-  nextstyle.background = "none";
+  next.style.background = "none";
 });
 
 next.addEventListener("click", function () {

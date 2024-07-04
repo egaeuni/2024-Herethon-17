@@ -198,3 +198,7 @@ hr {
   background-color: none;
   border-radius: 25px;
 }
+
+#one {
+  background-color: rgb(252, 221, 205, 0.5);
+}

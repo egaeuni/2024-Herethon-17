@@ -7,7 +7,6 @@ let isClicked = false;
 
 scrapBtn.addEventListener("click", function () {
   var scrapCount = parseInt(count.innerText, 10);
-
   console.log("클릭되었음");
   if (isClicked) {
     scrapCount--;
@@ -16,6 +15,7 @@ scrapBtn.addEventListener("click", function () {
     scrapCount++;
     scrapImg.src = "/img/scrap2.png";
   }
+
   count.innerText = scrapCount;
 
   isClicked = !isClicked;
