@@ -196,12 +196,9 @@ hr {
   font-weight: bold;
 }
 
-.program_list1,
-.program_list2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 1vw;
+.program_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .policy,

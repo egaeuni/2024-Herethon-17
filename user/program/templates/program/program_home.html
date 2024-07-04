@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/introduction.css' %}"></link>
+    <title>introduction</title>
+</head>
+<body>
+    {% include 'program/header.html' %}
+    <section>
+    <div class="section">
+        <div class="sec_header">
+        <div class="sec_header_text">
+            <p>육아에 대해 <span>고민했던 부분</span>을 바로 알고</p>
+            <p>싶다면?</p>
+            <p id="text_bold">육아휴직소개서</p>
+        </div><!-- ~<div class="sec_header_text"> -->
+
+        <div class="sec_header_img">
+            <img src="{% static 'images/working.png' %}"/>
+        </div> <!-- ~<div class="sec_header_img"> -->
+        </div><!-- ~<div class="sec_header"> -->
+        
+        <div class="sec_content">
+        <div class="policy">
+            <div class="policy_header">
+            <div class="policy_header_title">
+                <p>오늘의 POM 육아휴직 제도</p>
+                <img src="{% static 'images/orangeStar.png' %}">
+            </div><!-- ~<div class="policy_header_title"> -->
+            <div class="policy_header_more"><a href="{% url 'program:policy_list' %}"><p>더보기</p></a></div><!-- ~<div class="policy_header_more"> -->
+            </div><!-- ~<div class="policy_header"> -->
+            
+            <div class="policy_list">
+            {% for policy in policies|slice:":3" %}
+                <div class="policy_detail">
+                <div class="policy_detail_img">
+                    {% if forloop.counter0 == 0 %}
+                        <img src="{% static 'images/policy1.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 1 %}
+                        <img src="{% static 'images/policy2.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 2 %}
+                        <img src="{% static 'images/policy3.png' %}" alt="Policy Image">
+                    {% endif %}
+                </div><!-- ~<div class="policy_detail_img"> -->
+                <div class="policy_detail_text">
+                    <p>{{ policy.title }}</p>
+                </div><!-- ~<div class="policy_detail_text"> -->
+                </div><!-- ~<div class="policy_detail"> -->
+                {% endfor %}
+            </div><!-- ~<div class="policy_list"> -->
+        </div><!-- ~<div class="policy"> -->
+
+        <div class="program">
+            <div class="program_header">
+            <div class="program_header_title">
+                <p>POM이 추천하는 육아 프로그램</p>
+            </div><!-- ~<div class="program_header_title"> -->
+            <div class="program_header_more"><a href="{% url 'program:program_list' %}"><p>더보기</p></a></div><!-- ~<div class="program_header_more"> -->
+            </div><!-- ~<div class="program_header"> -->
+
+            <div class="program_list">
+                {% for program in programs %}
+                <div class="program_detail">
+                    <div class="program_detail_location">
+                    <div class="program_detail_circle"><div class="program_detail_text">인천시</div></div><!-- ~<div class="program_detail_circle"> -->
+                    </div><!-- ~<div class="program_detail_location"> -->
+                    <div class="program_detail_content">
+                    <p>{{ program.region }}</p>
+                    <p>{{ program.title }}</p>
+                    </div>
+                </div><!-- ~<div class="program_detail"> -->
+                {% endfor %}
+            </div>
+
+            </div><!-- ~<div class="program_list"> -->
+            
+        </div><!-- ~<div class="program"> -->
+        </div><!-- ~<div class="sec_content"> -->
+    </div><!-- ~<div class="section"> -->
+    </section>
+</body>
+</html>

@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/policy.css' %}"></link>
+    <title>policy</title>
+</head>
+<body>
+    <div class="header">
+    <header>
+        <div>
+        <a href="/html/mainpage.html"><img src="{% static 'images/POM.png' %}" id="logo"></a></img>
+        </div>
+    </header>
+    <nav>
+        <div class="nav">
+        <div class="menu">
+            <ul>
+            <li><a href="{% url 'program:program_home' %}">육아휴직 소개서</a></li>
+            <li><a href="/html/mentoring.html">전문가 멘토링</a></li>
+            <li><a href="/html/community.html">커뮤니티</a></li>
+            <li><a href="/html/mypage.html">마이 페이지</a></li>
+            </ul>
+        </div>
+        <!-- ~<div class="menu"> -->
+        <div class="account">
+            <ul>
+            <li><a href="/html/login.html">로그인</a></li>
+            <li><a href="/html/signup.html" id="signup">회원가입</a></li>
+            </ul>
+        </div>
+        <!-- ~<div class="account"> -->
+        </div>
+        <!-- ~<div class="menu"> -->
+    </nav>
+    </div>
+    <!-- ~<div class="header"> -->
+
+    <hr>
+
+    <section>
+    <div class="section">
+        <div class="sec_header">육아휴직 제도</div><!-- ~<div class="sec_header"> -->
+
+        <div class="sec_section">
+        <div class="sec_search">
+            <form>
+            <div class="form_div">
+                <input type="text" name="search" placeholder="검색어를 입력하세요." id="search"> 
+                <button type="submit" name="submit" id="submit"><img src="{% static 'images/search.png' %}" > </button>
+            </div><!-- ~<div class="form_div"> -->
+            </form>
+        </div><!-- ~<div class="sec_search"> -->
+            
+        <div class="sec_btn">
+            <button type="button" id="recent">최신 등록순</button>
+            <button type="button" id="hot">인기순</button>
+        </div><!-- ~<div class="sec_btn"> -->
+        </div><!-- ~<div class="sec_section"> -->
+
+
+        <div class="sec_detail">
+        <div class="sec_grid">
+            {% for policy in policies %}
+            <div class="policy_detail">
+                <div class="policy_detail_img">
+                    {% if forloop.counter0 == 0 %}
+                    <img src="{% static 'images/policy1_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 1 %}
+                    <img src="{% static 'images/policy2_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 2 %}
+                        <img src="{% static 'images/policy3_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 3 %}
+                        <img src="{% static 'images/policy4_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 4 %}
+                        <img src="{% static 'images/policy5_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 5 %}
+                        <img src="{% static 'images/policy6_.png' %}" alt="Policy Image">
+                    {% endif %}
+                </div><!-- ~<div class="policy_detail_img"> -->
+                <div class="policy_detail_main">
+                    <div class="policy_detail_text">
+                    <p>{{ policy.title }}</p>
+                    </div><!-- ~<div class="policy_detail_text"> -->
+                    <div class="policy_detail_btn">
+                    <button id="detailBtn"><a href="/html/policy_datail.html">상세보기 ></a></button>
+                    </div><!-- ~<div class="policy_detail_btn"> -->
+                </div>
+            </div><!-- ~<div class="policy_detail"> -->
+            {% endfor%}
+            
+        </div><!-- ~<div class="sec_grid"> -->
+        </div><!-- ~<div class="sec_detail"> -->
+        <!-- <div class="page">
+        <button type="button" id="one">1</button>
+        <button type="button" id="two">2</button>
+        <button type="button" id="three">3</button>
+        <button type="button" id="next">></button>
+        </div>~<div class="page"> -->
+    </div><!-- ~<div class="section"> -->
+        
+        
+        
+    </section>
+    <script src="{% static 'scripts/policy.js' %}"></script>
+
+</body>
+</html>

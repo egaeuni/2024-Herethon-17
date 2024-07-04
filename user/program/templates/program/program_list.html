@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/program.css' %}"></link>
+    <title>program</title>
+</head>
+<body>
+    <div class="header">
+    <header>
+        <div>
+        <a href="staic '/html/mainpage.html"><img src="{% static 'images/POM.png'%} " id="logo"></a></img>
+        </div>
+    </header>
+    <nav>
+        <div class="nav">
+        <div class="menu">
+            <ul>
+            <li><a href="{% url 'program:program_home' %}">육아휴직 소개서</a></li>
+            <li><a href="/html/mentoring.html">전문가 멘토링</a></li>
+            <li><a href="/html/community.html">커뮤니티</a></li>
+            <li><a href="/html/mypage.html">마이 페이지</a></li>
+            </ul>
+        </div>
+        <!-- ~<div class="menu"> -->
+        <div class="account">
+            <ul>
+            <li><a href="/html/login.html">로그인</a></li>
+            <li><a href="/html/signup.html" id="signup">회원가입</a></li>
+            </ul>
+        </div>
+        <!-- ~<div class="account"> -->
+        </div>
+        <!-- ~<div class="menu"> -->
+    </nav>
+    </div>
+    <!-- ~<div class="header"> -->
+    
+    <hr>
+
+    <section>
+    <div class="section">
+        <div class="sec_header">육아프로그램</div><!-- ~<div class="sec_header"> -->
+        
+        <div class="search">
+        <form method="GET" action="{% url 'program:program_list' %}">
+            <div class="searchDiv">
+            <div class="listDiv">
+                <select id="list" name="region">
+                    <option value="">지역 선택</option>
+                    <option value="서울" {% if region == '서울' %}selected{% endif %}>서울</option>
+                    <option value="인천" {% if region == '인천' %}selected{% endif %}>인천</option>
+                    <option value="강원" {% if region == '강원' %}selected{% endif %}>강원</option>
+                    <option value="경남" {% if region == '경남' %}selected{% endif %}>경남</option>
+                    <option value="전남" {% if region == '전남' %}selected{% endif %}>전남</option>
+                    <option value="경기" {% if region == '경기' %}selected{% endif %}>경기</option>
+                </select>
+            </div><!-- ~<div class="listDiv"> -->
+            <div class="inputDiv">
+                <input type="text" id="program" placeholder="프로그램을 입력하세요" name="q" value="{{ query }}">
+            </div><!-- ~<div class="inputDiv"> -->
+            <div class="submitBtn">
+                <button type="submit" id="submit">조회</button>
+            </div><!-- ~<div class="submitBtn"> -->
+            </div>
+            
+        </form>
+        
+        </div><!-- ~<div class="search"> -->
+
+        <div id="programs">
+
+        <div class="program_list">
+            {% for program in programs %}
+            <div class="program_detail">
+                <div class="program_detail_location">
+                <div class="program_detail_circle"><div class="program_detail_text">{{ program.region }}</div></div><!-- ~<div class="program_detail_circle"> -->
+                </div><!-- ~<div class="program_detail_location"> -->
+                <div class="program_detail_content">
+                <p>{{ program.center_info }}</p>
+                <p>{{ program.title }}</p>
+                </div>
+                <div class="program_detail_look">
+                <p><a href="/html/program_detail.html">상세보기</a></p>
+                </div>
+            </div><!-- ~<div class="program_detail"> -->
+            {% endfor %}
+            
+            
+        </div><!-- ~<div class="program_list"> -->
+        
+        </div><!-- ~<div class="programs"> -->
+
+        <!-- <div class="page">
+        <div><button>1</button></div>
+        <button>2</button>
+        <button>3</button>
+        <button>></button>
+        </div>~<div class="page"> -->
+
+    </div><!-- ~<div class="section"> -->
+    </section>
+    <!-- <script src="{% static 'scripts/program.js' %}"></script>    -->
+</body>
+</html>
