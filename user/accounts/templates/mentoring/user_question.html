@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내 질문</title>
+    <style>
+        .question-container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .question-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .question-content {
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>내 질문</h1>
+    {% if user_questions %}
+        {% for question in user_questions %}
+            <div class="question-container">
+                <div class="question-content">{{ question.content }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>작성한 질문이 없습니다.</p>
+    {% endif %}
+    <a href="{% url 'accounts:mypage' %}" class="back-button">뒤로가기</a>
+</body>
+</html>

@@ -20,7 +20,7 @@
             align-items: flex-start;
         }
         .program-image {
-            width: 50px; 
+            width: 50px;
             height: auto;
             margin-right: 10px;
         }
@@ -65,14 +65,21 @@
     </form>
 
     <ul>
-        {% for program in programs %}
-            <li class="item-container">
-                {% if program.image %}
-                    <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
-                {% endif %}
-                <h2 class="program-title"><a href="{% url 'program:program_detail' program.id %}">{{ program.region }} | {{ program.title }}</a></h2>
-            </li>
-        {% endfor %}
+        {% if programs %}
+            {% for program in programs %}
+                <li class="item-container">
+                    {% if program.image %}
+                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
+                    {% endif %}
+                    <div>
+                        <h2 class="program-title"><a href="{% url 'program:program_detail' program.id %}">{{ program.region }} | {{ program.title }}</a></h2>
+                        <p>스크랩 수: {{ program.scrap_count }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        {% else %}
+            <p>해당 프로그램을 찾을 수 없습니다.</p>
+        {% endif %}
     </ul>
 </body>
 </html>

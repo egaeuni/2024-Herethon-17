@@ -5,12 +5,14 @@ from django.contrib import auth
 from django.conf import settings
 from .models import Profile
 from .forms import ProfileForm
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 from community.models import Post, ScrapCommunity  
 from program.models import Scrap, Policy, Program
+from mentoring.models import Question, Record
 from django.contrib.auth.decorators import login_required
-from mentoring.models import *
 
 def signup(request):
     if request.method == "POST":
@@ -39,6 +41,18 @@ def signup_child(request):
         return redirect('accounts:home')
     return render(request, 'accounts/signup_child.html')
 
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance, birth_date=date(2000, 1, 1), gender='Unknown', nickname='User')
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    try:
+        instance.profile.save()
+    except Profile.DoesNotExist:
+        Profile.objects.create(user=instance, birth_date=date(2000, 1, 1), gender='Unknown', nickname='User')
+
 def login(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -46,6 +60,8 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
+            # 프로필이 없으면 생성
+            Profile.objects.get_or_create(user=user, defaults={'birth_date': date(2000, 1, 1), 'gender': 'Unknown', 'nickname': 'User'})
             return redirect('accounts:home')
         else:
             return render(request, 'accounts/login.html', {'error': 'Username or password is incorrect'})
@@ -63,6 +79,9 @@ def home(request):
 @login_required
 def mypage(request):
     if request.user.is_authenticated:
+        if not hasattr(request.user, 'profile'):
+            Profile.objects.create(user=request.user, birth_date=date(2000, 1, 1), gender='Unknown', nickname='User')
+
         if request.method == "POST":
             form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
             if form.is_valid():
@@ -83,11 +102,12 @@ def mypage(request):
             scrapped_policies = Scrap.objects.filter(user=request.user, policy__isnull=False).select_related('policy')
             scrapped_programs = Scrap.objects.filter(user=request.user, program__isnull=False).select_related('program')
 
+            # 멘토링 질문과 기록지 가져오기
+            user_questions = Question.objects.filter(user=request.user)
+            user_records = Record.objects.filter(user=request.user)
+
             # 스크랩 수의 합 계산
-            scrapped_posts_count = scrapped_posts.count()
-            scrapped_policies_count = scrapped_policies.count()
-            scrapped_programs_count = scrapped_programs.count()
-            total_scraps = scrapped_posts_count + scrapped_policies_count + scrapped_programs_count
+            total_scraps = scrapped_posts.count() + scrapped_policies.count() + scrapped_programs.count()
 
             # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
@@ -102,9 +122,11 @@ def mypage(request):
                 'scraped_posts': scrapped_posts,
                 'scraped_policies': scrapped_policies,
                 'scraped_programs': scrapped_programs,
-                'scrapped_posts_count': scrapped_posts_count,
-                'scrapped_policies_count': scrapped_policies_count,
-                'scrapped_programs_count': scrapped_programs_count,
+                'scrapped_posts_count': scrapped_posts.count(),
+                'scrapped_policies_count': scrapped_policies.count(),
+                'scrapped_programs_count': scrapped_programs.count(),
+                'user_questions': user_questions,
+                'user_records': user_records,
                 'total_scraps': total_scraps,  # 총 스크랩 수를 템플릿에 전달
             })
         except Profile.DoesNotExist:
@@ -118,10 +140,9 @@ def mypage(request):
                 'scraped_posts': [],
                 'scraped_policies': [],
                 'scraped_programs': [],
-                'scrapped_posts_count': 0,
-                'scrapped_policies_count': 0,
-                'scrapped_programs_count': 0,
                 'total_scraps': 0,  # 스크랩 수의 기본값을 0으로 설정
+                'user_questions': [],
+                'user_records': [],
             })
     else:
         return redirect('accounts:login')
@@ -191,3 +212,13 @@ def scrap_program(request):
     user = request.user
     scrapped_programs = Scrap.objects.filter(user=user, program__isnull=False).select_related('program')
     return render(request, 'mypage/scrap_program.html', {'scrapped_programs': scrapped_programs})
+
+@login_required
+def user_question(request):
+    user_questions = Question.objects.filter(user=request.user)
+    return render(request, 'mentoring/user_question.html', {'user_questions': user_questions})
+
+@login_required
+def user_record(request):
+    user_records = Record.objects.filter(user=request.user)
+    return render(request, 'mentoring/user_record.html', {'user_records': user_records})

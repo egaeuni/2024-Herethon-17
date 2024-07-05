@@ -81,5 +81,13 @@
             <li><a href="{% url 'accounts:scrap_program' %}">육아휴직 프로그램 ({{ scrapped_programs_count }})</a></li>
         </ul>
     </div>
+
+    <h3>
+        <a href="{% url 'accounts:user_question' %}" class="toggle-button">멘토링 질문: {{ user_questions|length }}</a>
+    </h3>
+
+    <h3>
+        <a href="{% url 'accounts:user_record' %}" class="toggle-button">멘토링 기록지: {{ user_records|length }}</a>
+    </h3>
 </body>
 </html>

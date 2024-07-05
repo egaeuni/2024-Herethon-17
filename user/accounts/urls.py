@@ -13,6 +13,8 @@ urlpatterns = [
     path('mypage/scrap/post/', scrap_post, name='scrap_post'),
     path('mypage/scrap/policy/', scrap_policy, name='scrap_policy'),
     path('mypage/scrap/program/', scrap_program, name='scrap_program'),
+    path('mypage/user_question/', user_question, name='user_question'),
+    path('mypage/user_record/', user_record, name='user_record'),
     path('edit_profile/', edit_profile, name="edit_profile"),
     path('home/', home, name="home"),
 ]

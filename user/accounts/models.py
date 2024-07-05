@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 from django.contrib.auth.models import User
 
 def user_directory_path(instance, filename):
@@ -8,7 +9,7 @@ def user_directory_path(instance, filename):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length=10)
-    birth_date = models.DateField()
+    birth_date = models.DateField(default=date(2000, 1, 1))
     profile_pic = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     nickname = models.CharField(max_length=100, default='User')  # 닉네임 필드 추가
 

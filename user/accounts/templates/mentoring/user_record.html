@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내 기록지</title>
+    <style>
+        .record-container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .record-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .record-content {
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>내 기록지</h1>
+    {% if user_records %}
+        {% for record in user_records %}
+            <div class="record-container">
+                <div class="record-title">멘토링 기록지 {{ forloop.counter }}</div>
+                <div class="record-content"><strong>멘토님과 함께 정한 사항:</strong> {{ record.plan }}</div>
+                <div class="record-content"><strong>멘토님이 전해준 말씀 정리:</strong> {{ record.advice }}</div>
+                <div class="record-content"><strong>앞으로의 다짐:</strong> {{ record.pledge }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>작성한 기록지가 없습니다.</p>
+    {% endif %}
+    <a href="{% url 'accounts:mypage' %}" class="back-button">뒤로가기</a>
+</body>
+</html>

@@ -12,7 +12,7 @@ def program_list(request):
     query = request.GET.get('q', '')
     region = request.GET.get('region', '')
 
-    programs = Program.objects.all()
+    programs = Program.objects.annotate(scrap_count=Count('scraps'))
 
     if query:
         programs = programs.filter(title__icontains=query)
