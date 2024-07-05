@@ -83,7 +83,10 @@ def mypage(request):
             scrapped_programs = Scrap.objects.filter(user=request.user, program__isnull=False).select_related('program')
 
             # 스크랩 수의 합 계산
-            total_scraps = scrapped_posts.count() + scrapped_policies.count() + scrapped_programs.count()
+            scrapped_posts_count = scrapped_posts.count()
+            scrapped_policies_count = scrapped_policies.count()
+            scrapped_programs_count = scrapped_programs.count()
+            total_scraps = scrapped_posts_count + scrapped_policies_count + scrapped_programs_count
 
             # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
@@ -98,6 +101,9 @@ def mypage(request):
                 'scraped_posts': scrapped_posts,
                 'scraped_policies': scrapped_policies,
                 'scraped_programs': scrapped_programs,
+                'scrapped_posts_count': scrapped_posts_count,
+                'scrapped_policies_count': scrapped_policies_count,
+                'scrapped_programs_count': scrapped_programs_count,
                 'total_scraps': total_scraps,  # 총 스크랩 수를 템플릿에 전달
             })
         except Profile.DoesNotExist:
@@ -111,6 +117,9 @@ def mypage(request):
                 'scraped_posts': [],
                 'scraped_policies': [],
                 'scraped_programs': [],
+                'scrapped_posts_count': 0,
+                'scrapped_policies_count': 0,
+                'scrapped_programs_count': 0,
                 'total_scraps': 0,  # 스크랩 수의 기본값을 0으로 설정
             })
     else:
