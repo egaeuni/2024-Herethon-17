@@ -2,8 +2,17 @@
 <html>
 <head>
     <title>커뮤니티 게시글 목록</title>
+        <style>
+        .profile-pic {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
+
     <b><a href="{% url 'accounts:home' %}">POM</a></b>
     <a href="{% url 'program:program_home' %}">육아휴직 소개서</a>
     <a href="{%url 'mentoring:home'%}">전문가 멘토링</a>
@@ -18,8 +27,8 @@
     <br><hr>
 
     {% for post in posts %}
-        {% if profile_pic_url %}
-            <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic" width="25" height="25">
+        {% if post.author.profile.profile_pic_url %}
+            <img src="{{ post.author.profile.profile_pic_url }}" alt="프로필 사진" class="profile-pic" width="25" height="25">
         {% else %}
             <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic" width="25" height="25">
         {% endif %}

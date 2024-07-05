@@ -18,16 +18,25 @@
     </script>
 </head>
 <body>
+    <style>
+        .profile-pic {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
     <button onclick="goBack()">뒤로가기</button><br><br>
 
-    {% if post.user.profile_pic %}
-        <img src="{{ post.user.profile_pic.url }}">
-    {% else %}
-        <img src="{% static 'default_profile_pic.png' %}">
-    {% endif %}
+    {% if author_profile_pic_url %}
+            <img src="{{ author_profile_pic_url }}" alt="프로필 사진" class="profile-pic" width="25" height="25">
+        {% else %}
+            <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic" width="25" height="25">
+        {% endif %}
     {{ author_nickname }} | {{ author_current_age_months }}
     <h2>{{ post.title }}</h2>
     {{ post.content }}<br><br>
+    
     <!--댓글-->
     댓글 수: {{ post.answers.count }}<br><br>
     {% for answer in post.answers.all %}
