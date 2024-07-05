@@ -1,9 +1,13 @@
 .container {
-  width: 1920px;
-  height: 1080px;
-  position: relative;
-  overflow: hidden;
-  background: #fefefe;
+  width: 80%;
+  text-align: center;
+  align-items: center;
+  /* max-width: 600px; */
+  /* margin: 130px auto; */
+  /* padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; */
 }
 
 .nav_main {
