@@ -4,7 +4,8 @@
 - 팀원 소개
 
 - 기술 스택
-프론트엔드: <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
+프론트엔드:
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
 백엔드:
 기획/디자인: 
 
