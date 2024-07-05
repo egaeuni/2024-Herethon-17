@@ -1,9 +1,9 @@
 <body>
     <h2>게시글 등록</h2>
-    <form method="POST" action="{% url 'community:create' %}">
-        {% csrf_token %}
+    <form method="POST" action="{%url 'community:create'%}">
+        {%csrf_token%}
         <input type="text" name="title" placeholder="제목을 입력하세요."><br><br>
-        <textarea name="content" placeholder="내용을 입력하세요."></textarea><br>
+        <textarea name = "content" placeholder="내용을 입력하세요."></textarea><br>
         <input type="submit" value="등록">
     </form>
 </body>

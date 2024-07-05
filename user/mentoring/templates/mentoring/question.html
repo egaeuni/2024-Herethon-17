@@ -5,14 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/question.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/answer.css' %}" />
     <title>question</title>
   </head>
   <body>
     {%include 'mentoring/header.html' %}
 
     <section>
-      <form action="{%url 'mentoring:question' mento.id%}" method="POST">
-        {%csrf_token%}
+      
+        
         <div class="section">
           <div class="sec_header">질문사항</div>
           <!-- ~<div class="sec_header"> -->
@@ -36,15 +37,41 @@
               <!-- ~<div class="mentor_content"> -->
             </div>
             <!-- ~<div class="mentor_detail"> -->
+
+
             {%for question in questions %}
             <div class="question">
-              <div><p>{{question.content}}</p></div>
+              <div><p>Q. {{ question.content }}</p></div>
             </div>
             <!-- ~<div class="question"> -->
-            {%endfor%}
-            <div class="text">
-              <textarea class="textarea" placeholder="내용을 입력해주세요." name="content"></textarea>
-            </div>
+
+            {% if question.comment_set.all %}
+              {% for comment in question.comment_set.all %}
+                A. {{ comment.content }}<br>
+                <div class="close">
+                  <button type="button" id="closeBtn"><a href="{%url 'mentoring:home'%}">뒤로가기</a></button>
+                </div><!-- ~<div class="closeBtn"> -->
+              {% endfor %}
+            {% else %}
+            <div class="answer_detail">
+              <div class="mentor_nickname">
+                <div class="answer_circle"><div class="answer_text">{{mento.name}}<br>멘토</div></div><!-- ~<div class="mentor_circle"> -->
+              </div><!-- ~<div class="mentor_nickname"> -->
+              <div class="answer_content">
+                <div>답변 중</div>
+                <div>...</div> 
+              </div><!-- ~<div class="answer_content"> -->
+            </div><!-- ~<div class="mentor_detail"> -->
+              <div class="close">
+                <button type="button" id="closeBtn"><a href="{%url 'mentoring:home'%}">뒤로가기</a></button>
+              </div><!-- ~<div class="closeBtn"> -->
+            {% endif %}
+            {% empty %}
+            <form action="{%url 'mentoring:question' mento.id%}" method="POST">
+              {%csrf_token%}
+                <div class="text">
+                <textarea class="textarea" placeholder="내용을 입력해주세요." name="content"></textarea>
+              /div>
             <!-- ~<div class="text"> -->
           </div>
           <!-- ~<div class="mentor"> -->
@@ -56,6 +83,7 @@
         </div>
         <!-- ~<div class="section"> -->
       </form>
+      {% endfor %}
     </section>
   </body>
 </html>

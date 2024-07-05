@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{% static 'css/mypage_styles.css' %}" />
     <title>마이페이지</title>
     <style>
-<<<<<<< HEAD
       .profile-pic {
         width: 150px; /* 원하는 크기로 조정 */
         height: 150px; /* 원하는 크기로 조정 */
@@ -132,46 +131,7 @@
             </li>
             {% empty %}
             <li>스크랩한 게시글이 없습니다.</li>
-<<<<<<< HEAD
-        {% endfor %}
-    </ul>
-=======
-        .profile-container {
-            position: relative;
-            display: inline-block;
-        }
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .no-underline {
-            text-decoration: none;
-            color: inherit;
-            font-size: 12px;
-        }
-        .no-underline:hover {
-            text-decoration: underline;
-        }
-        .post-list {
-            display: none;
-            margin-top: 10px;
-        }
-        .toggle-button {
-            cursor: pointer;
-            color: #007BFF;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .toggle-button:hover {
-            text-decoration: underline;
-        }
-        .toggle-section {
-            display: none;
-            margin-left: 20px;
-            margin-top: 10px;
-        }
+      
     </style>
     <script>
         function toggleSection(sectionId) {
@@ -186,7 +146,7 @@
 </head>
 <body>
     <h1>마이페이지</h1>
-    <a href="{% url 'community:list' %}">뒤로가기</a><br><br>
+    <a href="{% url 'accounts:home' %}">뒤로가기</a><br><br>
     <div class="profile-container">
         {% if profile_pic_url %}
             <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic">
@@ -214,10 +174,9 @@
             <li><a href="{% url 'accounts:scrap_program' %}">육아휴직 프로그램</a></li>
         </ul>
     </div>
->>>>>>> 80f193e3c82b9d1dc5e6f7b402307e67ab5c40d9
 </body>
 </html>
-=======
+
             {% endfor %}
           </ul>
         </div>
@@ -227,4 +186,4 @@
     <!-- <script src="{% static 'scripts/showProfile.js' %}"></script> -->
   </body>
 </html>
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
+

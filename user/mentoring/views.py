@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.db.models import Q, Count
 from .models import Mento
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     search_query = request.GET.get('search', '')
@@ -78,9 +79,15 @@ def record_sheet(request):
         return redirect('mentoring:home')
     return render(request, 'mentoring/record_sheet.html')
 
+@login_required
+def create_comment(request, question_id):
+    question = get_object_or_404(Question, id = question_id)
+    if request.method == "POST":
+        content = request.POST.get('content')
 
-def sheet_list(request):
-    records = Record.objects.all().order_by('-id')  #'-id': 역순으로 정렬
-    return render(request, 'metoring/sheet_list.html', {'records': records})
-
-
+        Comment.objects.create(
+            content = content,
+            question = question,
+        )
+        return redirect('mentoring:question', question_id)
+    return render(request, 'mentoring/question.html')
