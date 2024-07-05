@@ -18,6 +18,11 @@
     <br><hr>
 
     {% for post in posts %}
+        {% if profile_pic_url %}
+            <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic" width="25" height="25">
+        {% else %}
+            <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic" width="25" height="25">
+        {% endif %}
     {{ post.author.profile.nickname }} | {{ post.author.profile.current_age_months }}
     <h2><a href="{% url 'community:detail' post.id %}">{{ post.title }}</a></h2>
     {{ post.content }}<br><br>

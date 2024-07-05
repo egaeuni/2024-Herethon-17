@@ -20,6 +20,11 @@
 <body>
     <button onclick="goBack()">뒤로가기</button><br><br>
 
+    {% if post.user.profile_pic %}
+        <img src="{{ post.user.profile_pic.url }}">
+    {% else %}
+        <img src="{% static 'default_profile_pic.png' %}">
+    {% endif %}
     {{ author_nickname }} | {{ author_current_age_months }}
     <h2>{{ post.title }}</h2>
     {{ post.content }}<br><br>
