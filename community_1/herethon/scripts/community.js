@@ -1,3 +1,7 @@
-document.getElementById('customButton').addEventListener('click', function() {
-    window.location.href = 'post.html';
-});
+function increaseCount(id) {
+    const countElement = document.getElementById(id);
+    let count = parseInt(countElement.textContent);
+    count++;
+    countElement.textContent = count;
+}
+
