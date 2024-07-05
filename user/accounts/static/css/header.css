@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 2vw 5vw 1vw 5vw;
+}
+
+#logo {
+  width: 7vw;
+}
+nav {
+  flex: 1;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  flex: 1;
+}
+
+.menu ul,
+.account ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu ul li,
+.account ul li {
+  list-style: none;
+  margin-right: 2vw;
+  font-weight: bold;
+}
+
+.menu ul li a,
+.account ul li a,
+.policy_header_more a,
+.program_header_more a {
+  text-decoration: none;
+  color: #333;
+}
+
+.policy_header_more p,
+.program_header_more p {
+  font-size: 11px;
+}
+
+hr {
+  background: #d0d3d9;
+}

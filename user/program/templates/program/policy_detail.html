@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ policy.title }}</title>
-    <style>
-        .content {
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .title {
-            font-weight: bold;
-            color: #007BFF;
-        }
-        .policy-image {
-            width: 300px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-    </style>
+
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/policy_detail.css' %}"></link>
+    <title>policy_detail</title>
     <script>
         function goBack() {
             const referrer = document.referrer;
@@ -31,42 +19,70 @@
             }
         }
     </script>
-</head>
-<body>
-    <h1>{{ policy.title }}</h1>
-    {% if policy.image %}
-        <img src="{{ policy.image.url }}" alt="{{ policy.title }}" class="policy-image">
-    {% endif %}
-    <div class="content">
-        {% for benefit in policy.benefits.all %}
-            <h3>혜택 {{ forloop.counter }}: {{ benefit.title }}</h3>
-            <p><strong>내용:</strong> {{ benefit.content }}</p>
-            {% if benefit.eligibility %}
-                <p><strong>지원 조건:</strong> {{ benefit.eligibility }}</p>
-            {% endif %}
-            {% if benefit.application_period %}
-                <p><strong>신청 시기:</strong> {{ benefit.application_period }}</p>
-            {% endif %}
-            <p><strong>신청 방법:</strong> {{ benefit.application_method }}</p>
-            {% if benefit.planned_changes %}
-                <p><strong>2024년 개편 예정:</strong> {{ benefit.planned_changes }}</p>
-            {% endif %}
-            {% if benefit.additional_info %}
-                <p><strong>기타:</strong> {{ benefit.additional_info }}</p>
-            {% endif %}
-        {% endfor %}
-    </div>
-    <button onclick="goBack()">뒤로가기</button>
+    </head>
+    <body>
+        {% include 'program/header.html' %}
+    <section>
+        <div class="section">
+        <div class="sec_header">{{ policy.title }}</div><!-- ~<div class="sec_header"> -->
+        <div class="sec_content">
+            <!-- <div class="sec_scrap">
+            <button id="scrap" type="submit" name="scrap"> <img src="{% static 'images/scrap.png' %}" id="scrap_img"></button>
+            <p id="scrapCount">{{ policy.scrap_set.count }}</p>
+            </div>~<div class="sec_scrap"> -->
 
-    <!-- 스크랩 -->
-    {% if is_scrapped %}
-    <form method="POST" action="{% url 'program:remove_scrap_policy' policy.id %}">
-        {% csrf_token %}
-        <button type="submit" name="scrap">스크랩 취소</button> {{ policy.scrap_set.count }}</form>
-    {% else %}
-    <form method="POST" action="{% url 'program:add_scrap_policy' policy.id %}">
-        {% csrf_token %}
-        <button type="submit" name="scrap">스크랩</button> {{ policy.scrap_set.count }}</form>
-    {% endif %}
-</body>
-</html>
+            <!-- 스크랩 -->
+            {% if is_scrapped %}
+            <form method="POST" action="{% url 'program:remove_scrap_policy' policy.id %}">
+                {% csrf_token %}
+                <button id="scrap" type="submit" name="scrap"> <img src="{% static 'images/scrap2.png' %}" id="scrap_img"></button>
+                <!-- <p id="scrapCount">{{ policy.scrap_set.count }}</p> -->
+            </form>
+
+            {% else %}
+            <form method="POST" action="{% url 'program:add_scrap_policy' policy.id %}">
+                {% csrf_token %}
+                <button id="scrap" type="submit" name="scrap" onclick="goBack()"> <img src="{% static 'images/scrap.png' %}" id="scrap_img"></button>
+                <!-- <p id="scrapCount">{{ policy.scrap_set.count }}</p> -->
+            </form>
+            {% endif %}
+
+            <div class="sec_detail">
+            <div class="content_img">
+                <img src="{% static 'images/policy01.png' %}">
+            </div>
+            <div class="content_text">
+            {% for benefit in policy.benefits.all %}
+                
+                <div class="text1">
+                <p><img src="{% static 'images/circle.png' %}"><span class="content_title1">혜택 {{ forloop.counter }} </span> <span class="content_title2"> {{ benefit.title }}</span></p>
+                <p class="contents">●내용: {{ benefit.content }}</p>
+                {% if benefit.eligibility %}
+                <p class="contents">●지원 조건: {{ benefit.eligibility }}</p>
+                {% endif %}{% if benefit.application_period %}
+                <p class="contents">●신청 시기: {{ benefit.application_period }}</p>
+                {% endif %}
+                <p class="contents">●신청 방법: {{ benefit.application_method }}</p>
+                {% if benefit.planned_changes %}
+                <p class="contents">●2024년 개편 예정: {{ benefit.planned_changes }}</p>
+                {% endif %} {% if benefit.additional_info %}
+                <p class="contents">●기타: {{ benefit.additional_info }}</p>
+                {% endif %} 
+                </div><!-- ~<div class="text1"> -->
+                    {% endfor %}
+            </div><!-- ~<div class="content_text"> -->
+                
+            </div>
+            
+        </div><!-- ~<div class="sec_content"> -->
+            
+        <div class="close">
+            <button type="button" id="closeBtn" onclick="goBack()">뒤로가기</button>
+        </div><!-- ~<div class="closeBtn"> -->
+        </div><!-- ~<div class="section"> -->
+    </section>
+    <script src="{% static 'scripts/policy_detail.js' %}"></script>
+    
+    </body>
+    </html>
+

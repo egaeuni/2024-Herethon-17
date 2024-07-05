@@ -1,0 +1,36 @@
+<div class="header">
+    <header>
+      <div>
+        <a href="{% url 'accounts:home' %}"><img src="{% static 'images/POM.png' %}" id="logo"></a></img>
+      </div>
+    </header>
+    <nav>
+      <div class="nav">
+        <div class="menu">
+          <ul>
+            <li><a href="{% url 'program:program_home' %}">육아휴직 소개서</a></li>
+            <li><a href="{% url 'mentoring:home' %}">전문가 멘토링</a></li>
+            <li><a href="{% url 'community:list' %}">커뮤니티</a></li>
+            <li><a href="{% url 'accounts:mypage' %}"">마이 페이지</a></li>
+          </ul>
+        </div>
+        <!-- ~<div class="menu"> -->
+        <div class="account">
+          <ul>
+            {% if user.is_authenticated %}
+            <li><a href="#">{{ user.username }}님, 환영합니다!</a></li>
+            <li><a href="{%url 'accounts:logout' %}" id="signup">로그아웃</a></li>
+            {% else %}
+            <li><a href="{%url 'accounts:login' %}">로그인</a></li>
+            <li><a href="{%url 'accounts:signup' %}" id="signup">회원가입</a></li>
+            {%endif%}
+          </ul>
+        </div>
+        <!-- ~<div class="account"> -->
+      </div>
+      <!-- ~<div class="menu"> -->
+    </nav>
+  </div>
+  <!-- ~<div class="header"> -->
+  
+  <hr>

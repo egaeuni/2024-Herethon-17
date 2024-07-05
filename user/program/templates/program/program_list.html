@@ -1,85 +1,77 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>모든 프로그램</title>
-    <style>
-        .program-content {
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            position: relative;
-        }
-        .program-title {
-            cursor: pointer;
-            color: #007BFF;
-            font-weight: bold;
-        }
-        .program-details {
-            display: flex;
-            align-items: flex-start;
-        }
-        .program-image {
-            width: 50px;
-            height: auto;
-            margin-right: 10px;
-        }
-        .apply-button {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .apply-button button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .apply-button button:hover {
-            background-color: #0056b3;
-        }
-        .item-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/program.css' %}"></link>
+    <title>program</title>
 </head>
 <body>
-    <h1>육아 프로그램</h1>
-    <a href="{% url 'program:program_home' %}"><button>뒤로가기</button></a>
-    <br>
-    <form method="GET" action="{% url 'program:program_list' %}">
-        <select name="region">
-            <option value="">전체 지역</option>
-            <option value="서울" {% if region == '서울' %}selected{% endif %}>서울</option>
-            <option value="인천" {% if region == '인천' %}selected{% endif %}>인천</option>
-            <option value="강원" {% if region == '강원' %}selected{% endif %}>강원</option>
-            <option value="경남" {% if region == '경남' %}selected{% endif %}>경남</option>
-            <option value="전남" {% if region == '전남' %}selected{% endif %}>전남</option>
-            <option value="경기" {% if region == '경기' %}selected{% endif %}>경기</option>
-        </select>
-        <input type="text" name="q" placeholder="프로그램 이름 검색" value="{{ query }}">
-        <button type="submit">검색</button>
-    </form>
+    {% include 'program/header.html' %}
 
-    <ul>
-        {% if programs %}
+    <section>
+    <div class="section">
+        <div class="sec_header">육아프로그램</div><!-- ~<div class="sec_header"> -->
+        
+        <div class="search">
+        <form method="GET" action="{% url 'program:program_list' %}">
+            <div class="searchDiv">
+            <div class="listDiv">
+                <select id="list" name="region">
+                    <option value="">지역 선택</option>
+                    <option value="서울" {% if region == '서울' %}selected{% endif %}>서울</option>
+                    <option value="인천" {% if region == '인천' %}selected{% endif %}>인천</option>
+                    <option value="강원" {% if region == '강원' %}selected{% endif %}>강원</option>
+                    <option value="경남" {% if region == '경남' %}selected{% endif %}>경남</option>
+                    <option value="전남" {% if region == '전남' %}selected{% endif %}>전남</option>
+                    <option value="경기" {% if region == '경기' %}selected{% endif %}>경기</option>
+                </select>
+            </div><!-- ~<div class="listDiv"> -->
+            <div class="inputDiv">
+                <input type="text" id="program" placeholder="프로그램을 입력하세요" name="q" value="{{ query }}">
+            </div><!-- ~<div class="inputDiv"> -->
+            <div class="submitBtn">
+                <button type="submit" id="submit">조회</button>
+            </div><!-- ~<div class="submitBtn"> -->
+            </div>
+            
+        </form>
+        
+        </div><!-- ~<div class="search"> -->
+
+        <div id="programs">
+
+        <div class="program_list">
             {% for program in programs %}
-                <li class="item-container">
-                    {% if program.image %}
-                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
-                    {% endif %}
-                    <div>
-                        <h2 class="program-title"><a href="{% url 'program:program_detail' program.id %}">{{ program.region }} | {{ program.title }}</a></h2>
-                        <p>스크랩 수: {{ program.scrap_count }}</p>
-                    </div>
-                </li>
+            <div class="program_detail">
+                <div class="program_detail_location">
+                <div class="program_detail_circle"><div class="program_detail_text">{{ program.region }}</div></div><!-- ~<div class="program_detail_circle"> -->
+                </div><!-- ~<div class="program_detail_location"> -->
+                <div class="program_detail_content">
+                <p>{{ program.center_info }}</p>
+                <p>{{ program.title }}</p>
+                </div>
+                <div class="program_detail_look">
+                <p><a href="{% url 'program:program_detail' program.id %}">상세보기</a></p>
+                </div>
+            </div><!-- ~<div class="program_detail"> -->
             {% endfor %}
-        {% else %}
-            <p>해당 프로그램을 찾을 수 없습니다.</p>
-        {% endif %}
-    </ul>
+            
+            
+        </div><!-- ~<div class="program_list"> -->
+        
+        </div><!-- ~<div class="programs"> -->
+
+            <div class="page">
+                <button type="button" id="one">1</button>
+                <button type="button" id="two">2</button>
+                <button type="button" id="three">3</button>
+                <button type="button" id="next">></button>
+            </div>
+
+    </div><!-- ~<div class="section"> -->
+    </section>
+    <script src="{% static 'scripts/program.js' %}"></script>   
 </body>
 </html>

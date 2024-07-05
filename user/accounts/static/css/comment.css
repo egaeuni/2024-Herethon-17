@@ -1,0 +1,429 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 2vw 5vw 1vw 5vw;
+}
+
+#logo {
+  width: 7vw;
+}
+nav {
+  flex: 1;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  flex: 1;
+}
+
+.menu ul,
+.account ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu ul li,
+.account ul li {
+  list-style: none;
+  margin-right: 2vw;
+  font-weight: bold;
+}
+
+.menu ul li a,
+.account ul li a,
+.policy_header_more a,
+.program_header_more a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 296px;
+  height: 667px;
+  position: absolute;
+  left: 127px;
+  top: 272px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.comment-icon1 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 676px;
+  top: 670px;
+  overflow: hidden;
+  gap: 10px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 40px;
+  z-index: 100;
+}
+
+.post-title1 {
+  position: absolute;
+  left: 735px;
+  top: 680px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.post-body1 {
+  position: absolute;
+  left: 678px;
+  top: 744px;
+  font-size: 16px;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.button-container {
+  margin: 10px;
+  position: relativy;
+  display: inline-block;
+}
+.count {
+  margin-left: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.good {
+  position: absolute;
+  left: 678px;
+  top: 901px;
+  background-image: url("../img/good.png"); /* 이미지 경로 설정 */
+  /*background-size: cover; /* 이미지를 버튼 크기에 맞게 조정 */
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+  border: none;
+  z-index: 100;
+}
+
+.comment-button {
+  position: absolute;
+  left: 730px;
+  top: 901px;
+  background-image: url("../img/comment.png"); /* 이미지 경로 설정 */
+  background-size: cover; /* 이미지를 버튼 크기에 맞게 조정 */
+  width: 20.028px;
+  height: 20.001px;
+  flex-shrink: 0;
+  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+  border: none;
+  z-index: 100;
+}
+
+.scrape {
+  position: absolute;
+  left: 782px;
+  top: 901px;
+  background-image: url("../img/scrape.png"); /* 이미지 경로 설정 */
+  background-size: cover; /* 이미지를 버튼 크기에 맞게 조정 */
+  width: 14px;
+  height: 20.004px;
+  flex-shrink: 0;
+  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+  border: none;
+  z-index: 100;
+}
+
+.post-title2 {
+  position: absolute;
+  left: 985px;
+  top: 622px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.post-body2 {
+  position: absolute;
+  left: 985px;
+  top: 647px;
+  font-size: 16px;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.post-title3 {
+  position: absolute;
+  left: 985px;
+  top: 729px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.post-body3 {
+  position: absolute;
+  left: 985px;
+  top: 754px;
+  font-size: 16px;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.post-title4 {
+  position: absolute;
+  left: 985px;
+  top: 810px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.post-body4 {
+  position: absolute;
+  left: 985px;
+  top: 835px;
+  font-size: 16px;
+  color: #391800;
+  z-index: 100; /* 가장 앞에 오도록 z-index 값 높게 설정 */
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.header {
+  width: 671px;
+  height: 222px;
+  position: absolute;
+  left: 625px;
+  top: 230px;
+  border-radius: 10px;
+  background: #eff0f1;
+  padding: 20px;
+  z-index: 5;
+}
+
+.header h1 {
+  position: absolute; /* 위치 조정을 위해 position 속성 추가 */
+  left: 77px; /* 좌측 위치 조정 */
+  top: 115px; /* 상단 위치 조정 */
+  color: #391800;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.24px;
+}
+
+.header p {
+  position: absolute; /* 위치 조정을 위해 position 속성 추가 */
+  left: 77px; /* 좌측 위치 조정 */
+  top: 63px; /* 상단 위치 조정 */
+  color: #391800;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.24px;
+}
+
+.header span {
+  color: #fb8129;
+}
+
+.header img {
+  width: 178px;
+  height: 174px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  object-fit: cover;
+}
+
+.nav-item {
+  position: absolute;
+  left: 1241px;
+  top: 498px;
+  width: 75px;
+  height: 24.76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1px solid #fb8129;
+  background: var(--Color-White, #fff);
+  color: #fb8129;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  z-index: 100;
+}
+
+.nav-active {
+  position: absolute;
+  display: inline-block; /* 인라인 블록 요소로 설정 */
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+  overflow: hidden;
+  left: 1140px;
+  top: 498px;
+  width: 100px;
+  height: 24.763px;
+  padding: 7px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #eff0f1;
+  background: var(--Color-White, #fff);
+  color: #391800;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  z-index: 100;
+}
+
+.custom-button {
+  position: absolute;
+  left: 1100px;
+  top: 498px;
+  background-image: url("../img/Group\ 1083.png"); /* 이미지 경로 설정 */
+  background-size: cover; /* 이미지를 버튼 크기에 맞게 조정 */
+  border-radius: 50px;
+  width: 26.186px;
+  height: 26px;
+  flex-shrink: 0;
+  cursor: pointer; /* 커서를 포인터로 변경하여 클릭 가능한 것을 나타냄 */
+  z-index: 100;
+  border: none;
+}
+
+.main-content {
+  width: 700px;
+  height: 544px;
+  position: absolute;
+  left: 624px;
+  top: 539px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0px 4px 16px 0 rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.comment-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 313.848px;
+  height: 98px;
+  position: absolute;
+  left: 972px;
+  top: 942px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 4px 16px 0 rgba(0, 0, 0, 0.15);
+  z-index: 90;
+}
+
+.comment-box input {
+  position: absolute;
+  left: 19.85px;
+  top: 36.77px;
+  width: 280.08px;
+  height: 41.61px;
+  font-size: 14px;
+  color: #000000;
+  z-index: 95;
+  border: none;
+}
+
+.comment-box button {
+  position: absolute;
+  left: 238px;
+  top: 43.8px;
+  width: 61.58px;
+  height: 31.94px;
+  padding: 7px 18px;
+  border-radius: 8px;
+  background: #fb8129;
+  font-size: 12px;
+  color: #fff;
+  z-index: 100;
+  border: none;
+  cursor: pointer;
+}
+
+.post-tag {
+  position: absolute;
+  left: 676px;
+  top: 633px;
+  width: 30px;
+  height: 15px;
+  background: rgba(254, 246, 206, 0.5);
+  color: #fb8129;
+  font-family: Jua;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 18px */
+  letter-spacing: -0.132px;
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.post-author {
+  position: absolute;
+  left: 731px;
+  top: 667px;
+  color: #c2c2c2;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  z-index: 100;
+}

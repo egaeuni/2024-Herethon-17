@@ -1,22 +1,148 @@
-<body>
-    <h2>멘토 찾기</h2>
-    <a href="{%url 'mentoring:record-sheet'%}">멘토링 기록지</a><br><br>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/mentoring.css' %}" />
+    <title>mentoring</title>
+  </head>
+  <body>
+    {% include 'mentoring/header.html' %}
 
-    <form method="GET" action="{% url 'mentoring:home' %}">
-        <input name="search" type="text" placeholder="닉네임, 키워드 검색어를 입력하세요.">
-        <button type="submit">검색</button>
-    </form>
-        <a href="{% url 'mentoring:home' %}?sort=latest">최신 등록순</a>
-        <a href="{% url 'mentoring:home' %}?sort=popular">인기순</a><br><br>
-    
-    
-{% if mentos %}
-    {% for mento in mentos %}
-        {{ mento.nickname }}
-        <b><a href="{% url 'mentoring:detail' mento.id %}">{{ mento.name }}</a></b>
-        {{ mento.tag }}<br><br>
-    {% endfor %}
-{% else %}
-    멘토가 없습니다.
-{% endif %}
-</body>
+    <section>
+      <div class="section">
+        <div class="sec_header">
+          <div class="sec_header_text">
+            <p>육아에 대해 <span>고민했던 부분을 </span>바로 알고</p>
+            <p>싶다면?</p>
+            <p id="text_bold">전문가 멘토링</p>
+          </div>
+          <!-- ~<div class="sec_header_text"> -->
+
+          <div class="sec_header_img">
+            <img src="{% static 'images/mentoring.png' %}" />
+          </div>
+          <!-- ~<div class="sec_header_img"> -->
+        </div>
+        <!-- ~<div class="sec_header"> -->
+
+        <div class="sec_advice">
+          <div class="advice">
+            <div class="advice_img">
+              <p>POM 멘토</p>
+              <p>육아 조언</p>
+            </div>
+            <!-- ~<div class="advice_img"> -->
+          </div>
+          <!-- ~<div class="advice"> -->
+
+          <div class="advice_list">
+            <div class="advice_detail">
+              <div class="advice_detail_header">
+                <div class="advice_detail_nickname">
+                  <div class="advice_detail_circle"><div class="advice_detail_text">육아고수</div></div>
+                  <!-- ~<div class="program_detail_circle"> -->
+                </div>
+                <!-- ~<div class="program_detail_location"> -->
+                <div class="advice_detail_name">
+                  <p>김현식 멘토</p>
+                </div>
+                <!-- ~<div class="advice_detail_name"> -->
+              </div>
+              <!-- ~<div class="advice_detail_header"> -->
+
+              <div class="advice_detail_content">
+                <p>훈육할때 절대하면 안되는 행동</p>
+                <p>꿀팁 전수하겠습니다!</p>
+              </div>
+            </div>
+            <!-- ~<div class="advice_detail"> -->
+
+            <div class="advice_detail">
+              <div class="advice_detail_header">
+                <div class="advice_detail_nickname">
+                  <div class="advice_detail_circle"><div class="advice_detail_text">똑똑박사</div></div>
+                  <!-- ~<div class="program_detail_circle"> -->
+                </div>
+                <!-- ~<div class="advice_detail_nickname"> -->
+                <div class="advice_detail_name">
+                  <p>최현호 멘토</p>
+                </div>
+                <!-- ~<div class="advice_detail_name"> -->
+              </div>
+              <!-- ~<div class="advice_detail_header"> -->
+
+              <div class="advice_detail_content">
+                <p>밥 안 먹는 아이 어떻게 하면</p>
+                <p>잘 먹일 수 있을까요?</p>
+              </div>
+            </div>
+            <!-- ~<div class="advice_detail"> -->
+          </div>
+          <!-- ~<div class="advice_list"> -->
+        </div>
+        <!-- ~<div class="sec_advice"> -->
+
+        <div class="find">
+          <div class="find_header">
+            <p>멘토 찾기</p>
+            <a href="{%url 'mentoring:record-sheet'%}"><button type="button">멘토링 기록지</button></a>
+          </div>
+          <!-- ~<div class="find_header"> -->
+
+          <div class="find_search">
+            <div class="sec_search">
+              <form method="GET" action="{% url 'mentoring:home' %}">
+                <div class="form_div">
+                  <input type="text" name="search" placeholder="닉네임, 키워드 검색어를 입력하세요." id="search" />
+                  <button type="submit" name="submit" id="submit"><img src="{% static 'images/search.png' %}" /></button>
+                </div>
+                <!-- ~<div class="form_div"> -->
+              </form>
+            </div>
+            <!-- ~<div class="sec_search"> -->
+
+            <div class="sec_btn">
+              <button type="button" id="recent"><a href="{% url 'mentoring:home' %}?sort=latest">최신 등록순</a></button>
+              <button type="button" id="hot"><a href="{% url 'mentoring:home' %}?sort=popular">인기순</a></button>
+            </div>
+            <!-- ~<div class="sec_btn"> -->
+          </div>
+          <!-- ~<div class="find_search"> -->
+          {% if mentos %}
+          <div class="result">
+            {%for mento in mentos%}
+            <div class="result_detail">
+              <div class="advice_detail_nickname">
+                <div class="result_circle"><div class="result_text">{{mento.nickname}}</div></div>
+                <!-- ~<div class="program_detail_circle"> -->
+              </div>
+              <!-- ~<div class="advice_detail_nickname"> -->
+
+              <div class="result_name">
+                <p>{{mento.name}}</p>
+              </div>
+              <!-- ~<div class="result_name"> -->
+
+              <div class="result_content">
+                <p>{{mento.tag}}</p>
+              </div>
+              <!-- ~<div class="result_content"> -->
+
+              <div class="result_btn">
+                <a href="{%url 'mentoring:detail' mento.id%}"><img class="result_img" src="{% static 'images/plusBtn.png' %}" /></a>
+              </div>
+            </div>
+            <!-- ~<div class="result_detail"> -->
+            {%empty%} 멘토가 없습니다. {%endfor%} {% else %} 멘토가 없습니다. {% endif %}
+          </div>
+          <!-- ~<div class="result"> -->
+        </div>
+        <!-- ~<div class="find"> -->
+      </div>
+      <!-- ~<div class="section"> -->
+    </section>
+    <script src="{% static 'scripts/mentoring.js' %}"></script>
+  </body>
+</html>

@@ -1,45 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>커뮤니티 게시글 목록</title>
-        <style>
-        .profile-pic {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    <link rel="stylesheet" href="{% static 'css/community.css' %}" />
+    <style>
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>    
+ {%include 'mentoring/header.html' %}
+    <div class="container">
+      <!-- 커뮤니티 이미지 사용 -->
+      <img src="{% static 'images/community.png' %}" class="community-img" />
 
-    <b><a href="{% url 'accounts:home' %}">POM</a></b>
-    <a href="{% url 'program:program_home' %}">육아휴직 소개서</a>
-    <a href="{%url 'mentoring:home'%}">전문가 멘토링</a>
-    <a href="{% url 'community:list' %}">커뮤니티</a>
-    <a href="{% url 'accounts:mypage' %}">마이페이지</a><br><br>
+      <!-- 글 작성 버튼 -->
+      <br />
+      <div class="button_join">
+        <a href="{% url 'community:list' %}?sort=latest" class="button_1"
+          >최신 등록순</a
+        >
+        <a href="{% url 'community:list' %}?sort=popular" class="button_1"
+          >인기순</a
+        >
+        <a href="{% url 'community:create' %}" class="write_com"
+          >✏️ 글 작성하기</a
+        >
+      </div>
 
-    <!--최신 등록순 % 인기순-->
-    <a href="{% url 'community:list' %}?sort=latest">최신 등록순</a>
-    <a href="{% url 'community:list' %}?sort=popular">인기순</a>
-    <!-- 글 작성 버튼 -->
-    <a href="{% url 'community:create' %}">글 작성하기</a>
-    <br><hr>
+      <br />
+      <br />
+      <hr />
+      <br />
 
-    {% for post in posts %}
-        {% if post.author.profile.profile_pic_url %}
-            <img src="{{ post.author.profile.profile_pic_url }}" alt="프로필 사진" class="profile-pic" width="25" height="25">
-        {% else %}
-            <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic" width="25" height="25">
-        {% endif %}
-    {{ post.author.profile.nickname }} | {{ post.author.profile.current_age_months }}
-    <h2><a href="{% url 'community:detail' post.id %}">{{ post.title }}</a></h2>
-    {{ post.content }}<br><br>
-    댓글 수: {{ post.answers.count }}
-    공감 수: {{ post.like.count }}
-    스크랩 수: {{ post.scrap.count }} <br><hr>
-    {% empty %}
-    게시글이 없습니다.
-    {% endfor %}
-</body>
+      <div class="posts-container">
+        {% for post in posts %}
+        <div class="post-card">
+          <div class="post-header">
+            {% if post.author.profile.profile_pic_url %}
+            <img
+              src="{{ post.author.profile.profile_pic_url }}"
+              alt="프로필 사진"
+              class="profile-pic"
+            />
+            {% else %}
+            <img
+              src="{% static 'images/basic_image.png' %}"
+              alt="기본 프로필 사진"
+              class="profile-pic"
+            />
+            {% endif %}
+            <div>
+              <span class="nickname">{{ post.author.profile.nickname }}</span>
+              <span class="age"
+                >{{ post.author.profile.current_age_months }}</span
+              >
+            </div>
+          </div>
+          <h2 class="post-title">
+            <a href="{% url 'community:detail' post.id %}"
+              >{{ post.title | truncatechars:20 }}</a
+            >
+          </h2>
+          <div class="post-content">{{ post.content | truncatechars:30 }}</div>
+          <div class="post-meta">
+            댓글 수: {{ post.answers.count }} | 공감 수: {{ post.like.count }} |
+            스크랩 수: {{ post.scrap.count }}
+          </div>
+        </div>
+        {% empty %}
+        <p>게시글이 없습니다.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
 </html>

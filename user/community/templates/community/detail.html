@@ -1,83 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시글 상세보기</title>
-    <script>
-        function goBack() {
-            const referrer = document.referrer;
-            if (referrer.includes('/accounts/mypage/posts/')) {
-                location.href = "{% url 'accounts:post_number' %}";
-            } else if (referrer.includes('/accounts/mypage/scrap/post/')) {
-                location.href = "{% url 'accounts:scrap_post' %}";
-            } else if (referrer.includes('/community/list/')) {
-                location.href = "{% url 'community:list' %}";
-            } else {
-                location.href = "{% url 'community:list' %}";  // 기본적으로 리스트 페이지로 이동
-            }
-        }
-    </script>
-</head>
-<body>
-    <style>
-        .profile-pic {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-    </style>
-    <button onclick="goBack()">뒤로가기</button><br><br>
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+  </head>
 
-    {% if author_profile_pic_url %}
-            <img src="{{ author_profile_pic_url }}" alt="프로필 사진" class="profile-pic" width="25" height="25">
-        {% else %}
-            <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic" width="25" height="25">
-        {% endif %}
-    {{ author_nickname }} | {{ author_current_age_months }}
-    <h2>{{ post.title }}</h2>
-    {{ post.content }}<br><br>
-    
-    <!--댓글-->
-    댓글 수: {{ post.answers.count }}<br><br>
-    {% for answer in post.answers.all %}
-        <b>{{ answer.author.profile.nickname }}</b><br>
-        {{ answer.content }}   
-        {%if request.user.is_authenticated %}
-        <a href="{%url 'community:delete-answer' answer.id%}">삭제하기</a>
-        {%endif%}
-    {% empty %}
-        댓글이 없습니다.
-    {% endfor %}
-    <br><br>
+  <body>
+    {% include 'mentoring/header.html' %}
+    <div class="container">
+      <!-- 커뮤니티 이미지 사용 -->
+      <img src="{% static 'images/community.png' %}" class="community-img" />
 
-    <!--댓글 입력-->
-    <form method="POST" action="{% url 'community:create-answer' post.id %}">
+      <!-- 글 작성 버튼 -->
+      <br />
+      <div class="button_join">
+        <a href="{% url 'community:list' %}?sort=latest" class="button_1"
+          >최신 등록순</a
+        >
+        <a href="{% url 'community:list' %}?sort=popular" class="button_1"
+          >인기순</a
+        >
+        <a href="{% url 'community:create' %}" class="write_com"
+          >✏️ 글 작성하기</a
+        >
+      </div>
+    </div>
+
+    <div class="container">
+      <a class="back_button" href="{% url 'community:list' %}">뒤로가기</a
+      ><br /><br />
+      <!-- 게시글 작성자의 닉네임과 개월 수 표시 -->
+      <label class="author-info">
+        {{ author_nickname }} | {{ author_current_age_months }}
+      </label>
+
+      <h2 class="post-title">{{ post.title }}</h2>
+
+      <div class="post-content">{{ post.content }}</div>
+
+      <!-- 댓글 작성 폼 -->
+      <form method="POST" action="{% url 'community:create-answer' post.id %}">
         {% csrf_token %}
-        <input type="text" name="content" placeholder="댓글을 입력해주세요.">
-        <input type="submit" value="등록">
-    </form>
-    <!--공감-->
-    {% if request.user in post.like.all %}
-    <form method="POST" action="{% url 'community:remove-like' post.id %}">
+        <input type="text" name="content" placeholder="댓글을 입력해주세요." />
+        <input type="submit" value="등록" />
+      </form>
+
+      <!-- 공감 -->
+      {% if request.user in post.like.all %}
+      <form method="POST" action="{% url 'community:remove-like' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="like">공감 취소</button>   {{ post.like.count }}</form>
-    {% else %}
-    <form method="POST" action="{% url 'community:add-like' post.id %}">
+        <button type="submit" name="like">공감 취소</button> {{ post.like.count
+        }}
+      </form>
+      {% else %}
+      <form method="POST" action="{% url 'community:add-like' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="like">공감</button>   {{ post.like.count }}</form>
-    {% endif %}
-    <!--스크랩-->
-    {% if request.user in post.scrap.all %}
-    <form method="POST" action="{% url 'community:remove-scrap' post.id %}">
+        <button type="submit" name="like">공감</button>
+      </form>
+      {% endif %}
+
+      <!-- 스크랩 -->
+      {% if request.user in post.scrap.all %}
+      <form method="POST" action="{% url 'community:remove-scrap' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="scrap">스크랩 취소</button>   {{ post.scrap.count }}</form>
-    {% else %}
-    <form method="POST" action="{% url 'community:add-scrap' post.id %}">
+        <button type="submit" name="scrap">스크랩 취소</button> {{
+        post.scrap.count }}
+      </form>
+      {% else %}
+      <form method="POST" action="{% url 'community:add-scrap' post.id %}">
         {% csrf_token %}
-        <button type="submit" name="scrap">스크랩</button>   {{ post.scrap.count }}</form>
-    {% endif %}
-    <br>
-    <!--게시글 삭제-->
-    <a href="{%url 'community:delete' post.id %}">삭제하기</a>
-</body>
+        <button type="submit" name="scrap">스크랩</button>
+      </form>
+      {% endif %}
+
+      <!-- 댓글 -->
+      댓글 수: {{ post.answers.count }}<br /><br />
+      {% for answer in post.answers.all %}
+      <b>{{ answer.author.profile.nickname }}</b><br />
+      {{ answer.content }}<br /><br />
+      {% empty %} 댓글이 없습니다. {% endfor %}
+    </div>
+  </body>
 </html>

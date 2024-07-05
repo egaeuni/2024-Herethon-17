@@ -34,11 +34,21 @@ def signup_child(request):
         birth_date_str = request.POST['birth_date']
         
         birth_date = datetime.strptime(birth_date_str, '%Y-%m-%d').date()
-        user = User.objects.create_user(username, password=password)
-        profile = Profile(user=user, gender=gender, birth_date=birth_date, nickname=nickname)
+
+        if User.objects.filter(username=username).exists():
+            user = User.objects.get(username=username)
+        else:
+            user = User.objects.create_user(username, password=password)
+
+        profile, created = Profile.objects.get_or_create(user=user)
+        profile.gender = gender
+        profile.birth_date = birth_date
+        profile.nickname = nickname
         profile.save()
+
         auth.login(request, user)
         return redirect('accounts:home')
+    
     return render(request, 'accounts/signup_child.html')
 
 @receiver(post_save, sender=User)

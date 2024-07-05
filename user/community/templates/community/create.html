@@ -1,9 +1,33 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>게시글 상세보기</title>
+  <link rel="stylesheet" href="{% static 'css/post.css' %}" />
+</head>
+
 <body>
-    <h2>게시글 등록</h2>
-    <form method="POST" action="{%url 'community:create'%}">
+  {% include 'mentoring/header.html' %}
+  <div class="container">
+    <a class="back_button" href="{% url 'community:list' %}">뒤로가기</a
+    ><br /><br />
+    <h2 class="post">게시글 등록</h2>
+    <div class="">
+      <form method="POST" action="{%url 'community:create'%}">
         {%csrf_token%}
-        <input type="text" name="title" placeholder="제목을 입력하세요."><br><br>
-        <textarea name = "content" placeholder="내용을 입력하세요."></textarea><br>
-        <input type="submit" value="등록">
-    </form>
+        <input
+          class="post-title"
+          type="text"
+          name="title"
+          placeholder="제목을 입력하세요."
+        /><br /><br />
+        <textarea
+          class="post-content"
+          name="content"
+          placeholder="내용을 입력하세요."
+        ></textarea
+        ><br />
+        <input class="post-button" type="submit" value="등록" />
+      </form>
+    </div>
+  </div>
 </body>

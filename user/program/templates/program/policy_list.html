@@ -1,82 +1,87 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>육아휴직 제도</title>
-    <style>
-        .content {
-            display: none;
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .title {
-            font-weight: bold;
-        }
-        .details-button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .details-button:hover {
-            background-color: #0056b3;
-        }
-        .sort-buttons {
-            margin-bottom: 20px;
-        }
-        .sort-buttons a {
-            text-decoration: none;
-            color: #007BFF;
-            padding: 5px 10px;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-        }
-        .sort-buttons a.active {
-            border-bottom: 2px solid #007BFF;
-            font-weight: bold;
-        }
-        .item-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .policy-image {
-            width: 200px; 
-            height: auto;
-            margin-right: 10px;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/policy.css' %}"></link>
+    <title>policy</title>
 </head>
 <body>
-    <h1>육아휴직 제도</h1>
-    <a href="{% url 'program:program_home' %}"><button>뒤로가기</button></a>
-    <br>
-    <form method="GET" action="{% url 'program:policy_list' %}">
-        <input type="text" name="q" placeholder="제도 검색" value="{{ query }}">
-        <input type="hidden" name="sort_by" value="{{ sort_by }}">
-        <button type="submit">검색</button>
-    </form>
-    <div class="sort-buttons">
-        <a href="{% url 'program:policy_list' %}?sort_by=created_at" class="{% if sort_by == 'created_at' %}active{% endif %}">최신 등록순</a>
-        <a href="{% url 'program:policy_list' %}?sort_by=scrap_count" class="{% if sort_by == 'scrap_count' %}active{% endif %}">인기순</a>
-    </div>
-    <ul>
-        {% for policy in policies %}
-            <li class="item-container">
-                {% if policy.image %}
-                    <img src="{{ policy.image.url }}" alt="{{ policy.title }}" class="policy-image">
-                {% endif %}
-                <div>
-                    <h2 class="title">{{ policy.title }}</h2>
-                    <p>스크랩 수: {{ policy.scrap_count }}</p>
-                    <a href="{% url 'program:policy_detail' policy.id %}"><button class="details-button">상세보기</button></a>
+    {% include 'program/header.html' %}
+
+
+    <section>
+    <div class="section">
+        <div class="sec_header">육아휴직 제도</div><!-- ~<div class="sec_header"> -->
+
+        <div class="sec_section">
+        <div class="sec_search">
+            <form method="GET" action="{% url 'program:policy_list' %}">
+            <div class="form_div">
+                <input type="text" name="q" placeholder="검색어를 입력하세요." id="search" value="{{ query }}"> 
+                <input type="hidden" name="sort_by" value="{{ sort_by }}">
+                <button type="submit" name="submit" id="submit"><img src="{% static 'images/search.png' %}" > </button>
+            </div><!-- ~<div class="form_div"> -->
+            </form>
+        </div><!-- ~<div class="sec_search"> -->
+            
+        <div class="sec_btn">
+            <button type="button" id="recent"><a href="{% url 'program:policy_list' %}?sort_by=created_at" class="{% if sort_by == 'created_at' %}active{% endif %}">최신 등록순</button></a>
+            <button type="button" id="hot"><a href="{% url 'program:policy_list' %}?sort_by=scrap_count" class="{% if sort_by == 'scrap_count' %}active{% endif %}">인기순</button></a>
+        </div><!-- ~<div class="sec_btn"> -->
+        </div><!-- ~<div class="sec_section"> -->
+
+
+        <div class="sec_detail">
+        <div class="sec_grid">
+            {% for policy in policies %}
+            <div class="policy_detail">
+                <div class="policy_detail_img">
+                    {% if forloop.counter0 == 0 %}
+                    <img src="{% static 'images/policy1_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 1 %}
+                    <img src="{% static 'images/policy2_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 2 %}
+                        <img src="{% static 'images/policy3_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 3 %}
+                        <img src="{% static 'images/policy4_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 4 %}
+                        <img src="{% static 'images/policy5_.png' %}" alt="Policy Image">
+                    {% elif forloop.counter0 == 5 %}
+                        <img src="{% static 'images/policy6_.png' %}" alt="Policy Image">
+                    {% endif %}
+                </div><!-- ~<div class="policy_detail_img"> -->
+                <div class="policy_detail_main">
+                    <div class="policy_detail_scrap"><img src="{% static 'images/scrap.png' %}" style="width: 7px; height: 10px;"/>{{ policy.scrap_count }}</div>
+
+
+                    <div class="policy_detail_text">
+                    <p>{{ policy.title }}</p>
+                    </div><!-- ~<div class="policy_detail_text"> -->
+                    <div class="policy_detail_btn">
+                    <button id="detailBtn"><a href="{% url 'program:policy_detail' policy.id %}">상세보기 ></button></a>
+                    </div><!-- ~<div class="policy_detail_btn"> -->
+                    
+                    
                 </div>
-            </li>
-        {% endfor %}
-    </ul>
+            </div><!-- ~<div class="policy_detail"> -->
+            {% endfor%}
+            
+        </div><!-- ~<div class="sec_grid"> -->
+        </div><!-- ~<div class="sec_detail"> -->
+        <div class="page">
+        <button type="button" id="one">1</button>
+        <button type="button" id="two">2</button>
+        <button type="button" id="three">3</button>
+        <button type="button" id="next">></button>
+        </div>
+    </div><!-- ~<div class="section"> -->
+        
+        
+        
+    </section>
+    <script src="{% static 'scripts/policy.js' %}"></script>
+
 </body>
 </html>
