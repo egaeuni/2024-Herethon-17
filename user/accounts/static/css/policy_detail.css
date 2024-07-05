@@ -66,8 +66,8 @@ hr {
   margin-top: 2vw;
   box-shadow: 5px 5px 15px #d9d9d9;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
 }
 
 .content_img {
@@ -124,4 +124,33 @@ hr {
 #closeBtn a {
   text-decoration: none;
   color: white;
+}
+
+.sec_detail {
+  display: flex;
+  flex-direction: row;
+}
+
+#scrap {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+#scrap img {
+  width: 0.8vw;
+}
+
+.sec_scrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.3vw;
+}
+
+.sec_scrap p {
+  margin: 0;
+  margin-left: 0.2vw;
+  color: #747474;
+  font-size: 11px;
 }

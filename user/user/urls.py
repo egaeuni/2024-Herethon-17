@@ -27,6 +27,7 @@ urlpatterns = [
     path('program/', include('program.urls', namespace='program')),
     path('mentoring/', include('mentoring.urls')),
     path('', accounts.views.home, name='home'),
+    path('', accounts.views.login, name='login'), 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

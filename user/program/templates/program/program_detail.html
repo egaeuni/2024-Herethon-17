@@ -1,0 +1,87 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/program_detail.css' %}"></link>
+    <title>program_detail</title>
+  </head>
+  <body>
+    {% include 'program/header.html' %}
+
+    <section>
+      <div class="section">
+        <div class="sec_header">{{ program.title }}</div><!-- ~<div class="sec_header"> -->
+
+        <div class="sec_section">
+          <!-- <div class="sec_scrap">
+            <button id="scrap" type="submit" name="scrap"> <img src="/img/scrap.png" id="scrap_img"></button>
+            <p id="scrapCount">1</p>
+          </div> -->
+
+          <!-- 스크랩 -->
+          {% if is_scrapped %}
+          <form method="POST" action="{% url 'program:remove_scrap_program' program.id %}">
+              {% csrf_token %}
+            <button id="scrap" type="submit" name="scrap"> <img src=" {% static 'images/scrap2.png' %}" id="scrap_img"></button>
+            <p id="scrapCount">{{ policy.scrap_set.count }}</p>
+
+          </form>
+
+          {% else %}
+          <form method="POST" action="{% url 'program:add_scrap_program' program.id %}">
+              {% csrf_token %}
+            <button id="scrap" type="submit" name="scrap"> <img src="{% static 'images/scrap.png' %}" id="scrap_img"></button>
+            <p id="scrapCount">{{ policy.scrap_set.count }}</p>
+          
+        </form>
+
+          {% endif %}
+          <div class="sec_content">
+            {% if program.image %}
+            <div class="content_img">
+              <img src="{{ program.image.url }}" alt="{{ program.title }}">
+              {% endif %}
+
+            </div>
+            <div class="content_text">
+              <div class="text1">
+                {% if program.center_info %}
+                <p class="contents">●센터정보:  {{ program.center_info }}</p>
+                {% endif %}
+                {% if program.event_period %}
+                <p class="contents">●행사기간: {{ program.event_period }}</p>
+                {% endif %}
+                {% if program.registration_period %}
+                <p class="contents">●접수기간: {{ program.registration_period }} </p>
+                {% endif %}
+                {% if program.participants %}
+                <p class="contents">●참여대상: {{ program.participants }} </p>
+                {% endif %}
+                {% if program.event_content %}
+                <p class="contents">●행사내용: {{ program.event_content }} </p>
+                {% endif %}
+                {% if program.session_info %}
+                <p class="contents">●회기정보: {{ program.session_info }} </p>
+                {% endif %}
+                {% if program.location %}
+                <p class="contents">●진행장소: {{ program.location }} </p>
+                {% endif %}
+
+              </div><!-- ~<div class="text1"> -->
+            </div><!-- ~<div class="content_text"> -->
+          </div><!-- ~<div class="sec_content"> -->
+          <div class="register">
+            <button type="button" id="registerBtn"><a href="{{ program.application_url }}" target="_blank">신청하기</a></button>
+          </div>
+        </div><!-- ~<div class="sec_section"> -->
+        
+        <div class="close">
+          <button type="button" id="closeBtn"><a href="{% url 'program:program_list' %}">뒤로가기</a></button>
+        </div><!-- ~<div class="closeBtn"> -->
+      </div><!-- ~<div class="section"> -->
+    </section>
+    <script src="{% static 'scripts/program_detail.js' %}"></script>
+  </body>
+</html>

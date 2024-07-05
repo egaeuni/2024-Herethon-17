@@ -1,6 +1,9 @@
 const result_btn = document.getElementsByClassName("result_btn");
 const result_img = document.getElementsByClassName("result_img");
 
+const recent = document.getElementById("recent");
+const hot = document.getElementById("hot");
+
 let recent_isClicked = false;
 let hot_isClicked = false;
 

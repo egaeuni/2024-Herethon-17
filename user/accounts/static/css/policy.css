@@ -104,10 +104,10 @@ hr {
   padding: 0.6vw 1vw;
 }
 
-.sec_btn button:nth-child(2) {
+/* .sec_btn button:nth-child(2) {
   border: 1px solid #fb8129;
   color: #fb8129;
-}
+} */
 
 .sec_grid {
   display: grid;
@@ -197,4 +197,27 @@ hr {
   margin-right: 0.5vw;
   background-color: none;
   border-radius: 25px;
+}
+
+#one {
+  background-color: rgb(252, 221, 205, 0.5);
+}
+
+#recent a,
+#hot a {
+  text-decoration: none;
+}
+
+.policy_detail_scrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  margin-right: 0.8vw;
+  margin-bottom: 0.5vw;
+  font-size: 10px;
+}
+
+.policy_detail_scrap img {
+  margin-right: 0.2vw;
 }
