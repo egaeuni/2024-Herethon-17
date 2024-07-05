@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 댓글</title>
+  <link rel="stylesheet" href="../css/comment.css">
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar"></div>
+
+    <p class="post-tag">POM</p>
+    <p class="post-author">애기아빠 | 7개월</p>
+
+    <img class="comment-icon1" src="../img/Frame 3368.png">
+
+    <div class="post-content1">
+        <p class="post-title1">처음 뵙겠습니다.</p>
+        <p class="post-body1">육아 휴직 제도를 한눈에 볼 수 있는<br> 사이트가 없어 불편했는데<br> POM 사이트는 제도를 한눈에 볼 수<br> 있어서 좋습니다. <br>감사합니다!</p>
+    </div>
+
+    <div class="button-container">
+        <button class="good"></button><span class="count" id="good-count">0</span>
+    </div>
+    <div class="button-container">
+        <button class="comment-button"></button><span class="count" id="comment-count">0</span>
+    </div>
+    <div class="button-container">
+        <button class="scrape"></button><span class="count" id="scrape-count">0</span>
+    </div>
+
+    <script src="comment.js"></script>
+
+    <div class="post-content2">
+        <p class="post-title2">빠빠쟁이</p>
+        <p class="post-body2">저도 육아 휴직 제도를 한번에 볼 수 있는 웹<br>이 없어서 불편했는데 다행히 POM웹이 출<br>시되서 행복합니다. </p>
+      </div>
+
+      <div class="post-content3">
+        <p class="post-title3">Dadm</p>
+        <p class="post-body3">유용한 육아 정보가 많아서 좋은 것 같아요!</p>
+      </div>
+
+      <div class="post-content4">
+        <p class="post-title4">POM러브</p>
+        <p class="post-body4">이거 말로 다른 사이트는 못쓸 것 같은데요.. <br>이제..</p>
+      </div>
+
+    <div class="header">
+      <p>POM만의 육아 정보 <span>공유 공간</span></p>
+      <h1>커뮤니티</h1>
+      <img src="../img/Man and woman exchange messages online.png" alt="Exchange messages">
+    </div>
+
+    <div class="nav">
+        <button class="custom-button"></button>
+      <button class="nav-active">최신 등록순</button>
+      <button class="nav-item">인기순</button>
+    </div>
+    
+    <div class="main-content"></div>
+
+    <div class="comment-box">
+        <input placeholder="댓글을 입력해주세요">
+        <button>등록</button>
+      </div>
+
+      <div class="comments" id="commentsContainer"></div>
+
+      <script src="../scripts/comment.js"></script>
+    </div>
+</body>
+</html>
