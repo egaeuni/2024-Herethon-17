@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/program_detail.css' %}"></link>
     <title>program_detail</title>
+    <script>
+      function goBack() {
+          const referrer = document.referrer;
+          if (referrer.includes('/program/list/')) {
+              location.href = "{% url 'program:program_list' %}";
+          } else if (referrer.includes('/accounts/mypage/scrap/program/')) {
+              location.href = "{% url 'accounts:scrap_program' %}";
+          } else {
+              location.href = "{% url 'program:program_home' %}";
+          }
+      }
+  </script>
   </head>
   <body>
     {% include 'program/header.html' %}
@@ -25,7 +37,6 @@
           <form method="POST" action="{% url 'program:remove_scrap_program' program.id %}">
               {% csrf_token %}
             <button id="scrap" type="submit" name="scrap"> <img src=" {% static 'images/scrap2.png' %}" id="scrap_img"></button>
-            <p id="scrapCount">{{ policy.scrap_set.count }}</p>
 
           </form>
 
@@ -33,7 +44,6 @@
           <form method="POST" action="{% url 'program:add_scrap_program' program.id %}">
               {% csrf_token %}
             <button id="scrap" type="submit" name="scrap"> <img src="{% static 'images/scrap.png' %}" id="scrap_img"></button>
-            <p id="scrapCount">{{ policy.scrap_set.count }}</p>
           
         </form>
 
@@ -78,7 +88,7 @@
         </div><!-- ~<div class="sec_section"> -->
         
         <div class="close">
-          <button type="button" id="closeBtn"><a href="{% url 'program:program_list' %}">뒤로가기</a></button>
+          <button type="button" id="closeBtn" onclick="goBack()">뒤로가기</button>
         </div><!-- ~<div class="closeBtn"> -->
       </div><!-- ~<div class="section"> -->
     </section>

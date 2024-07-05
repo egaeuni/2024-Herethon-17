@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+
 from .models import Post, Answer
 from accounts.views import calculate_age_in_months  # 함수 가져오기
 from django.db.models import Count
+from .models import Post, Answer, ScrapCommunity
+from accounts.views import calculate_age_in_months
 
 @login_required
 def list(request):
@@ -27,7 +30,7 @@ def create(request):
         post = Post.objects.create(
             title=title,
             content=content,
-            author=request.user,  # 현재 로그인된 사용자
+            author=request.user,
         )
         return redirect('community:list')
     return render(request, 'community/create.html')
@@ -37,8 +40,8 @@ def detail(request, id):
     post = get_object_or_404(Post, id=id)
     author_profile = post.author.profile
     nickname = author_profile.nickname
-    birth_date = author_profile.birth_date  # 생일 정보 가져오기
-    current_age_months = calculate_age_in_months(birth_date)  # 함수 사용
+    birth_date = author_profile.birth_date
+    current_age_months = calculate_age_in_months(birth_date)
 
     return render(request, 'community/detail.html', {
         'post': post,
@@ -52,7 +55,7 @@ def create_answer(request, post_id):
     if request.method == "POST":
         Answer.objects.create(
             content=request.POST.get('content'),
-            author=request.user,  # 현재 로그인된 사용자
+            author=request.user,
             post=post,
         )
         return redirect('community:detail', post_id)
@@ -72,11 +75,11 @@ def remove_like(request, post_id):
 @login_required
 def add_scrap(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    post.scrap.add(request.user)
+    ScrapCommunity.objects.get_or_create(user=request.user, post=post)
     return redirect('community:detail', post_id)
 
 @login_required
 def remove_scrap(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    post.scrap.remove(request.user)
+    ScrapCommunity.objects.filter(user=request.user, post=post).delete()
     return redirect('community:detail', post_id)
