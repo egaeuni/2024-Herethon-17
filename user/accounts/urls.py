@@ -14,5 +14,5 @@ urlpatterns = [
     path('mypage/scrap/policy/', scrap_policy, name='scrap_policy'),
     path('mypage/scrap/program/', scrap_program, name='scrap_program'),
     path('edit_profile/', edit_profile, name="edit_profile"),
-    path('', home, name="home"),
+    path('home/', home, name="home"),
 ]

@@ -1,3 +1,7 @@
+<header>
+  <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+</header>
+
 <div class="header">
   <header>
     <div>
@@ -19,7 +23,15 @@
         <ul>
           {% if user.is_authenticated %}
           <li><a href="#">{{ user.username }}님, 환영합니다!</a></li>
-          <li><a href="{%url 'accounts:logout' %}" id="signup">로그아웃</a></li>
+          <li><a href="{%url 'accounts:logout' %}" id="signup" onclick="document.getElementById('logout-form').submit();">로그아웃</a>
+            <form
+            id="logout-form"
+            action="{% url 'accounts:logout' %}"
+            method="post"
+            style="display: none"
+          >
+            {% csrf_token %}
+          </form></li>
           {% else %}
           <li><a href="{%url 'accounts:login' %}">로그인</a></li>
           <li><a href="{%url 'accounts:signup' %}" id="signup">회원가입</a></li>
