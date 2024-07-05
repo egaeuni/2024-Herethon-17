@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-
-
 from .models import Post, Answer
 from accounts.views import calculate_age_in_months  # 함수 가져오기
 from django.db.models import Count
-from .models import Post, Answer, ScrapCommunity
-from accounts.views import calculate_age_in_months
+from django.core.exceptions import ObjectDoesNotExist
+from accounts.models import *
 
 @login_required
 def list(request):
@@ -19,8 +17,10 @@ def list(request):
     
     for post in posts:
         post.author.profile.current_age_months = calculate_age_in_months(post.author.profile.birth_date)
+        post.author.profile.profile_pic_url = post.author.profile.profile_pic.url if post.author.profile.profile_pic else None
     
     return render(request, 'community/list.html', {'posts': posts})
+
 
 @login_required
 def create(request):
@@ -43,11 +43,13 @@ def detail(request, id):
     nickname = author_profile.nickname
     birth_date = author_profile.birth_date  # 생일 정보 가져오기
     current_age_months = calculate_age_in_months(birth_date)  # 함수 사용
+    profile_pic_url = author_profile.profile_pic.url if author_profile.profile_pic else None
 
     return render(request, 'community/detail.html', {
         'post': post,
         'author_nickname': nickname,
         'author_current_age_months': current_age_months,
+        'author_profile_pic_url': profile_pic_url
     })
 
 @login_required
@@ -83,4 +85,17 @@ def add_scrap(request, post_id):
 def remove_scrap(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.scrap.remove(request.user)
+    return redirect('community:detail', post_id)
+
+@login_required
+def delete(request, post_id):
+    post=get_object_or_404(Post, id=post_id)
+    post.delete()
+    return redirect('community:list')
+
+@login_required
+def delete_answer(request, answer_id):
+    answer= get_object_or_404(Answer, id = answer_id)
+    post_id = answer.post.id
+    answer.delete()
     return redirect('community:detail', post_id)

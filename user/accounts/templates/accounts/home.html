@@ -63,7 +63,7 @@
 
       <div class="program">
         <img class="title" src="{% static 'images/title2.png' %}" alt="로고" />
-        <div>
+        <div class="menu-container">
           <a href="{% url 'program:program_home' %}">
             <img
               class="menu_1"
@@ -71,21 +71,23 @@
               alt="육아휴직소개서"
             />
           </a>
+          <div class="right-menus">
+            <a href="{% url 'mentoring:home' %}">
+              <img
+                class="menu_2"
+                src="{% static 'images/menu2.png' %}"
+                alt="전문가멘토링"
+              />
+            </a>
+            <a href="{% url 'community:list' %}">
+              <img
+                class="menu_3"
+                src="{% static 'images/menu3.png' %}"
+                alt="커뮤니티"
+              />
+            </a>
+          </div>
         </div>
-        <a href="{% url 'mentoring:home' %}">
-          <img
-            class="menu_2"
-            src="{% static 'images/menu2.png' %}"
-            alt="전문가멘토링"
-          />
-        </a>
-        <a href="{% url 'community:list' %}">
-          <img
-            class="menu_3"
-            src="{% static 'images/menu3.png' %}"
-            alt="커뮤니티"
-          />
-        </a>
       </div>
     </div>
     <script src="{% static '/scripts/loginCheck.js' %}"></script>

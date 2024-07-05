@@ -76,7 +76,7 @@ hr {
 }
 
 .guide {
-  width: 450px;
+  width: 550px;
   margin-top: 60px;
   display: flex;
   align-items: center;
@@ -84,8 +84,7 @@ hr {
 }
 
 .title {
-  height: 28px;
-
+  height: 30px;
   margin-bottom: 50px;
   position: absolute;
   display: flex;
@@ -94,28 +93,26 @@ hr {
 }
 
 .program {
-  margin-top: 100px;
-
+  margin-top: 150px;
+  margin-left: 40px;
   /* position: absolute; */
   /* display: flex; */
   align-items: center;
   justify-content: center;
 }
 
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 .menu_1 {
-  width: 24vw;
-  margin-top: 40px;
-  margin-bottom: 55px;
+  margin-top: 45px;
 }
 
-.menu_2 {
-  position: absolute;
-  width: 380px;
-  margin-top: 60px;
-}
-
-.menu_3 {
-  position: absolute;
-  width: 380px;
-  margin-top: 300px;
+.right-menus {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }

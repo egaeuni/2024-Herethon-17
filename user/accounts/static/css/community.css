@@ -1,0 +1,162 @@
+body {
+  background-image: url("../images/mypage_background2.png");
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100vh;
+}
+
+.logo-container {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+}
+
+.container {
+  /* background: white; */
+  /* box-shadow: 0 0 3px #e65c00; */
+  /* padding: 2rem; */
+  border-radius: 8px;
+  width: 40%;
+  text-align: center;
+}
+
+.community-img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.button_join {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.write_com {
+  color: white;
+  background-color: #ff6600;
+  margin-left: 20px;
+  padding: 8px 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.write_com:hover {
+  background-color: #bc4b00;
+}
+
+.button_1 {
+  color: black;
+  background-color: white;
+  margin-left: 10px;
+  padding: 8px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.button_1:hover {
+  background-color: rgb(203, 203, 203);
+}
+
+.posts-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.post-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  padding: 20px 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.post-header1 {
+  text-align: right;
+  align-items: center;
+  font-size: 13px;
+  color: #777;
+}
+
+.post-header2 {
+  text-align: right;
+  align-items: center;
+  font-size: 13px;
+  color: #777;
+}
+
+.nickname {
+  font-weight: bold;
+  color: #333;
+}
+
+.age {
+  margin-left: 10px;
+  color: #555;
+}
+
+.post-title {
+  display: flex;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.post-title a {
+  text-decoration: none;
+  color: #ff6600;
+}
+
+.post-title a:hover {
+  text-decoration: underline;
+}
+
+.post-content {
+  display: flex;
+  font-size: 15px;
+  color: #4a4a4a;
+  margin-bottom: 15px;
+}
+
+.post-meta {
+  font-size: 14px;
+  color: #999;
+  margin-top: 25px;
+}
+
+.post-divider {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.profile-pic {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.post-header {
+  display: flex;
+  align-items: center;
+}
+.nickname {
+  margin-left: 10px;
+  font-weight: bold;
+}
+.age {
+  margin-left: 5px;
+  color: gray;
+}

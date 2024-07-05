@@ -4,12 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>커뮤니티 게시글 목록</title>
-    <link rel="stylesheet" href="{% static 'css/list.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/community.css' %}" />
+    <style>
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <!-- 커뮤니티 이미지 사용 -->
-      <img src="{% static 'images/community.png' %}" class="community-img" />
+      <img src="{% static 'images/flag.png' %}" class="community-img" />
 
       <!-- 글 작성 버튼 -->
       <br />
@@ -34,11 +42,25 @@
         {% for post in posts %}
         <div class="post-card">
           <div class="post-header">
-            <span class="nickname">{{ post.author.profile.nickname }}</span>
-            &nbsp; |
-            <span class="age"
-              >{{ post.author.profile.current_age_months }}</span
-            >
+            {% if post.author.profile.profile_pic_url %}
+            <img
+              src="{{ post.author.profile.profile_pic_url }}"
+              alt="프로필 사진"
+              class="profile-pic"
+            />
+            {% else %}
+            <img
+              src="{% static 'images/basic_image.png' %}"
+              alt="기본 프로필 사진"
+              class="profile-pic"
+            />
+            {% endif %}
+            <div>
+              <span class="nickname">{{ post.author.profile.nickname }}</span>
+              <span class="age"
+                >{{ post.author.profile.current_age_months }}</span
+              >
+            </div>
           </div>
           <h2 class="post-title">
             <a href="{% url 'community:detail' post.id %}"
