@@ -1,0 +1,152 @@
+.container {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background: #fefefe;
+  }
+
+  .nav_main {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 100px;
+    height: 70;
+    left: 163px;
+    top: 74px;
+  }
+  
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin-top: 35px;
+  }
+  
+  .menu li a {
+    font-size: 20px;
+    margin-right: 50px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .right_nav {
+    position: fixed;
+    right: 250px; /* 원하는 위치로 조정 */
+  }
+  
+  .user-options {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin-top: 35px;
+  }
+  
+  .user-options li a {
+    font-size: 20px;
+    margin-right: 50px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  hr {
+    color: #646464;
+    margin-top: 5px;
+  }
+
+.post-box{
+    position: absolute;
+    width: 671px;
+    height: 762px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.15);
+    left: 624px;
+    top: 262px;
+}
+
+.post{
+    position: absolute;
+    width: 180px;
+    height: 39px;
+    left: 258px;
+    top: 42px;
+    color: #391800;
+    text-align: center;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+}
+
+.post-hr{
+    width: 671.091px;
+    height: 0.5px;
+    border: 0; /* 기존의 border 제거 */
+    border-top: 0.5px solid #f1f1f1; /* 새로운 border 색상 및 두께 지정 */
+    position: absolute;
+    left: 0.05px;
+    top: 120px;
+}
+
+.post-title{
+    position: absolute;
+    width: 600px;
+    height: 50px;
+    left: 62px;
+    top: 150px;
+    border: none;
+}
+
+.title-hr{
+    width: 671.091px;
+    height: 0.5px;
+    border: 0; /* 기존의 border 제거 */
+    border-top: 0.5px solid #f1f1f1; /* 새로운 border 색상 및 두께 지정 */
+    position: absolute;
+    left: 0.05px;
+    top: 240px;
+}
+
+
+.post-content{
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    left: 62px;
+    top: 300px;
+    border: none;
+}
+
+.post-button{
+    position: absolute;
+    left: 270px;
+    top: 644px;
+    display: flex;
+    width: 127px;
+    height: 51px;
+    padding: 17px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #FB8129;
+    border-radius: 8px;
+    border: none;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+
