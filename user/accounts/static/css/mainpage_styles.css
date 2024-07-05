@@ -41,10 +41,6 @@ body {
 }
 
 .right_nav {
-<<<<<<< HEAD
-  position: fixed;
-=======
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
   right: 250px; /* 원하는 위치로 조정 */
 }
 
@@ -61,15 +57,13 @@ body {
   text-decoration: none;
   color: #333;
 }
-<<<<<<< HEAD
-=======
+
 .user-options li span {
   font-size: 20px;
   margin-right: 50px;
   text-decoration: none;
   color: #333;
 }
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
 
 hr {
   color: #646464;
@@ -77,55 +71,51 @@ hr {
 }
 
 .main-content {
-  padding: 20px;
+  justify-content: center;
   display: flex;
 }
 
 .guide {
   width: 450px;
-<<<<<<< HEAD
-  margin-top: 50px;
-  margin-bottom: 30px;
-  margin-left: 280px;
-=======
+  margin-top: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
 }
 
 .title {
   height: 28px;
-<<<<<<< HEAD
-  margin-top: 110px;
-  margin-bottom: 20px;
-  margin-left: 90px;
-  position: absolute;
-=======
+
+  margin-bottom: 50px;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
+}
+
+.program {
+  margin-top: 100px;
+
+  /* position: absolute; */
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
 }
 
 .menu_1 {
-  width: 350px;
+  width: 24vw;
   margin-top: 40px;
   margin-bottom: 55px;
-  margin-left: 40px;
 }
 
 .menu_2 {
   position: absolute;
   width: 380px;
-  margin-top: 170px;
-  margin-left: 10px;
+  margin-top: 60px;
 }
 
 .menu_3 {
   position: absolute;
   width: 380px;
-  margin-top: 410px;
-  margin-left: 10px;
+  margin-top: 300px;
 }
