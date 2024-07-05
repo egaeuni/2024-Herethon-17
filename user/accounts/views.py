@@ -10,6 +10,7 @@ from dateutil.relativedelta import relativedelta
 from community.models import Post, ScrapCommunity  
 from program.models import Scrap, Policy, Program
 from django.contrib.auth.decorators import login_required
+from mentoring.models import *
 
 def signup(request):
     if request.method == "POST":
@@ -90,6 +91,8 @@ def mypage(request):
 
             # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
+            record_sheets = Record.objects.filter(user=request.user)
+            questions = Question.objects.filter(user = request.user)
 
             return render(request, 'accounts/mypage.html', {
                 'nickname': nickname,
@@ -105,6 +108,8 @@ def mypage(request):
                 'scrapped_policies_count': scrapped_policies_count,
                 'scrapped_programs_count': scrapped_programs_count,
                 'total_scraps': total_scraps,  # 총 스크랩 수를 템플릿에 전달
+                'record_sheets':record_sheets,
+                'questions':questions
             })
         except Profile.DoesNotExist:
             return render(request, 'accounts/mypage.html', {
@@ -121,6 +126,8 @@ def mypage(request):
                 'scrapped_policies_count': 0,
                 'scrapped_programs_count': 0,
                 'total_scraps': 0,  # 스크랩 수의 기본값을 0으로 설정
+                'record_sheets':[],
+                'questions':[]
             })
     else:
         return redirect('accounts:login')
