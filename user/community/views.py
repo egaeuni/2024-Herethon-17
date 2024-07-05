@@ -84,3 +84,16 @@ def remove_scrap(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.scrap.remove(request.user)
     return redirect('community:detail', post_id)
+
+@login_required
+def delete(request, post_id):
+    post=get_object_or_404(Post, id=post_id)
+    post.delete()
+    return redirect('community:list')
+
+@login_required
+def delete_answer(request, answer_id):
+    answer= get_object_or_404(Answer, id = answer_id)
+    post_id = answer.post.id
+    answer.delete()
+    return redirect('community:detail', post_id)

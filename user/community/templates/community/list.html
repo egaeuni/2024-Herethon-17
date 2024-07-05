@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>커뮤니티 게시글 목록</title>
-</head>
-<body>
+  </head>
+  <body>
     <b><a href="{% url 'accounts:home' %}">POM</a></b>
     <a href="{% url 'program:program_home' %}">육아휴직 소개서</a>
     <a href="{%url 'mentoring:home'%}">전문가 멘토링</a>
     <a href="{% url 'community:list' %}">커뮤니티</a>
-    <a href="{% url 'accounts:mypage' %}">마이페이지</a><br><br>
+    <a href="{% url 'accounts:mypage' %}">마이페이지</a><br /><br />
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 972212362afc0161c183baa21de456d8c8ee8e61
     <!--최신 등록순 % 인기순-->
     <a href="{% url 'community:list' %}?sort=latest">최신 등록순</a>
     <a href="{% url 'community:list' %}?sort=popular">인기순</a>
     <!-- 글 작성 버튼 -->
-<<<<<<< HEAD
-=======
->>>>>>> 80f193e3c82b9d1dc5e6f7b402307e67ab5c40d9
-=======
->>>>>>> 972212362afc0161c183baa21de456d8c8ee8e61
     <a href="{% url 'community:create' %}">글 작성하기</a>
-    <br><hr>
+    <br />
+    <hr />
 
-    {% for post in posts %}
-    {{ post.author.profile.nickname }} | {{ post.author.profile.current_age_months }}
+    {% for post in posts %} {% if profile_pic_url %}
+    <img src="{{ profile_pic_url }}" alt="프로필 사진" class="profile-pic" width="25" height="25" />
+    {% else %}
+    <img src="{% static 'images/basic_image.png' %}" alt="기본 프로필 사진" class="profile-pic" width="25" height="25" />
+    {% endif %} {{ post.author.profile.nickname }} | {{ post.author.profile.current_age_months }}
     <h2><a href="{% url 'community:detail' post.id %}">{{ post.title }}</a></h2>
-    {{ post.content }}<br><br>
-    댓글 수: {{ post.answers.count }}
-    공감 수: {{ post.like.count }}
-    스크랩 수: {{ post.scrap.count }} <br><hr>
-    {% empty %}
-    게시글이 없습니다.
-    {% endfor %}
-</body>
+    {{ post.content }}<br /><br />
+    댓글 수: {{ post.answers.count }} 공감 수: {{ post.like.count }} 스크랩 수: {{ post.scrap.count }} <br />
+    <hr />
+    {% empty %} 게시글이 없습니다. {% endfor %}
+  </body>
 </html>

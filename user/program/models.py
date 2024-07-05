@@ -19,6 +19,7 @@ class Program(models.Model):
 
 class Policy(models.Model):
     title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='policy_images/', blank=True, null=True) #제도 이미지
     created_at = models.DateTimeField(auto_now_add=True)  #최신 등록순
 
     def __str__(self):

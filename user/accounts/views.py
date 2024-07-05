@@ -10,6 +10,7 @@ from dateutil.relativedelta import relativedelta
 from community.models import Post, ScrapCommunity  
 from program.models import Scrap, Policy, Program
 from django.contrib.auth.decorators import login_required
+from mentoring.models import *
 
 def signup(request):
     if request.method == "POST":
@@ -83,10 +84,15 @@ def mypage(request):
             scrapped_programs = Scrap.objects.filter(user=request.user, program__isnull=False).select_related('program')
 
             # 스크랩 수의 합 계산
-            total_scraps = scrapped_posts.count() + scrapped_policies.count() + scrapped_programs.count()
+            scrapped_posts_count = scrapped_posts.count()
+            scrapped_policies_count = scrapped_policies.count()
+            scrapped_programs_count = scrapped_programs.count()
+            total_scraps = scrapped_posts_count + scrapped_policies_count + scrapped_programs_count
 
             # 출생일로부터 현재까지 몇 개월인지 계산
             current_age_months = calculate_age_in_months(birth_date)
+            record_sheets = Record.objects.filter(user=request.user)
+            questions = Question.objects.filter(user = request.user)
 
             return render(request, 'accounts/mypage.html', {
                 'nickname': nickname,
@@ -98,7 +104,12 @@ def mypage(request):
                 'scraped_posts': scrapped_posts,
                 'scraped_policies': scrapped_policies,
                 'scraped_programs': scrapped_programs,
+                'scrapped_posts_count': scrapped_posts_count,
+                'scrapped_policies_count': scrapped_policies_count,
+                'scrapped_programs_count': scrapped_programs_count,
                 'total_scraps': total_scraps,  # 총 스크랩 수를 템플릿에 전달
+                'record_sheets':record_sheets,
+                'questions':questions
             })
         except Profile.DoesNotExist:
             return render(request, 'accounts/mypage.html', {
@@ -111,7 +122,12 @@ def mypage(request):
                 'scraped_posts': [],
                 'scraped_policies': [],
                 'scraped_programs': [],
+                'scrapped_posts_count': 0,
+                'scrapped_policies_count': 0,
+                'scrapped_programs_count': 0,
                 'total_scraps': 0,  # 스크랩 수의 기본값을 0으로 설정
+                'record_sheets':[],
+                'questions':[]
             })
     else:
         return redirect('accounts:login')

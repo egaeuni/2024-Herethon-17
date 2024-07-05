@@ -169,11 +169,16 @@
     </h3>
     <div id="scrap-section" class="toggle-section">
         <ul>
-            <li><a href="{% url 'accounts:scrap_post' %}">커뮤니티 게시글</a></li>
-            <li><a href="{% url 'accounts:scrap_policy' %}">육아휴직 제도</a></li>
-            <li><a href="{% url 'accounts:scrap_program' %}">육아휴직 프로그램</a></li>
+            <li><a href="{% url 'accounts:scrap_post' %}">커뮤니티 게시글 ({{ scrapped_posts_count }})</a></li>
+            <li><a href="{% url 'accounts:scrap_policy' %}">육아휴직 제도 ({{ scrapped_policies_count }})</a></li>
+            <li><a href="{% url 'accounts:scrap_program' %}">육아휴직 프로그램 ({{ scrapped_programs_count }})</a></li>
         </ul>
     </div>
+    <!--멘토링 질문-->
+    <a href="{% url 'accounts:questions' %}" class="toggle-button">멘토링 질문: {{ questions|length }}</a>
+    <br><br>
+    <!--멘토링 기록지-->
+    <a href="{% url 'accounts:record-sheets' %}" class="toggle-button">멘토링 기록지: {{ record_sheets|length }}</a>
 </body>
 </html>
 
