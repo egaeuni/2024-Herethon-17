@@ -52,7 +52,11 @@ hr {
 
 body {
   font-family: Arial, sans-serif;
+<<<<<<< HEAD
   background-image: url("/img/mypage_background2.png");
+=======
+  background-image: url("../images/mypage_background2.png");
+>>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
   margin: 0;
   padding: 0;
 }
@@ -60,7 +64,11 @@ body {
 .container {
   width: 80%;
   max-width: 600px;
+<<<<<<< HEAD
   margin: 130px auto;
+=======
+  margin: 40px auto;
+>>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -172,3 +180,46 @@ body {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
+<<<<<<< HEAD
+=======
+
+.edit_button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.edit_button:hover {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #c65300;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+}
+.back_button {
+  margin-top: 5px;
+  padding: 10px 10px;
+  background-color: #fedfce;
+  border: none;
+  color: #ff6600;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.back_button:hover {
+  color: #fedfce;
+  background-color: #ff6600;
+}
+>>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77

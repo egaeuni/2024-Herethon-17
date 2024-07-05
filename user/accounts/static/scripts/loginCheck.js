@@ -13,5 +13,9 @@ if (loggedIn === "true") {
 document.getElementById("logout").addEventListener("click", function () {
   localStorage.removeItem("loggedIn");
   console.log("로그아웃 성공:", username);
+<<<<<<< HEAD
   window.location.href = "/html/mainpage.html";
+=======
+  window.location.href = "{% url 'mainpage' %}";
+>>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
 });
