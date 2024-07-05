@@ -15,8 +15,13 @@
             color: #007BFF;
             font-weight: bold;
         }
-        .program-image {
-            width: 300px; 
+        .policy-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .policy-image {
+            width: 100px; /* 이미지 크기 확대 */
             height: auto;
             margin-right: 20px;
         }
@@ -38,7 +43,10 @@
     <a href="{% url 'program:policy_list' %}">더보기</a>
     <ul>
         {% for policy in policies|slice:":3" %}
-            <li>
+            <li class="policy-item">
+                {% if policy.image %}
+                    <img src="{{ policy.image.url }}" alt="{{ policy.title }}" class="policy-image">
+                {% endif %}
                 <h2 class="title"><a href="{% url 'program:policy_detail' policy.id %}">{{ policy.title }}</a></h2>
             </li>
         {% endfor %}

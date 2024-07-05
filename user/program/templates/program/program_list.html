@@ -20,9 +20,9 @@
             align-items: flex-start;
         }
         .program-image {
-            width: 300px; 
+            width: 50px; 
             height: auto;
-            margin-right: 20px;
+            margin-right: 10px;
         }
         .apply-button {
             text-align: center;
@@ -38,6 +38,11 @@
         }
         .apply-button button:hover {
             background-color: #0056b3;
+        }
+        .item-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -61,7 +66,10 @@
 
     <ul>
         {% for program in programs %}
-            <li>
+            <li class="item-container">
+                {% if program.image %}
+                    <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-image">
+                {% endif %}
                 <h2 class="program-title"><a href="{% url 'program:program_detail' program.id %}">{{ program.region }} | {{ program.title }}</a></h2>
             </li>
         {% endfor %}

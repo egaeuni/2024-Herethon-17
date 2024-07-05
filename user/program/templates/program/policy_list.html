@@ -39,6 +39,16 @@
             border-bottom: 2px solid #007BFF;
             font-weight: bold;
         }
+        .item-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .policy-image {
+            width: 200px; 
+            height: auto;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -56,10 +66,15 @@
     </div>
     <ul>
         {% for policy in policies %}
-            <li>
-                <h2 class="title">{{ policy.title }}</h2>
-                <p>스크랩 수: {{ policy.scrap_count }}</p>
-                <a href="{% url 'program:policy_detail' policy.id %}"><button class="details-button">상세보기</button></a>
+            <li class="item-container">
+                {% if policy.image %}
+                    <img src="{{ policy.image.url }}" alt="{{ policy.title }}" class="policy-image">
+                {% endif %}
+                <div>
+                    <h2 class="title">{{ policy.title }}</h2>
+                    <p>스크랩 수: {{ policy.scrap_count }}</p>
+                    <a href="{% url 'program:policy_detail' policy.id %}"><button class="details-button">상세보기</button></a>
+                </div>
             </li>
         {% endfor %}
     </ul>

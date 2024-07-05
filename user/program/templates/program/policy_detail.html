@@ -13,6 +13,11 @@
             font-weight: bold;
             color: #007BFF;
         }
+        .policy-image {
+            width: 300px;
+            height: auto;
+            margin-bottom: 20px;
+        }
     </style>
     <script>
         function goBack() {
@@ -29,6 +34,9 @@
 </head>
 <body>
     <h1>{{ policy.title }}</h1>
+    {% if policy.image %}
+        <img src="{{ policy.image.url }}" alt="{{ policy.title }}" class="policy-image">
+    {% endif %}
     <div class="content">
         {% for benefit in policy.benefits.all %}
             <h3>혜택 {{ forloop.counter }}: {{ benefit.title }}</h3>
