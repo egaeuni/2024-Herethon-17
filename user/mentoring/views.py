@@ -7,12 +7,26 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     mentos = Mento.objects.all()
     sort = request.GET.get('sort', 'latest')
+    search = request.GET.get('search', '')
+
+    if search:
+        mentos = mentos.filter(
+            Q(name__icontains=search) | 
+            Q(nickname__icontains=search) | 
+            Q(tag__icontains=search) |
+            Q(intro__icontains=search) |
+            Q(content_1__icontains=search) |
+            Q(content_2__icontains=search) |
+            Q(content_3__icontains=search) |
+            Q(content_4__icontains=search)
+        )
     
     if sort == 'popular':
-        mentos = Mento.objects.all().annotate(popularity= Count('questions')).order_by('-popularity', '-id')
+        mentos = mentos.annotate(popularity=Count('questions')).order_by('-popularity', '-id')
     else:
-        mentos = Mento.objects.all().order_by('-id')
-    return render(request, 'mentoring/home.html', {'mentos':mentos})
+        mentos = mentos.order_by('-id')
+    
+    return render(request, 'mentoring/home.html', {'mentos': mentos, 'search': search})
 
 def detail(request, id):
     mento = get_object_or_404(Mento, id=id)
@@ -29,25 +43,7 @@ def question(request, mento_id):
     questions = Question.objects.filter(mento=mento)
     return render(request,'mentoring/question.html', {'mento': mento, 'questions': questions})
 
-def search(request):
-    sort = request.GET.get('sort', 'latest')
-    search = request.GET.get('search', '')
-    
-    if search:
-        search_list = Mento.objects.filter(
-            Q(name__icontains=search) | 
-            Q(nickname__icontains=search) | 
-            Q(tag__icontains=search) |
-            Q(intro__icontains=search) |
-            Q(content_1__icontains=search) |
-            Q(content_2__icontains=search) |
-            Q(content_3__icontains=search) |
-            Q(content_4__icontains=search)
-        )
-    else:
-        search_list = Mento.objects.all()
 
-    return render(request, 'mentoring/search.html', {'search_list': search_list, 'sort': sort})
 
 
 def record_sheet(request):
