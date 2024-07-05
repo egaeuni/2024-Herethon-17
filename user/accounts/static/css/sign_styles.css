@@ -1,9 +1,5 @@
 body {
-<<<<<<< HEAD
-  background-image: url("/img/mypage_background2.png");
-=======
   background-image: url("../images/mypage_background2.png");
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -160,21 +156,13 @@ h1.title_sign {
   display: inline-block;
   margin-left: 18px;
   margin-right: 18px;
-<<<<<<< HEAD
+
   font-size: 21px;
 }
 .radio-label2 {
   display: inline-block;
   margin-left: 18px;
   font-size: 21px;
-=======
-  font-size: 18px;
-}
-.radio-label2 {
-  display: inline-block;
-  margin-left: 28px;
-  font-size: 18px;
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
 }
 
 .radio-input {
@@ -182,16 +170,13 @@ h1.title_sign {
 }
 
 .radio-custom {
-<<<<<<< HEAD
   display: inline-block;
   width: 15px;
   height: 15px;
-=======
   margin-top: 2px;
   display: inline-block;
   width: 13px;
   height: 13px;
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
   border-radius: 50%;
   border: 2px solid #ccc;
   position: relative;
@@ -229,7 +214,6 @@ h1.title_sign {
 
 .gender_select {
   margin-left: 5px;
-<<<<<<< HEAD
   width: 90px;
   height: 90px;
 }
@@ -244,7 +228,6 @@ h1.title_sign {
   margin-left: 15px;
   width: 90px;
   height: 90px;
-=======
   width: 80px;
   height: 80px;
 }
@@ -259,5 +242,4 @@ h1.title_sign {
   margin-left: 20px;
   width: 80px;
   height: 80px;
->>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
 }
