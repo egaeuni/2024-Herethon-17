@@ -5,21 +5,20 @@ from .models import Mento
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
-    search_query = request.GET.get('search', '')
-    sort = request.GET.get('sort', 'latest')
-    
     mentos = Mento.objects.all()
-    
-    if search_query:
+    sort = request.GET.get('sort', 'latest')
+    search = request.GET.get('search', '')
+
+    if search:
         mentos = mentos.filter(
-            Q(name__icontains=search_query) | 
-            Q(nickname__icontains=search_query) | 
-            Q(tag__icontains=search_query) |
-            Q(intro__icontains=search_query) |
-            Q(content_1__icontains=search_query) |
-            Q(content_2__icontains=search_query) |
-            Q(content_3__icontains=search_query) |
-            Q(content_4__icontains=search_query)
+            Q(name__icontains=search) | 
+            Q(nickname__icontains=search) | 
+            Q(tag__icontains=search) |
+            Q(intro__icontains=search) |
+            Q(content_1__icontains=search) |
+            Q(content_2__icontains=search) |
+            Q(content_3__icontains=search) |
+            Q(content_4__icontains=search)
         )
     
     if sort == 'popular':
@@ -27,7 +26,7 @@ def home(request):
     else:
         mentos = mentos.order_by('-id')
     
-    return render(request, 'mentoring/home.html', {'mentos': mentos, 'search_query': search_query, 'sort': sort})
+    return render(request, 'mentoring/home.html', {'mentos': mentos, 'search': search})
 
 def detail(request, id):
     mento = get_object_or_404(Mento, id=id)
@@ -43,27 +42,6 @@ def question(request, mento_id):
         return redirect('mentoring:question', mento_id)
     questions = Question.objects.filter(mento=mento)
     return render(request,'mentoring/question.html', {'mento': mento, 'questions': questions})
-
-def search(request):
-    sort = request.GET.get('sort', 'latest')
-    search = request.GET.get('search', '')
-    
-    if search:
-        search_list = Mento.objects.filter(
-            Q(name__icontains=search) | 
-            Q(nickname__icontains=search) | 
-            Q(tag__icontains=search) |
-            Q(intro__icontains=search) |
-            Q(content_1__icontains=search) |
-            Q(content_2__icontains=search) |
-            Q(content_3__icontains=search) |
-            Q(content_4__icontains=search)
-        )
-    else:
-        search_list = Mento.objects.all()
-
-    return render(request, 'mentoring/search.html', {'search_list': search_list, 'sort': sort})
-
 
 def record_sheet(request):
     if request.method == "POST":

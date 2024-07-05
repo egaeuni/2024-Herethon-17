@@ -25,8 +25,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('community/', include('community.urls')),
     path('program/', include('program.urls', namespace='program')),
-    path('mentoring/', include('mentoring.urls')),
-    path('', accounts.views.home, name='home'),
     path('', accounts.views.login, name='login'), 
     path('mentoring/', include('mentoring.urls'))
 ]

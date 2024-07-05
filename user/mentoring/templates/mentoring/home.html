@@ -110,7 +110,7 @@
             <!-- ~<div class="sec_btn"> -->
           </div>
           <!-- ~<div class="find_search"> -->
-
+          {% if mentos %}
           <div class="result">
             {%for mento in mentos%}
             <div class="result_detail">
@@ -135,7 +135,7 @@
               </div>
             </div>
             <!-- ~<div class="result_detail"> -->
-            {%empty%} 멘토가 없습니다. {%endfor%}
+            {%empty%} 멘토가 없습니다. {%endfor%} {% else %} 멘토가 없습니다. {% endif %}
           </div>
           <!-- ~<div class="result"> -->
         </div>
