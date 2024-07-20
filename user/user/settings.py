@@ -125,6 +125,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "accounts" / "static",
+    BASE_DIR / "community" / "static",
 ]
 
 MEDIA_URL = '/media/'

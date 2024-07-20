@@ -1,14 +1,66 @@
+.nav_main {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
 
+.logo {
+  width: 100px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: 150px;
+  margin-right: 80px;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.menu li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
+
+.right_nav {
+  position: fixed;
+  right: 250px; /* 원하는 위치로 조정 */
+}
+
+.user-options {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-top: 35px;
+}
+
+.user-options li a {
+  font-size: 20px;
+  margin-right: 50px;
+  text-decoration: none;
+  color: #333;
+}
 
 hr {
   color: #646464;
   margin-top: 5px;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("../images/mypage_background2.png");
+  margin: 0;
+  padding: 0;
+}
+
 .container {
   width: 80%;
   max-width: 600px;
-  margin: 40px auto;
+  margin: 80px auto;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -145,7 +197,7 @@ hr {
   text-decoration: none;
 }
 .back_button {
-  margin-top: 5px;
+  margin-top: 10px;
   padding: 10px 10px;
   background-color: #fedfce;
   border: none;
@@ -157,6 +209,13 @@ hr {
 }
 
 .back_button:hover {
-  color: #fedfce;
+  margin-top: 10px;
+  padding: 10px 10px;
   background-color: #ff6600;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
 }
