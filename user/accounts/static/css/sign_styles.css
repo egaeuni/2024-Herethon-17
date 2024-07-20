@@ -1,18 +1,11 @@
 body {
-<<<<<<< HEAD
-=======
   background-image: url("../images/mypage_background2.png");
->>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  justify-content: center;
-=======
   /* justify-content: center; */
->>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
   align-items: center;
   height: 100vh;
 }
@@ -38,11 +31,11 @@ body {
   padding: 2rem;
   border-radius: 8px;
   width: 400px;
-  /* text-align: center; */
+  text-align: center;
 }
 
 .container2 {
-  /* background: white; */
+  background: white;
   margin-top: 250px;
   box-shadow: 0 0 5px #e65c00;
   padding: 2rem;
@@ -163,22 +156,12 @@ h1.title_sign {
   display: inline-block;
   margin-left: 18px;
   margin-right: 18px;
-<<<<<<< HEAD
-
-  font-size: 21px;
-}
-.radio-label2 {
-  display: inline-block;
-  margin-left: 18px;
-  font-size: 21px;
-=======
   font-size: 18px;
 }
 .radio-label2 {
   display: inline-block;
   margin-left: 28px;
   font-size: 18px;
->>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
 }
 
 .radio-input {
@@ -186,12 +169,6 @@ h1.title_sign {
 }
 
 .radio-custom {
-<<<<<<< HEAD
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-=======
->>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
   margin-top: 2px;
   display: inline-block;
   width: 13px;
@@ -233,23 +210,6 @@ h1.title_sign {
 
 .gender_select {
   margin-left: 5px;
-<<<<<<< HEAD
-  width: 90px;
-  height: 90px;
-}
-
-.gender_select2 {
-  margin-left: 8px;
-  width: 90px;
-  height: 90px;
-}
-
-.gender_select3 {
-  margin-left: 15px;
-  width: 90px;
-  height: 90px;
-=======
->>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
   width: 80px;
   height: 80px;
 }
