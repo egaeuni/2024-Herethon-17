@@ -60,35 +60,30 @@
               >{{ user_posts|length }}</span
             >
           </h3>
-          <ul id="user-post-list" class="post-list">
-            {% for post in user_posts %}
-            <li>
-              <a href="{% url 'community:detail' post.id %}"
-                >{{ post.title }}</a
-              >
-            </li>
-            {% empty %}
-            <li>작성한 게시글이 없습니다.</li>
-            {% endfor %}
-          </ul>
 
           <h3>
             스크랩한 게시글:
             <span class="toggle-button" onclick="togglePostList('scrap')"
+              >{{ total_scraps }}</span
+            >
+          </h3>
+            <li><a href="{% url 'accounts:scrap_post' %}">커뮤니티 게시글 ({{ scrapped_posts_count }})</a></li>
+            <li><a href="{% url 'accounts:scrap_policy' %}">육아휴직 제도 ({{ scrapped_policies_count }})</a></li>
+            <li><a href="{% url 'accounts:scrap_program' %}">육아휴직 프로그램 ({{ scrapped_programs_count }})</a></li>
+          </ul>
+
+          <h3>
+            멘토링 질문:
+            <span class="toggle-button" onclick="togglePostList('scrap')"
               >{{ scraped_posts|length }}</span
             >
           </h3>
-          <ul id="scrap-post-list" class="post-list">
-            {% for post in scraped_posts %}
-            <li>
-              <a href="{% url 'community:detail' post.id %}"
-                >{{ post.title }}</a
-              >
-            </li>
-            {% empty %}
-            <li>스크랩한 게시글이 없습니다.</li>
-            {% endfor %}
-          </ul>
+          <h3>
+            멘토링 기록지:
+            <span class="toggle-button" onclick="togglePostList('scrap')"
+              >{{ scraped_posts|length }}</span
+            >
+          </h3>
         </div>
       </div>
     </div>
