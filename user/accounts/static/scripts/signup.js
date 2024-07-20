@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm_password");
 const message = document.getElementById("message");
@@ -17,6 +18,8 @@ function validatePasswords() {
 password.addEventListener("input", validatePasswords);
 confirmPassword.addEventListener("input", validatePasswords);
 =======
+=======
+>>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
 document
   .getElementById("signupForm")
   .addEventListener("submit", function (event) {
@@ -31,4 +34,7 @@ document
       message.style.display = "none"; // 에러 메시지 숨김
     }
   });
+<<<<<<< HEAD
 >>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
+=======
+>>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561

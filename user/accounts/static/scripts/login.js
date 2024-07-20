@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 document
   .getElementById("loginForm")
   .addEventListener("submit", function (event) {
@@ -22,6 +23,8 @@ document
     }
   });
 =======
+=======
+>>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
 document.addEventListener("DOMContentLoaded", function () {
   // 페이지가 로드되면 실행될 함수
   var usernameInput = document.getElementById("username");
@@ -35,4 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     passwordInput.value = "";
   }
 });
+<<<<<<< HEAD
 >>>>>>> b80f800ce6f26dd3fcbada442c3aea7fbf704b77
+=======
+>>>>>>> 800d85480886c6d9c524a3f6366d0b32c780f561
